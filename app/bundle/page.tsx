@@ -284,6 +284,87 @@ export default function BundleServicePage() {
     }
   ];
 
+  const popularDestinations = [
+    {
+      id: 1,
+      name: "Boracay",
+      region: "Region VI (Western Visayas)",
+      province: "Aklan", 
+      city: "Boracay (Malay)",
+      rating: 4.1,
+      reviews: 103,
+      category: "Islands, Points of Interest & Landmarks",
+      image: "/api/placeholder/400/250",
+      description: "World-famous white sand beaches and crystal clear waters",
+      highlights: ["White Beach", "Water Sports", "Nightlife"]
+    },
+    {
+      id: 2,
+      name: "Palawan",
+      region: "Region IV-B (MIMAROPA)",
+      province: "Palawan",
+      city: "Puerto Princesa",
+      rating: 4.5,
+      reviews: 287,
+      category: "Islands, Nature & Wildlife",
+      image: "/api/placeholder/400/250",
+      description: "Pristine islands and underground rivers",
+      highlights: ["El Nido", "Coron", "Underground River"]
+    },
+    {
+      id: 3,
+      name: "Bohol",
+      region: "Region VII (Central Visayas)",
+      province: "Bohol",
+      city: "Tagbilaran City",
+      rating: 4.3,
+      reviews: 156,
+      category: "Nature & Wildlife, Points of Interest",
+      image: "/api/placeholder/400/250",
+      description: "Chocolate Hills and adorable tarsiers",
+      highlights: ["Chocolate Hills", "Tarsier Sanctuary", "Loboc River"]
+    },
+    {
+      id: 4,
+      name: "Siargao",
+      region: "Region XIII (Caraga)",
+      province: "Surigao del Norte",
+      city: "Del Carmen",
+      rating: 4.4,
+      reviews: 89,
+      category: "Islands, Surfing & Water Sports",
+      image: "/api/placeholder/400/250",
+      description: "Surfing capital with pristine lagoons",
+      highlights: ["Cloud 9", "Sugba Lagoon", "Island Hopping"]
+    },
+    {
+      id: 5,
+      name: "Cebu City",
+      region: "Region VII (Central Visayas)",
+      province: "Cebu",
+      city: "Cebu City",
+      rating: 4.0,
+      reviews: 234,
+      category: "Historical Sites, Shopping Malls",
+      image: "/api/placeholder/400/250",
+      description: "Historical landmarks and modern attractions",
+      highlights: ["Magellan's Cross", "Temple of Leah", "IT Park"]
+    },
+    {
+      id: 6,
+      name: "Baguio",
+      region: "Cordillera Administrative Region (CAR)",
+      province: "Benguet",
+      city: "Baguio City",
+      rating: 3.9,
+      reviews: 178,
+      category: "Mountains, Cool Climate & Nature",
+      image: "/api/placeholder/400/250",
+      description: "Summer capital with cool mountain air",
+      highlights: ["Burnham Park", "Session Road", "Strawberry Farm"]
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -362,12 +443,12 @@ export default function BundleServicePage() {
           {/* Step 1: Destination Selection - Philippines Focus */}
           {currentStep === 1 && (
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-                <span className="text-3xl mr-3">🇵🇭</span>
-                Choose Your Philippines Destination
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                🇵🇭 Choose Your Philippines Destination
               </h2>
               
-              <div className="grid md:grid-cols-2 gap-6">
+              {/* Location Selectors */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 {/* Region Selection */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -470,19 +551,19 @@ export default function BundleServicePage() {
                 </div>
               </div>
 
-              {/* Popular Destinations Suggestions */}
+              {/* Enhanced Popular Destinations */}
               {!tripData.destination.region && (
                 <div className="mt-8">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Popular Destinations</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {[
-                      { name: 'Boracay', region: 'Region VI (Western Visayas)', province: 'Aklan', city: 'Boracay (Malay)', emoji: '🏖️' },
-                      { name: 'Palawan', region: 'Region IV-B (MIMAROPA)', province: 'Palawan', city: 'Puerto Princesa', emoji: '🏝️' },
-                      { name: 'Cebu', region: 'Region VII (Central Visayas)', province: 'Cebu', city: 'Cebu City', emoji: '🏛️' },
-                      { name: 'Manila', region: 'National Capital Region (NCR)', province: 'Metro Manila', city: 'Manila', emoji: '🏙️' }
-                    ].map(destination => (
-                      <button
-                        key={destination.name}
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">Popular Destinations</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Discover the best of the Philippines</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {popularDestinations.map((destination) => (
+                      <div
+                        key={destination.id}
+                        className="group relative bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-200 dark:border-gray-600"
                         onClick={() => setTripData({
                           ...tripData,
                           destination: {
@@ -492,12 +573,107 @@ export default function BundleServicePage() {
                             barangay: ''
                           }
                         })}
-                        className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors text-center"
                       >
-                        <div className="text-2xl mb-2">{destination.emoji}</div>
-                        <div className="font-medium text-gray-900 dark:text-white">{destination.name}</div>
-                      </button>
+                        {/* Image Container */}
+                        <div className="relative h-48 overflow-hidden">
+                          <img 
+                            src={destination.image} 
+                            alt={destination.name}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                          
+                          {/* Heart Icon */}
+                          <button className="absolute top-3 right-3 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-md transition-colors">
+                            <svg className="w-5 h-5 text-gray-600 hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                          </button>
+
+                          {/* Image Dots Indicator */}
+                          <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-1">
+                            {[...Array(5)].map((_, i) => (
+                              <div 
+                                key={i} 
+                                className={`w-2 h-2 rounded-full ${i === 0 ? 'bg-white' : 'bg-white/50'}`}
+                              ></div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Content */}
+                        <div className="p-4">
+                          {/* Title and Rating */}
+                          <div className="flex items-start justify-between mb-2">
+                            <h4 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                              {destination.name}
+                            </h4>
+                          </div>
+
+                          {/* Rating */}
+                          <div className="flex items-center mb-2">
+                            <div className="flex items-center">
+                              <span className="text-sm font-semibold text-gray-900 dark:text-white mr-1">
+                                {destination.rating}
+                              </span>
+                              <div className="flex items-center mr-2">
+                                {[...Array(5)].map((_, i) => (
+                                  <svg 
+                                    key={i} 
+                                    className={`w-4 h-4 ${i < Math.floor(destination.rating) ? 'text-green-500' : 'text-gray-300'}`} 
+                                    fill="currentColor" 
+                                    viewBox="0 0 20 20"
+                                  >
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                  </svg>
+                                ))}
+                              </div>
+                              <span className="text-sm text-gray-600 dark:text-gray-400">
+                                ({destination.reviews})
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Category */}
+                          <p className="text-sm text-blue-600 dark:text-blue-400 mb-2 font-medium">
+                            {destination.category}
+                          </p>
+
+                          {/* Description */}
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
+                            {destination.description}
+                          </p>
+
+                          {/* Highlights */}
+                          <div className="flex flex-wrap gap-1 mb-3">
+                            {destination.highlights.slice(0, 2).map((highlight, index) => (
+                              <span 
+                                key={index}
+                                className="px-2 py-1 bg-gray-100 dark:bg-gray-600 text-xs text-gray-700 dark:text-gray-300 rounded-full"
+                              >
+                                {highlight}
+                              </span>
+                            ))}
+                            {destination.highlights.length > 2 && (
+                              <span className="px-2 py-1 bg-gray-100 dark:bg-gray-600 text-xs text-gray-700 dark:text-gray-300 rounded-full">
+                                +{destination.highlights.length - 2} more
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Select Button */}
+                          <button className="w-full py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white text-sm font-medium rounded-lg transition-all duration-200 transform group-hover:scale-105">
+                            Select Destination
+                          </button>
+                        </div>
+                      </div>
                     ))}
+                  </div>
+
+                  {/* View All Destinations */}
+                  <div className="text-center mt-8">
+                    <button className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors">
+                      View All Philippines Destinations
+                    </button>
                   </div>
                 </div>
               )}
