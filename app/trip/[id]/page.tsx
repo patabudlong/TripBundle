@@ -555,82 +555,37 @@ export default function TripDetailsPage() {
               </div>
             </div>
 
-            {/* Hotel Booking Details */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 p-6">
-              <div className="flex items-center justify-between mb-6">
+            {/* Hotel Booking */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-bold flex items-center">
                   <svg className="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
                   Hotel Booking
                 </h3>
-                <div className="flex items-center space-x-2">
-                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Confirmed</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Booking #HTL001</span>
-                </div>
+                <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Confirmed</span>
               </div>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <img src={tripDetails.hotel.image} alt={tripDetails.hotel.name} className="w-full h-48 object-cover rounded-lg mb-4" />
-                  <h4 className="text-lg font-semibold mb-2">{tripDetails.hotel.name}</h4>
-                  <div className="flex items-center mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className={`w-4 h-4 ${i < Math.floor(tripDetails.hotel.rating) ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                    <span className="ml-1 text-sm text-gray-600 dark:text-gray-400">{tripDetails.hotel.rating} (4.2k reviews)</span>
+                  <h4 className="font-semibold mb-2">{tripDetails.hotel.name}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 mb-2">{tripDetails.hotel.address}</p>
+                  <div className="space-y-1 text-sm">
+                    <p><span className="font-medium">Check-in:</span> {new Date(tripDetails.dates.checkIn).toLocaleDateString()} at {tripDetails.hotel.checkIn}</p>
+                    <p><span className="font-medium">Check-out:</span> {new Date(tripDetails.dates.checkOut).toLocaleDateString()} at {tripDetails.hotel.checkOut}</p>
+                    <p><span className="font-medium">Guests:</span> {tripDetails.guests} adults</p>
+                    <p><span className="font-medium">Room Type:</span> Deluxe Ocean View</p>
+                    <p><span className="font-medium">Booking ID:</span> HTL001234</p>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">{tripDetails.hotel.address}</p>
                 </div>
-                
-                <div>
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Check-in</p>
-                        <p className="font-semibold">{new Date(tripDetails.dates.checkIn).toLocaleDateString()}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">After {tripDetails.hotel.checkIn}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Check-out</p>
-                        <p className="font-semibold">{new Date(tripDetails.dates.checkOut).toLocaleDateString()}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Before {tripDetails.hotel.checkOut}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Room Details</p>
-                      <p className="font-semibold">Deluxe Ocean View Room</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{tripDetails.guests} adults • 1 room</p>
-                    </div>
-                    
-                    <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Amenities Included</p>
-                      <div className="flex flex-wrap gap-2">
-                        {tripDetails.hotel.amenities.map((amenity, index) => (
-                          <span key={index} className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs">
-                            {amenity}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-lg font-bold">Total Cost</span>
-                        <span className="text-2xl font-bold text-blue-600">₱{tripDetails.hotel.cost.toLocaleString()}</span>
-                      </div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">For {getDuration() - 1} nights</p>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-6 flex space-x-3">
-                    <button className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                <div className="text-right">
+                  <p className="text-2xl font-bold text-blue-600 mb-2">₱{tripDetails.hotel.cost.toLocaleString()}</p>
+                  <p className="text-sm text-gray-500 mb-4">Total for {duration - 1} nights</p>
+                  <div className="space-y-2">
+                    <button className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
                       View Voucher
                     </button>
-                    <button className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors">
+                    <button className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors">
                       Contact Hotel
                     </button>
                   </div>
@@ -638,15 +593,106 @@ export default function TripDetailsPage() {
               </div>
             </div>
 
-            {/* Activities Bookings */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 p-6">
+            {/* Car Rental Booking */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold flex items-center">
+                  <svg className="w-6 h-6 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                  </svg>
+                  Car Rental Booking
+                </h3>
+                <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Confirmed</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-semibold mb-2">{tripDetails.car.model}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 mb-2">{tripDetails.car.type}</p>
+                  <div className="space-y-1 text-sm">
+                    <p><span className="font-medium">Pickup:</span> {tripDetails.car.pickupLocation} at {tripDetails.car.pickupTime}</p>
+                    <p><span className="font-medium">Return:</span> {tripDetails.car.pickupLocation} at {tripDetails.car.returnTime}</p>
+                    <p><span className="font-medium">Duration:</span> {duration} days</p>
+                    <p><span className="font-medium">Booking ID:</span> CAR001234</p>
+                    <p><span className="font-medium">License Required:</span> Valid driver's license</p>
+                  </div>
+                  <div className="mt-3">
+                    <p className="text-sm font-medium mb-1">Features:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {tripDetails.car.features.map((feature, index) => (
+                        <span key={index} className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-xs">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-2xl font-bold text-green-600 mb-2">₱{tripDetails.car.cost.toLocaleString()}</p>
+                  <p className="text-sm text-gray-500 mb-4">Total for {duration} days</p>
+                  <div className="space-y-2">
+                    <button className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
+                      View Rental Agreement
+                    </button>
+                    <button className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors">
+                      Contact Rental Company
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Restaurant Reservations */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-bold mb-4 flex items-center">
+                <svg className="w-6 h-6 mr-2 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                </svg>
+                Restaurant Reservations
+              </h3>
+              <div className="space-y-4">
+                {tripDetails.restaurants.map((restaurant, index) => (
+                  <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h4 className="font-semibold">{restaurant.name}</h4>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{restaurant.cuisine}</p>
+                        <p className="text-sm text-gray-500">{restaurant.address}</p>
+                      </div>
+                      <span className="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">Reserved</span>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="text-sm">
+                        <p><span className="font-medium">Date & Time:</span> {new Date(restaurant.reservationTime).toLocaleString()}</p>
+                        <p><span className="font-medium">Party Size:</span> {tripDetails.guests} people</p>
+                        <p><span className="font-medium">Reservation ID:</span> RST00{index + 1}234</p>
+                        <p><span className="font-medium">Table:</span> Window seat (requested)</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-lg font-bold text-orange-600 mb-2">₱{restaurant.cost.toLocaleString()}</p>
+                        <p className="text-xs text-gray-500 mb-3">Estimated cost</p>
+                        <div className="space-y-1">
+                          <button className="w-full px-3 py-1 bg-orange-600 hover:bg-orange-700 text-white rounded text-sm transition-colors">
+                            View Reservation
+                          </button>
+                          <button className="w-full px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded text-sm transition-colors">
+                            Modify Reservation
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Activity Bookings */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
               <h3 className="text-xl font-bold mb-4 flex items-center">
                 <svg className="w-6 h-6 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-5-10v20m0-20V3a2 2 0 114 0v1M7 21V10a2 2 0 012-2h6a2 2 0 012 2v11" />
                 </svg>
                 Activity Bookings
               </h3>
-              
               <div className="space-y-4">
                 {tripDetails.activities.map((activity, index) => (
                   <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4">
@@ -675,9 +721,12 @@ export default function TripDetailsPage() {
                       </div>
                       <div>
                         <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Booking Details</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Participants: {tripDetails.guests} people</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Booking ID: ACT00{index + 1}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Confirmation: Instant</p>
+                        <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                          <p><span className="font-medium">Participants:</span> {tripDetails.guests} people</p>
+                          <p><span className="font-medium">Booking ID:</span> ACT00{index + 1}234</p>
+                          <p><span className="font-medium">Confirmation:</span> Instant</p>
+                          <p><span className="font-medium">Meeting Point:</span> Hotel Lobby</p>
+                        </div>
                       </div>
                     </div>
                     
@@ -695,6 +744,44 @@ export default function TripDetailsPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Payment Summary */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-bold mb-4 flex items-center">
+                <svg className="w-6 h-6 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                Payment Summary
+              </h3>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span>Hotel ({duration - 1} nights)</span>
+                  <span>₱{tripDetails.hotel.cost.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Car Rental ({duration} days)</span>
+                  <span>₱{tripDetails.car.cost.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Restaurants ({tripDetails.restaurants.length} reservations)</span>
+                  <span>₱{tripDetails.restaurants.reduce((sum, r) => sum + r.cost, 0).toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Activities ({tripDetails.activities.length} bookings)</span>
+                  <span>₱{tripDetails.activities.reduce((sum, a) => sum + a.cost, 0).toLocaleString()}</span>
+                </div>
+                <div className="border-t border-gray-200 dark:border-gray-600 pt-3">
+                  <div className="flex justify-between text-lg font-bold">
+                    <span>Total Trip Cost</span>
+                    <span className="text-blue-600">₱{tripDetails.totalCost.toLocaleString()}</span>
+                  </div>
+                  <p className="text-sm text-gray-500 mt-1">All payments confirmed</p>
+                </div>
+              </div>
+              <button className="w-full mt-4 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors">
+                Download Receipt
+              </button>
             </div>
           </div>
         )}
