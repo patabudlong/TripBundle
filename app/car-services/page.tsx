@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Driver {
   id: string;
@@ -32,6 +33,7 @@ interface Driver {
 }
 
 export default function CarServicesPage() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'available' | 'sedan' | 'suv' | 'van'>('all');
   const [sortBy, setSortBy] = useState<'rating' | 'price' | 'experience'>('rating');
@@ -447,7 +449,8 @@ export default function CarServicesPage() {
                     </Link>
                     <button 
                       disabled={driver.availability !== 'available'}
-                      className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                      onClick={() => router.push(`/book-driver/${driver.id}`)}
+                      className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                         driver.availability === 'available' 
                           ? 'bg-blue-600 hover:bg-blue-700 text-white' 
                           : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
@@ -546,6 +549,7 @@ export default function CarServicesPage() {
                     </Link>
                     <button 
                       disabled={driver.availability !== 'available'}
+                      onClick={() => router.push(`/book-driver/${driver.id}`)}
                       className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                         driver.availability === 'available' 
                           ? 'bg-blue-600 hover:bg-blue-700 text-white' 
