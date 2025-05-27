@@ -5,9 +5,10 @@ import Link from 'next/link';
 
 interface TripData {
   destination: {
-    country: string;
     region: string;
-    place: string;
+    province: string;
+    city: string;
+    barangay: string;
   };
   dates: {
     checkIn: string;
@@ -22,7 +23,7 @@ interface TripData {
 export default function BundleServicePage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [tripData, setTripData] = useState<TripData>({
-    destination: { country: '', region: '', place: '' },
+    destination: { region: '', province: '', city: '', barangay: '' },
     dates: { checkIn: '', checkOut: '' },
     guests: 2,
     selectedHotel: null,
@@ -31,7 +32,7 @@ export default function BundleServicePage() {
   });
 
   const steps = [
-    { id: 1, name: 'Destination', icon: '🌍' },
+    { id: 1, name: 'Destination', icon: '🇵🇭' },
     { id: 2, name: 'Dates', icon: '📅' },
     { id: 3, name: 'Hotels', icon: '🏨' },
     { id: 4, name: 'Cars', icon: '🚗' },
@@ -39,120 +40,104 @@ export default function BundleServicePage() {
     { id: 6, name: 'Review', icon: '✅' }
   ];
 
-  const countries = [
-    'United States', 'United Kingdom', 'France', 'Germany', 'Italy', 'Spain', 
-    'Japan', 'Australia', 'Canada', 'Thailand', 'Greece', 'Portugal'
+  // Philippines administrative divisions
+  const regions = [
+    'National Capital Region (NCR)',
+    'Cordillera Administrative Region (CAR)',
+    'Region I (Ilocos Region)',
+    'Region II (Cagayan Valley)',
+    'Region III (Central Luzon)',
+    'Region IV-A (CALABARZON)',
+    'Region IV-B (MIMAROPA)',
+    'Region V (Bicol Region)',
+    'Region VI (Western Visayas)',
+    'Region VII (Central Visayas)',
+    'Region VIII (Eastern Visayas)',
+    'Region IX (Zamboanga Peninsula)',
+    'Region X (Northern Mindanao)',
+    'Region XI (Davao Region)',
+    'Region XII (SOCCSKSARGEN)',
+    'Region XIII (Caraga)',
+    'Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)'
   ];
 
-  const regions = {
-    'United States': ['California', 'New York', 'Florida', 'Texas', 'Nevada'],
-    'France': ['Île-de-France', 'Provence', 'Normandy', 'Loire Valley', 'French Riviera'],
-    'Italy': ['Tuscany', 'Lazio', 'Veneto', 'Campania', 'Sicily'],
-    'Japan': ['Tokyo', 'Kyoto', 'Osaka', 'Hokkaido', 'Okinawa']
+  const provinces = {
+    'National Capital Region (NCR)': [
+      'Metro Manila'
+    ],
+    'Region IV-A (CALABARZON)': [
+      'Batangas', 'Cavite', 'Laguna', 'Quezon', 'Rizal'
+    ],
+    'Region VII (Central Visayas)': [
+      'Bohol', 'Cebu', 'Negros Oriental', 'Siquijor'
+    ],
+    'Region XI (Davao Region)': [
+      'Davao del Norte', 'Davao del Sur', 'Davao de Oro', 'Davao Occidental', 'Davao Oriental'
+    ],
+    'Region VI (Western Visayas)': [
+      'Aklan', 'Antique', 'Capiz', 'Guimaras', 'Iloilo', 'Negros Occidental'
+    ],
+    'Region III (Central Luzon)': [
+      'Aurora', 'Bataan', 'Bulacan', 'Nueva Ecija', 'Pampanga', 'Tarlac', 'Zambales'
+    ],
+    'Region V (Bicol Region)': [
+      'Albay', 'Camarines Norte', 'Camarines Sur', 'Catanduanes', 'Masbate', 'Sorsogon'
+    ]
   };
 
-  const places = {
-    'California': ['Los Angeles', 'San Francisco', 'San Diego', 'Napa Valley'],
-    'Île-de-France': ['Paris', 'Versailles', 'Fontainebleau', 'Chantilly'],
-    'Tuscany': ['Florence', 'Siena', 'Pisa', 'San Gimignano'],
-    'Tokyo': ['Shibuya', 'Shinjuku', 'Asakusa', 'Ginza']
+  const cities = {
+    'Metro Manila': [
+      'Manila', 'Quezon City', 'Makati', 'Pasig', 'Taguig', 'Mandaluyong', 'Marikina', 
+      'Pasay', 'Caloocan', 'Las Piñas', 'Muntinlupa', 'Parañaque', 'Valenzuela', 
+      'Malabon', 'Navotas', 'San Juan', 'Pateros'
+    ],
+    'Cebu': [
+      'Cebu City', 'Lapu-Lapu City', 'Mandaue City', 'Talisay City', 'Toledo City', 
+      'Danao City', 'Carcar City', 'Bogo City'
+    ],
+    'Batangas': [
+      'Batangas City', 'Lipa City', 'Tanauan City', 'Santo Tomas', 'Calaca', 'Lemery'
+    ],
+    'Davao del Sur': [
+      'Davao City', 'Digos City', 'Samal City'
+    ],
+    'Aklan': [
+      'Kalibo', 'Boracay (Malay)', 'Ibajay', 'Altavas', 'Balete', 'Banga'
+    ],
+    'Bohol': [
+      'Tagbilaran City', 'Panglao', 'Loboc', 'Carmen', 'Dauis', 'Baclayon'
+    ],
+    'Palawan': [
+      'Puerto Princesa', 'El Nido', 'Coron', 'San Vicente', 'Brooke\'s Point'
+    ]
   };
 
-  const sampleHotels = [
-    {
-      id: 1,
-      name: 'Grand Palace Hotel',
-      rating: 4.8,
-      price: 299,
-      image: '/api/placeholder/300/200',
-      amenities: ['WiFi', 'Pool', 'Spa', 'Restaurant'],
-      location: 'City Center'
-    },
-    {
-      id: 2,
-      name: 'Boutique Garden Inn',
-      rating: 4.6,
-      price: 189,
-      image: '/api/placeholder/300/200',
-      amenities: ['WiFi', 'Garden', 'Breakfast', 'Parking'],
-      location: 'Historic District'
-    },
-    {
-      id: 3,
-      name: 'Modern Sky Tower',
-      rating: 4.7,
-      price: 349,
-      image: '/api/placeholder/300/200',
-      amenities: ['WiFi', 'Gym', 'Rooftop Bar', 'Concierge'],
-      location: 'Business District'
-    }
-  ];
-
-  const sampleCars = [
-    {
-      id: 1,
-      name: 'Economy Compact',
-      type: 'Toyota Corolla or similar',
-      price: 45,
-      features: ['Manual', '5 Seats', 'AC', 'Good MPG'],
-      image: '/api/placeholder/300/200'
-    },
-    {
-      id: 2,
-      name: 'Premium SUV',
-      type: 'BMW X3 or similar',
-      price: 89,
-      features: ['Automatic', '5 Seats', 'GPS', 'Luxury'],
-      image: '/api/placeholder/300/200'
-    },
-    {
-      id: 3,
-      name: 'Convertible',
-      type: 'Mercedes C-Class or similar',
-      price: 125,
-      features: ['Automatic', '4 Seats', 'Convertible', 'Premium'],
-      image: '/api/placeholder/300/200'
-    }
-  ];
-
-  const sampleRestaurants = [
-    {
-      id: 1,
-      name: 'Le Gourmet',
-      cuisine: 'French Fine Dining',
-      rating: 4.9,
-      priceRange: '$$$',
-      image: '/api/placeholder/300/200',
-      specialties: ['Foie Gras', 'Bouillabaisse', 'Crème Brûlée']
-    },
-    {
-      id: 2,
-      name: 'Sakura Sushi',
-      cuisine: 'Japanese',
-      rating: 4.7,
-      priceRange: '$$',
-      image: '/api/placeholder/300/200',
-      specialties: ['Omakase', 'Fresh Sashimi', 'Sake Selection']
-    },
-    {
-      id: 3,
-      name: 'Mama\'s Trattoria',
-      cuisine: 'Italian',
-      rating: 4.6,
-      priceRange: '$$',
-      image: '/api/placeholder/300/200',
-      specialties: ['Handmade Pasta', 'Wood-fired Pizza', 'Tiramisu']
-    },
-    {
-      id: 4,
-      name: 'Street Food Market',
-      cuisine: 'Local Specialties',
-      rating: 4.5,
-      priceRange: '$',
-      image: '/api/placeholder/300/200',
-      specialties: ['Local Dishes', 'Fresh Ingredients', 'Authentic Flavors']
-    }
-  ];
+  const barangays = {
+    'Manila': [
+      'Ermita', 'Malate', 'Intramuros', 'Binondo', 'Quiapo', 'Sampaloc', 'Tondo', 'Santa Cruz'
+    ],
+    'Makati': [
+      'Poblacion', 'Bel-Air', 'Salcedo Village', 'Legazpi Village', 'San Lorenzo', 'Urdaneta'
+    ],
+    'Cebu City': [
+      'Lahug', 'Capitol Site', 'Guadalupe', 'Banilad', 'Talamban', 'Mabolo', 'IT Park'
+    ],
+    'Davao City': [
+      'Poblacion District', 'Buhangin', 'Bunawan', 'Calinan', 'Marilog', 'Paquibato', 'Toril', 'Tugbok'
+    ],
+    'Boracay (Malay)': [
+      'Balabag', 'Manoc-Manoc', 'Yapak'
+    ],
+    'Tagbilaran City': [
+      'Cogon', 'Dao', 'Poblacion I', 'Poblacion II', 'Poblacion III', 'Taloto', 'Ubujan'
+    ],
+    'Puerto Princesa': [
+      'Barangay San Pedro', 'Barangay San Jose', 'Barangay Bancao-Bancao', 'Barangay Mandaragat'
+    ],
+    'El Nido': [
+      'Barangay Buena Suerte', 'Barangay Corong-Corong', 'Barangay Masagana', 'Barangay Maremegmeg'
+    ]
+  };
 
   const nextStep = () => {
     if (currentStep < steps.length) {
@@ -182,49 +167,189 @@ export default function BundleServicePage() {
   };
 
   const calculateTotal = () => {
-    const days = tripData.dates.checkIn && tripData.dates.checkOut 
-      ? Math.ceil((new Date(tripData.dates.checkOut).getTime() - new Date(tripData.dates.checkIn).getTime()) / (1000 * 3600 * 24))
-      : 1;
-    
-    const hotelTotal = tripData.selectedHotel ? tripData.selectedHotel.price * days : 0;
-    const carTotal = tripData.selectedCar ? tripData.selectedCar.price * days : 0;
-    const restaurantTotal = tripData.selectedRestaurants.length * 75; // Average per restaurant
-    
-    return hotelTotal + carTotal + restaurantTotal;
+    let total = 0;
+    if (tripData.selectedHotel && tripData.dates.checkIn && tripData.dates.checkOut) {
+      const days = Math.ceil((new Date(tripData.dates.checkOut).getTime() - new Date(tripData.dates.checkIn).getTime()) / (1000 * 3600 * 24));
+      total += tripData.selectedHotel.price * days;
+    }
+    if (tripData.selectedCar && tripData.dates.checkIn && tripData.dates.checkOut) {
+      const days = Math.ceil((new Date(tripData.dates.checkOut).getTime() - new Date(tripData.dates.checkIn).getTime()) / (1000 * 3600 * 24));
+      total += tripData.selectedCar.price * days;
+    }
+    return total;
   };
+
+  const sampleHotels = [
+    {
+      id: 1,
+      name: 'Manila Grand Hotel',
+      rating: 4.8,
+      price: 8500,
+      image: '/api/placeholder/300/200',
+      amenities: ['WiFi', 'Pool', 'Spa', 'Restaurant'],
+      location: 'Makati CBD'
+    },
+    {
+      id: 2,
+      name: 'Cebu Beach Resort',
+      rating: 4.6,
+      price: 6500,
+      image: '/api/placeholder/300/200',
+      amenities: ['WiFi', 'Beach Access', 'Breakfast', 'Parking'],
+      location: 'Mactan Island'
+    },
+    {
+      id: 3,
+      name: 'Boracay Paradise Inn',
+      rating: 4.7,
+      price: 7200,
+      image: '/api/placeholder/300/200',
+      amenities: ['WiFi', 'Beach Front', 'Bar', 'Water Sports'],
+      location: 'White Beach'
+    }
+  ];
+
+  const sampleCars = [
+    {
+      id: 1,
+      name: 'Economy Sedan',
+      type: 'Toyota Vios or similar',
+      price: 2500,
+      features: ['Manual', '5 Seats', 'AC', 'Good for City'],
+      image: '/api/placeholder/300/200'
+    },
+    {
+      id: 2,
+      name: 'SUV',
+      type: 'Toyota Fortuner or similar',
+      price: 4500,
+      features: ['Automatic', '7 Seats', 'GPS', 'Good for Provinces'],
+      image: '/api/placeholder/300/200'
+    },
+    {
+      id: 3,
+      name: 'Van',
+      type: 'Toyota Hiace or similar',
+      price: 6000,
+      features: ['Automatic', '15 Seats', 'AC', 'Group Travel'],
+      image: '/api/placeholder/300/200'
+    }
+  ];
+
+  const sampleRestaurants = [
+    {
+      id: 1,
+      name: 'Aristocrat Restaurant',
+      cuisine: 'Filipino',
+      rating: 4.5,
+      priceRange: '₱₱',
+      image: '/api/placeholder/300/200',
+      specialties: ['Chicken Barbecue', 'Java Rice', 'Pancit Canton']
+    },
+    {
+      id: 2,
+      name: 'Larsian BBQ',
+      cuisine: 'Street Food',
+      rating: 4.3,
+      priceRange: '₱',
+      image: '/api/placeholder/300/200',
+      specialties: ['Pork BBQ', 'Pusô', 'Tempura']
+    },
+    {
+      id: 3,
+      name: 'Sutukil Restaurant',
+      cuisine: 'Seafood',
+      rating: 4.6,
+      priceRange: '₱₱₱',
+      image: '/api/placeholder/300/200',
+      specialties: ['Grilled Fish', 'Kinilaw', 'Seafood Soup']
+    },
+    {
+      id: 4,
+      name: 'Jollibee',
+      cuisine: 'Fast Food',
+      rating: 4.2,
+      priceRange: '₱',
+      image: '/api/placeholder/300/200',
+      specialties: ['Chickenjoy', 'Jolly Spaghetti', 'Burger Steak']
+    },
+    {
+      id: 5,
+      name: 'Kamayan sa Palaisdaan',
+      cuisine: 'Filipino Seafood',
+      rating: 4.4,
+      priceRange: '₱₱',
+      image: '/api/placeholder/300/200',
+      specialties: ['Grilled Tilapia', 'Sinigang', 'Lechon Kawali']
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Create Your Perfect Trip Bundle
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Plan everything in one place - destination, dates, accommodation, transport, and dining
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
+            Plan your complete Philippines adventure in one place
           </p>
+          
+          {/* Flight Booking Help Banner */}
+          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl p-6 mb-8 shadow-lg">
+            <div className="flex items-center justify-center mb-3">
+              <svg className="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+              <h3 className="text-xl font-semibold">Need help to book your flight?</h3>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
+              <div className="flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span>Call us at <strong>+63 082 298 8047</strong></span>
+              </div>
+              <div className="flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                <span>Mobile/WhatsApp: <strong>+63 898 800 5598</strong></span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Progress Steps */}
         <div className="mb-8">
-          <div className="flex items-center justify-center space-x-4 overflow-x-auto pb-4">
+          <div className="flex items-center justify-between">
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
-                <div className={`flex items-center justify-center w-12 h-12 rounded-full text-sm font-medium ${
+                <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${
                   currentStep >= step.id 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                    ? 'bg-blue-600 border-blue-600 text-white' 
+                    : 'border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500'
                 }`}>
-                  <span className="text-lg">{step.icon}</span>
+                  {currentStep > step.id ? (
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <span className="text-sm font-medium">{step.id}</span>
+                  )}
                 </div>
-                <div className="ml-2 text-sm font-medium text-gray-900 dark:text-white hidden sm:block">
-                  {step.name}
+                <div className="ml-3 hidden sm:block">
+                  <p className={`text-sm font-medium ${
+                    currentStep >= step.id ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'
+                  }`}>
+                    {step.icon} {step.name}
+                  </p>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`w-8 h-0.5 mx-4 ${
+                  <div className={`hidden sm:block w-12 h-0.5 ml-4 ${
                     currentStep > step.id ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
-                  }`} />
+                  }`}></div>
                 )}
               </div>
             ))}
@@ -232,64 +357,161 @@ export default function BundleServicePage() {
         </div>
 
         {/* Main Content */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8 mb-8">
           
-          {/* Step 1: Destination */}
+          {/* Step 1: Destination Selection - Philippines Focus */}
           {currentStep === 1 && (
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Choose Your Destination</h2>
-              <div className="grid md:grid-cols-3 gap-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                <span className="text-3xl mr-3">🇵🇭</span>
+                Choose Your Philippines Destination
+              </h2>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Region Selection */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Country</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Region
+                  </label>
                   <select 
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                    value={tripData.destination.country}
-                    onChange={(e) => setTripData({
-                      ...tripData,
-                      destination: { ...tripData.destination, country: e.target.value, region: '', place: '' }
-                    })}
-                  >
-                    <option value="">Select Country</option>
-                    {countries.map(country => (
-                      <option key={country} value={country}>{country}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Region</label>
-                  <select 
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                     value={tripData.destination.region}
                     onChange={(e) => setTripData({
-                      ...tripData,
-                      destination: { ...tripData.destination, region: e.target.value, place: '' }
+                      ...tripData, 
+                      destination: { 
+                        ...tripData.destination, 
+                        region: e.target.value, 
+                        province: '', 
+                        city: '', 
+                        barangay: '' 
+                      }
                     })}
-                    disabled={!tripData.destination.country}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   >
-                    <option value="">Select Region</option>
-                    {tripData.destination.country && regions[tripData.destination.country as keyof typeof regions]?.map(region => (
+                    <option value="">Select a Region</option>
+                    {regions.map(region => (
                       <option key={region} value={region}>{region}</option>
                     ))}
                   </select>
                 </div>
+
+                {/* Province Selection */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">City/Place</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Province
+                  </label>
                   <select 
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                    value={tripData.destination.place}
+                    value={tripData.destination.province}
                     onChange={(e) => setTripData({
-                      ...tripData,
-                      destination: { ...tripData.destination, place: e.target.value }
+                      ...tripData, 
+                      destination: { 
+                        ...tripData.destination, 
+                        province: e.target.value, 
+                        city: '', 
+                        barangay: '' 
+                      }
                     })}
                     disabled={!tripData.destination.region}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <option value="">Select Place</option>
-                    {tripData.destination.region && places[tripData.destination.region as keyof typeof places]?.map(place => (
-                      <option key={place} value={place}>{place}</option>
+                    <option value="">Select a Province</option>
+                    {tripData.destination.region && provinces[tripData.destination.region]?.map(province => (
+                      <option key={province} value={province}>{province}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* City/Municipality Selection */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    City/Municipality
+                  </label>
+                  <select 
+                    value={tripData.destination.city}
+                    onChange={(e) => setTripData({
+                      ...tripData, 
+                      destination: { 
+                        ...tripData.destination, 
+                        city: e.target.value, 
+                        barangay: '' 
+                      }
+                    })}
+                    disabled={!tripData.destination.province}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <option value="">Select a City/Municipality</option>
+                    {tripData.destination.province && cities[tripData.destination.province]?.map(city => (
+                      <option key={city} value={city}>{city}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Barangay Selection */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Barangay (Optional)
+                  </label>
+                  <select 
+                    value={tripData.destination.barangay}
+                    onChange={(e) => setTripData({
+                      ...tripData, 
+                      destination: { 
+                        ...tripData.destination, 
+                        barangay: e.target.value 
+                      }
+                    })}
+                    disabled={!tripData.destination.city}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <option value="">Select a Barangay (Optional)</option>
+                    {tripData.destination.city && barangays[tripData.destination.city]?.map(barangay => (
+                      <option key={barangay} value={barangay}>{barangay}</option>
                     ))}
                   </select>
                 </div>
               </div>
+
+              {/* Popular Destinations Suggestions */}
+              {!tripData.destination.region && (
+                <div className="mt-8">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Popular Destinations</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[
+                      { name: 'Boracay', region: 'Region VI (Western Visayas)', province: 'Aklan', city: 'Boracay (Malay)', emoji: '🏖️' },
+                      { name: 'Palawan', region: 'Region IV-B (MIMAROPA)', province: 'Palawan', city: 'Puerto Princesa', emoji: '🏝️' },
+                      { name: 'Cebu', region: 'Region VII (Central Visayas)', province: 'Cebu', city: 'Cebu City', emoji: '🏛️' },
+                      { name: 'Manila', region: 'National Capital Region (NCR)', province: 'Metro Manila', city: 'Manila', emoji: '🏙️' }
+                    ].map(destination => (
+                      <button
+                        key={destination.name}
+                        onClick={() => setTripData({
+                          ...tripData,
+                          destination: {
+                            region: destination.region,
+                            province: destination.province,
+                            city: destination.city,
+                            barangay: ''
+                          }
+                        })}
+                        className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors text-center"
+                      >
+                        <div className="text-2xl mb-2">{destination.emoji}</div>
+                        <div className="font-medium text-gray-900 dark:text-white">{destination.name}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Selected Destination Preview */}
+              {tripData.destination.city && (
+                <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                  <h4 className="font-medium text-blue-900 dark:text-blue-300 mb-2">Selected Destination:</h4>
+                  <p className="text-blue-800 dark:text-blue-300">
+                    {tripData.destination.barangay && `${tripData.destination.barangay}, `}
+                    {tripData.destination.city}, {tripData.destination.province}, {tripData.destination.region}
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
@@ -455,7 +677,8 @@ export default function BundleServicePage() {
                 <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Destination</h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    {tripData.destination.place}, {tripData.destination.region}, {tripData.destination.country}
+                    {tripData.destination.barangay && `${tripData.destination.barangay}, `}
+                    {tripData.destination.city}, {tripData.destination.province}, {tripData.destination.region}
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     {tripData.dates.checkIn} to {tripData.dates.checkOut} • {tripData.guests} guest{tripData.guests > 1 ? 's' : ''}
@@ -498,7 +721,7 @@ export default function BundleServicePage() {
                 <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-semibold text-gray-900 dark:text-white">Total Estimated Cost</span>
-                    <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">${calculateTotal()}</span>
+                    <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">₱{calculateTotal().toLocaleString()}</span>
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                     *Prices are estimates and may vary based on availability and final selections
@@ -521,7 +744,8 @@ export default function BundleServicePage() {
             {currentStep < steps.length ? (
               <button 
                 onClick={nextStep}
-                className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg"
+                disabled={currentStep === 1 && !tripData.destination.city}
+                className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Next Step
               </button>
@@ -533,14 +757,75 @@ export default function BundleServicePage() {
           </div>
         </div>
 
-        {/* Side Summary (visible on larger screens) */}
+        {/* Additional Flight Booking Help Section */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-8">
+          <div className="flex items-start space-x-4">
+            <div className="flex-shrink-0">
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 109.75 9.75A9.75 9.75 0 0012 2.25z" />
+                </svg>
+              </div>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                Flight Booking Assistance
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Our travel experts are ready to help you find the best flight deals and create seamless travel itineraries. 
+                Get personalized assistance for domestic and international flights.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <svg className="w-5 h-5 text-green-600 dark:text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">Phone Support</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">+63 082 298 8047</p>
+                  </div>
+                </div>
+                <div className="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <svg className="w-5 h-5 text-green-600 dark:text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">WhatsApp/Mobile</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">+63 898 800 5598</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Side Summary */}
         <div className="hidden lg:block fixed right-8 top-1/2 transform -translate-y-1/2 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Trip Summary</h3>
           
-          {tripData.destination.place && (
+          {/* Flight Booking Reminder */}
+          <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+            <div className="flex items-center mb-2">
+              <svg className="w-4 h-4 text-blue-600 dark:text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+              <span className="text-sm font-medium text-blue-900 dark:text-blue-300">Need Flights?</span>
+            </div>
+            <p className="text-xs text-blue-800 dark:text-blue-300">
+              Call +63 082 298 8047 for flight booking assistance
+            </p>
+          </div>
+          
+          {tripData.destination.city && (
             <div className="mb-3">
               <p className="text-sm text-gray-600 dark:text-gray-400">Destination</p>
-              <p className="font-medium text-gray-900 dark:text-white">{tripData.destination.place}</p>
+              <p className="font-medium text-gray-900 dark:text-white">
+                {tripData.destination.barangay && `${tripData.destination.barangay}, `}
+                {tripData.destination.city}
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                {tripData.destination.province}, {tripData.destination.region}
+              </p>
             </div>
           )}
           
@@ -556,8 +841,9 @@ export default function BundleServicePage() {
           <div className="border-t border-gray-200 dark:border-gray-700 pt-3 mt-3">
             <div className="flex justify-between items-center">
               <span className="font-medium text-gray-900 dark:text-white">Estimated Total</span>
-              <span className="text-lg font-bold text-blue-600 dark:text-blue-400">${calculateTotal()}</span>
+              <span className="text-lg font-bold text-blue-600 dark:text-blue-400">₱{calculateTotal().toLocaleString()}</span>
             </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">*Flights not included</p>
           </div>
         </div>
       </div>
