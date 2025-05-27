@@ -633,6 +633,11 @@ export default function TripDetailsPage() {
                     <button className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
                       View Rental Agreement
                     </button>
+                    <Link href="/driver-details/DRV001" className="block w-full">
+                      <button className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                        View Driver Details
+                      </button>
+                    </Link>
                     <button className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors">
                       Contact Rental Company
                     </button>
