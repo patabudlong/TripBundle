@@ -56,6 +56,7 @@ interface Restaurant {
 export default function FoodServiceManagement() {
   const [activeTab, setActiveTab] = useState<'overview' | 'restaurants' | 'menu' | 'orders' | 'earnings' | 'analytics'>('overview');
   const [showAddRestaurant, setShowAddRestaurant] = useState(false);
+  const [showAddMenuItem, setShowAddMenuItem] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'closed' | 'maintenance' | 'pending'>('all');
@@ -1133,8 +1134,11 @@ export default function FoodServiceManagement() {
                   <button className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                     Edit Restaurant
                   </button>
-                  <button className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors">
-                    Manage Menu
+                  <button 
+                    onClick={() => setShowAddMenuItem(true)}
+                    className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors"
+                  >
+                    Add Menu Item
                   </button>
                   <button className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
                     View Orders
@@ -1250,7 +1254,10 @@ export default function FoodServiceManagement() {
                     <option value="seasonal">Seasonal</option>
                   </select>
 
-                  <button className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors">
+                  <button 
+                    onClick={() => setShowAddMenuItem(true)}
+                    className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors"
+                  >
                     Add Menu Item
                   </button>
                 </div>
@@ -1263,15 +1270,15 @@ export default function FoodServiceManagement() {
                 {
                   id: 1,
                   name: "Grilled Seafood Platter",
-                  restaurant: "Sunset Grill",
+                  restaurant: "Sunset Grill & Bar",
                   category: "Main Course",
                   price: 1250,
-                  image: "https://images.unsplash.com/photo-1559847844-d721426d6edc?w=300&h=200&fit=crop",
                   status: "available",
-                  orders: 89,
                   rating: 4.8,
-                  description: "Fresh catch of the day with grilled vegetables",
-                  ingredients: ["Fish", "Shrimp", "Vegetables", "Herbs"],
+                  orders: 234,
+                  image: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=400&h=300&fit=crop",
+                  description: "Fresh catch of the day grilled to perfection with herbs and lemon",
+                  ingredients: ["Fish", "Shrimp", "Squid", "Herbs", "Lemon"],
                   allergens: ["Seafood"],
                   preparationTime: 25
                 },
@@ -1280,75 +1287,75 @@ export default function FoodServiceManagement() {
                   name: "Tropical Fruit Smoothie",
                   restaurant: "Island Café",
                   category: "Beverages",
-                  price: 180,
-                  image: "https://images.unsplash.com/photo-1546173159-315724a31696?w=300&h=200&fit=crop",
+                  price: 185,
                   status: "available",
-                  orders: 156,
                   rating: 4.6,
-                  description: "Blend of mango, pineapple, and coconut",
-                  ingredients: ["Mango", "Pineapple", "Coconut", "Ice"],
+                  orders: 456,
+                  image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop",
+                  description: "Refreshing blend of mango, pineapple, and coconut milk",
+                  ingredients: ["Mango", "Pineapple", "Coconut Milk", "Ice"],
                   allergens: [],
                   preparationTime: 5
                 },
                 {
                   id: 3,
                   name: "Adobo Rice Bowl",
-                  restaurant: "Sunset Grill",
+                  restaurant: "Quick Bites Express",
                   category: "Main Course",
-                  price: 320,
-                  image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop",
+                  price: 295,
                   status: "available",
-                  orders: 247,
                   rating: 4.9,
-                  description: "Traditional Filipino adobo with jasmine rice",
-                  ingredients: ["Pork", "Rice", "Soy Sauce", "Vinegar"],
+                  orders: 1247,
+                  image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop",
+                  description: "Traditional Filipino adobo served over steamed rice",
+                  ingredients: ["Pork", "Soy Sauce", "Vinegar", "Rice", "Garlic"],
                   allergens: ["Soy"],
                   preparationTime: 15
                 },
                 {
                   id: 4,
-                  name: "Coconut Panna Cotta",
-                  restaurant: "Island Café",
+                  name: "Chocolate Lava Cake",
+                  restaurant: "Sunset Grill & Bar",
                   category: "Desserts",
-                  price: 220,
-                  image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=300&h=200&fit=crop",
+                  price: 325,
                   status: "seasonal",
-                  orders: 78,
                   rating: 4.7,
-                  description: "Creamy coconut dessert with tropical fruits",
-                  ingredients: ["Coconut", "Cream", "Sugar", "Fruits"],
-                  allergens: ["Dairy"],
-                  preparationTime: 10
+                  orders: 189,
+                  image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop",
+                  description: "Warm chocolate cake with molten center, served with vanilla ice cream",
+                  ingredients: ["Chocolate", "Flour", "Eggs", "Butter", "Ice Cream"],
+                  allergens: ["Eggs", "Dairy", "Gluten"],
+                  preparationTime: 20
                 },
                 {
                   id: 5,
                   name: "Craft Beer Selection",
-                  restaurant: "Beach Bar",
-                  category: "Beverages",
-                  price: 150,
-                  image: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300&h=200&fit=crop",
-                  status: "out-of-stock",
-                  orders: 134,
-                  rating: 4.4,
-                  description: "Local craft beer varieties",
+                  restaurant: "Beach Bar Lounge",
+                  category: "Alcoholic",
+                  price: 165,
+                  status: "available",
+                  rating: 4.5,
+                  orders: 678,
+                  image: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400&h=300&fit=crop",
+                  description: "Local and imported craft beers, rotating selection",
                   ingredients: ["Hops", "Malt", "Yeast", "Water"],
                   allergens: ["Gluten"],
                   preparationTime: 2
                 },
                 {
                   id: 6,
-                  name: "Grilled Chicken Inasal",
-                  restaurant: "Sunset Grill",
-                  category: "Main Course",
-                  price: 380,
-                  image: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=300&h=200&fit=crop",
-                  status: "available",
-                  orders: 198,
-                  rating: 4.8,
-                  description: "Marinated grilled chicken with garlic rice",
-                  ingredients: ["Chicken", "Rice", "Garlic", "Spices"],
-                  allergens: [],
-                  preparationTime: 20
+                  name: "Caesar Salad",
+                  restaurant: "Island Café",
+                  category: "Appetizers",
+                  price: 245,
+                  status: "out-of-stock",
+                  rating: 4.4,
+                  orders: 123,
+                  image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop",
+                  description: "Crisp romaine lettuce with parmesan, croutons and caesar dressing",
+                  ingredients: ["Romaine", "Parmesan", "Croutons", "Caesar Dressing"],
+                  allergens: ["Dairy", "Eggs", "Gluten"],
+                  preparationTime: 10
                 }
               ].map((item) => (
                 <div key={item.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
@@ -1455,6 +1462,332 @@ export default function FoodServiceManagement() {
                   </svg>
                 </button>
               </nav>
+            </div>
+          </div>
+        )}
+
+        {/* Add Menu Item Modal */}
+        {showAddMenuItem && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Add New Menu Item</h2>
+                  <button 
+                    onClick={() => setShowAddMenuItem(false)}
+                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <form className="p-6 space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Left Column */}
+                  <div className="space-y-6">
+                    {/* Basic Information */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Basic Information</h3>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Item Name *
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g., Grilled Salmon with Herbs"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Restaurant *
+                          </label>
+                          <select className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                            <option value="">Select Restaurant</option>
+                            <option value="sunset-grill">Sunset Grill & Bar</option>
+                            <option value="island-cafe">Island Café</option>
+                            <option value="beach-bar">Beach Bar Lounge</option>
+                            <option value="quick-bites">Quick Bites Express</option>
+                            <option value="catering">Boracay Catering</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Category *
+                          </label>
+                          <select className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                            <option value="">Select Category</option>
+                            <option value="appetizers">Appetizers</option>
+                            <option value="soups">Soups & Salads</option>
+                            <option value="main-course">Main Course</option>
+                            <option value="seafood">Seafood</option>
+                            <option value="pasta">Pasta & Rice</option>
+                            <option value="desserts">Desserts</option>
+                            <option value="beverages">Beverages</option>
+                            <option value="alcoholic">Alcoholic Drinks</option>
+                          </select>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                              Price (₱) *
+                            </label>
+                            <input
+                              type="number"
+                              placeholder="0.00"
+                              min="0"
+                              step="0.01"
+                              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                              Prep Time (minutes) *
+                            </label>
+                            <input
+                              type="number"
+                              placeholder="15"
+                              min="1"
+                              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Description *
+                          </label>
+                          <textarea
+                            rows={3}
+                            placeholder="Describe the dish, cooking method, and what makes it special..."
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Ingredients & Allergens */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Ingredients & Allergens</h3>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Main Ingredients
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g., Salmon, Herbs, Lemon, Olive Oil (separate with commas)"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Allergens
+                          </label>
+                          <div className="grid grid-cols-2 gap-2">
+                            {['Dairy', 'Eggs', 'Fish', 'Shellfish', 'Nuts', 'Peanuts', 'Soy', 'Gluten'].map((allergen) => (
+                              <label key={allergen} className="flex items-center">
+                                <input
+                                  type="checkbox"
+                                  className="rounded border-gray-300 text-orange-600 focus:ring-orange-500"
+                                />
+                                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">{allergen}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Dietary Options
+                          </label>
+                          <div className="grid grid-cols-2 gap-2">
+                            {['Vegetarian', 'Vegan', 'Gluten-Free', 'Keto-Friendly', 'Low-Carb', 'Spicy'].map((option) => (
+                              <label key={option} className="flex items-center">
+                                <input
+                                  type="checkbox"
+                                  className="rounded border-gray-300 text-orange-600 focus:ring-orange-500"
+                                />
+                                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">{option}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column */}
+                  <div className="space-y-6">
+                    {/* Image Upload */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Item Images</h3>
+                      
+                      <div className="space-y-4">
+                        <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
+                          <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          <div className="mt-4">
+                            <label htmlFor="file-upload" className="cursor-pointer">
+                              <span className="mt-2 block text-sm font-medium text-gray-900 dark:text-white">
+                                Upload main image
+                              </span>
+                              <input id="file-upload" name="file-upload" type="file" className="sr-only" accept="image/*" />
+                            </label>
+                            <p className="mt-1 text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-2">
+                          {[1, 2, 3].map((i) => (
+                            <div key={i} className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 text-center">
+                              <svg className="mx-auto h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                              </svg>
+                              <p className="mt-1 text-xs text-gray-500">Additional</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Availability & Status */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Availability & Status</h3>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Status
+                          </label>
+                          <select className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                            <option value="available">Available</option>
+                            <option value="out-of-stock">Out of Stock</option>
+                            <option value="seasonal">Seasonal</option>
+                            <option value="limited">Limited Time</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="flex items-center">
+                            <input
+                              type="checkbox"
+                              className="rounded border-gray-300 text-orange-600 focus:ring-orange-500"
+                            />
+                            <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Available for delivery</span>
+                          </label>
+                        </div>
+
+                        <div>
+                          <label className="flex items-center">
+                            <input
+                              type="checkbox"
+                              className="rounded border-gray-300 text-orange-600 focus:ring-orange-500"
+                            />
+                            <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Available for takeout</span>
+                          </label>
+                        </div>
+
+                        <div>
+                          <label className="flex items-center">
+                            <input
+                              type="checkbox"
+                              className="rounded border-gray-300 text-orange-600 focus:ring-orange-500"
+                            />
+                            <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Featured item</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Nutritional Information */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Nutritional Information (Optional)</h3>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Calories
+                          </label>
+                          <input
+                            type="number"
+                            placeholder="0"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Protein (g)
+                          </label>
+                          <input
+                            type="number"
+                            placeholder="0"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Carbs (g)
+                          </label>
+                          <input
+                            type="number"
+                            placeholder="0"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Fat (g)
+                          </label>
+                          <input
+                            type="number"
+                            placeholder="0"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Form Actions */}
+                <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700">
+                  <button
+                    type="button"
+                    onClick={() => setShowAddMenuItem(false)}
+                    className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-medium transition-colors"
+                  >
+                    Save as Draft
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors"
+                  >
+                    Add Menu Item
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         )}
