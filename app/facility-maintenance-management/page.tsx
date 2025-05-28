@@ -2492,13 +2492,7 @@ export default function FacilityMaintenanceManagement() {
           </div>
         )}
 
-        {/* Other tabs placeholders */}
-        {activeTab !== 'overview' && activeTab !== 'services' && (
-          <div className="text-center py-12">
-            <p className="text-gray-600 dark:text-gray-400">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} section coming soon...</p>
-          </div>
-        )}
-
+       
         {activeTab === 'bookings' && renderBookings()}
 
         {/* Booking Details Modal */}
