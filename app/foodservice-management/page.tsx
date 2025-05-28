@@ -1013,12 +1013,12 @@ export default function FoodServiceManagement() {
                           Dine-in
                         </span>
                         {selectedRestaurant.capacity.takeout && (
-                          <span className="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-sm">
+                          <span className="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-xs">
                             Takeout
                           </span>
                         )}
                         {selectedRestaurant.capacity.delivery && (
-                          <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">
+                          <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs">
                             Delivery
                           </span>
                         )}
@@ -1145,8 +1145,322 @@ export default function FoodServiceManagement() {
           </div>
         )}
 
+        {/* Menu Management Tab */}
+        {activeTab === 'menu' && (
+          <div className="space-y-6">
+            {/* Menu Overview Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-orange-100 dark:bg-orange-900 rounded-lg">
+                    <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Menu Items</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">247</p>
+                    <p className="text-sm text-green-600">+12 this week</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Categories</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">18</p>
+                    <p className="text-sm text-blue-600">Across all restaurants</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Average Price</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱485</p>
+                    <p className="text-sm text-green-600">+8.5% from last month</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                    <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Best Seller</p>
+                    <p className="text-lg font-semibold text-gray-900 dark:text-white">Adobo Rice Bowl</p>
+                    <p className="text-sm text-purple-600">1,247 orders this month</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Menu Management Controls */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <div className="flex flex-col lg:flex-row gap-4 items-center justify-between mb-6">
+                <div className="flex-1 max-w-md">
+                  <div className="relative">
+                    <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input
+                      type="text"
+                      placeholder="Search menu items..."
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <option value="all">All Restaurants</option>
+                    <option value="sunset-grill">Sunset Grill</option>
+                    <option value="island-cafe">Island Café</option>
+                    <option value="beach-bar">Beach Bar</option>
+                  </select>
+
+                  <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <option value="all">All Categories</option>
+                    <option value="appetizers">Appetizers</option>
+                    <option value="main-course">Main Course</option>
+                    <option value="desserts">Desserts</option>
+                    <option value="beverages">Beverages</option>
+                  </select>
+
+                  <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <option value="all">All Status</option>
+                    <option value="available">Available</option>
+                    <option value="out-of-stock">Out of Stock</option>
+                    <option value="seasonal">Seasonal</option>
+                  </select>
+
+                  <button className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors">
+                    Add Menu Item
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Menu Items Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  id: 1,
+                  name: "Grilled Seafood Platter",
+                  restaurant: "Sunset Grill",
+                  category: "Main Course",
+                  price: 1250,
+                  image: "https://images.unsplash.com/photo-1559847844-d721426d6edc?w=300&h=200&fit=crop",
+                  status: "available",
+                  orders: 89,
+                  rating: 4.8,
+                  description: "Fresh catch of the day with grilled vegetables",
+                  ingredients: ["Fish", "Shrimp", "Vegetables", "Herbs"],
+                  allergens: ["Seafood"],
+                  preparationTime: 25
+                },
+                {
+                  id: 2,
+                  name: "Tropical Fruit Smoothie",
+                  restaurant: "Island Café",
+                  category: "Beverages",
+                  price: 180,
+                  image: "https://images.unsplash.com/photo-1546173159-315724a31696?w=300&h=200&fit=crop",
+                  status: "available",
+                  orders: 156,
+                  rating: 4.6,
+                  description: "Blend of mango, pineapple, and coconut",
+                  ingredients: ["Mango", "Pineapple", "Coconut", "Ice"],
+                  allergens: [],
+                  preparationTime: 5
+                },
+                {
+                  id: 3,
+                  name: "Adobo Rice Bowl",
+                  restaurant: "Sunset Grill",
+                  category: "Main Course",
+                  price: 320,
+                  image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300&h=200&fit=crop",
+                  status: "available",
+                  orders: 247,
+                  rating: 4.9,
+                  description: "Traditional Filipino adobo with jasmine rice",
+                  ingredients: ["Pork", "Rice", "Soy Sauce", "Vinegar"],
+                  allergens: ["Soy"],
+                  preparationTime: 15
+                },
+                {
+                  id: 4,
+                  name: "Coconut Panna Cotta",
+                  restaurant: "Island Café",
+                  category: "Desserts",
+                  price: 220,
+                  image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=300&h=200&fit=crop",
+                  status: "seasonal",
+                  orders: 78,
+                  rating: 4.7,
+                  description: "Creamy coconut dessert with tropical fruits",
+                  ingredients: ["Coconut", "Cream", "Sugar", "Fruits"],
+                  allergens: ["Dairy"],
+                  preparationTime: 10
+                },
+                {
+                  id: 5,
+                  name: "Craft Beer Selection",
+                  restaurant: "Beach Bar",
+                  category: "Beverages",
+                  price: 150,
+                  image: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300&h=200&fit=crop",
+                  status: "out-of-stock",
+                  orders: 134,
+                  rating: 4.4,
+                  description: "Local craft beer varieties",
+                  ingredients: ["Hops", "Malt", "Yeast", "Water"],
+                  allergens: ["Gluten"],
+                  preparationTime: 2
+                },
+                {
+                  id: 6,
+                  name: "Grilled Chicken Inasal",
+                  restaurant: "Sunset Grill",
+                  category: "Main Course",
+                  price: 380,
+                  image: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=300&h=200&fit=crop",
+                  status: "available",
+                  orders: 198,
+                  rating: 4.8,
+                  description: "Marinated grilled chicken with garlic rice",
+                  ingredients: ["Chicken", "Rice", "Garlic", "Spices"],
+                  allergens: [],
+                  preparationTime: 20
+                }
+              ].map((item) => (
+                <div key={item.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="relative">
+                    <img src={item.image} alt={item.name} className="w-full h-48 object-cover" />
+                    <div className="absolute top-4 right-4">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        item.status === 'available' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                        item.status === 'out-of-stock' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
+                        'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                      }`}>
+                        {item.status.replace('-', ' ')}
+                      </span>
+                    </div>
+                    <div className="absolute top-4 left-4">
+                      <span className="px-2 py-1 bg-black bg-opacity-50 text-white text-xs rounded-full">
+                        {item.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{item.name}</h3>
+                      <span className="text-lg font-bold text-orange-600">₱{item.price}</span>
+                    </div>
+
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{item.restaurant}</p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">{item.description}</p>
+
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-yellow-500">⭐</span>
+                        <span className="text-sm font-medium">{item.rating}</span>
+                        <span className="text-sm text-gray-500">({item.orders} orders)</span>
+                      </div>
+                      <span className="text-sm text-gray-500">{item.preparationTime} min</span>
+                    </div>
+
+                    <div className="mb-4">
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Ingredients:</p>
+                      <div className="flex flex-wrap gap-1">
+                        {item.ingredients.slice(0, 3).map((ingredient, index) => (
+                          <span key={index} className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-xs rounded">
+                            {ingredient}
+                          </span>
+                        ))}
+                        {item.ingredients.length > 3 && (
+                          <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-xs rounded">
+                            +{item.ingredients.length - 3} more
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {item.allergens.length > 0 && (
+                      <div className="mb-4">
+                        <p className="text-xs text-red-600 dark:text-red-400 mb-1">Allergens:</p>
+                        <div className="flex flex-wrap gap-1">
+                          {item.allergens.map((allergen, index) => (
+                            <span key={index} className="px-2 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs rounded">
+                              {allergen}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="flex space-x-2">
+                      <button className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        Edit
+                      </button>
+                      <button className="flex-1 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors">
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            <div className="flex justify-center">
+              <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                <button className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <span className="sr-only">Previous</span>
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </button>
+                <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-orange-50 dark:bg-orange-900 text-sm font-medium text-orange-600 dark:text-orange-400">
+                  1
+                </button>
+                <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  2
+                </button>
+                <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  3
+                </button>
+                <button className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <span className="sr-only">Next</span>
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </nav>
+            </div>
+          </div>
+        )}
+
         {/* Other tabs placeholders */}
-        {activeTab !== 'overview' && activeTab !== 'restaurants' && (
+        {activeTab !== 'overview' && activeTab !== 'restaurants' && activeTab !== 'menu' && (
           <div className="text-center py-12">
             <p className="text-gray-600 dark:text-gray-400">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} section coming soon...</p>
           </div>
