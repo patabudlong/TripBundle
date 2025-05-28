@@ -2523,8 +2523,364 @@ export default function FoodServiceManagement() {
           </div>
         )}
 
+        {/* Earnings Tab */}
+        {activeTab === 'earnings' && (
+          <div className="space-y-6">
+            {/* Earnings Overview Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Revenue</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱2,847,650</p>
+                    <p className="text-sm text-green-600">+15.2% this month</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Net Profit</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱854,295</p>
+                    <p className="text-sm text-blue-600">30% profit margin</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-orange-100 dark:bg-orange-900 rounded-lg">
+                    <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Daily Revenue</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱91,860</p>
+                    <p className="text-sm text-orange-600">Last 30 days</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                    <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Peak Hour Revenue</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱15,420</p>
+                    <p className="text-sm text-purple-600">7-9 PM daily avg</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Revenue Chart and Restaurant Performance */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Revenue Trend Chart */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Revenue Trend</h3>
+                  <select className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+                    <option value="7days">Last 7 Days</option>
+                    <option value="30days">Last 30 Days</option>
+                    <option value="3months">Last 3 Months</option>
+                    <option value="year">This Year</option>
+                  </select>
+                </div>
+
+                {/* Chart Area */}
+                <div className="h-64 relative">
+                  <svg className="w-full h-full" viewBox="0 0 400 200">
+                    {/* Grid Lines */}
+                    <defs>
+                      <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#e5e7eb" strokeWidth="0.5"/>
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                    
+                    {/* Revenue Line */}
+                    <polyline
+                      fill="none"
+                      stroke="#f97316"
+                      strokeWidth="3"
+                      points="20,160 60,140 100,120 140,100 180,80 220,90 260,70 300,60 340,50 380,40"
+                    />
+                    
+                    {/* Data Points */}
+                    {[
+                      {x: 20, y: 160, value: "₱65k"},
+                      {x: 60, y: 140, value: "₱72k"},
+                      {x: 100, y: 120, value: "₱78k"},
+                      {x: 140, y: 100, value: "₱85k"},
+                      {x: 180, y: 80, value: "₱92k"},
+                      {x: 220, y: 90, value: "₱88k"},
+                      {x: 260, y: 70, value: "₱95k"},
+                      {x: 300, y: 60, value: "₱98k"},
+                      {x: 340, y: 50, value: "₱102k"},
+                      {x: 380, y: 40, value: "₱108k"}
+                    ].map((point, index) => (
+                      <g key={index}>
+                        <circle cx={point.x} cy={point.y} r="4" fill="#f97316" />
+                        <circle cx={point.x} cy={point.y} r="8" fill="#f97316" fillOpacity="0.2" />
+                      </g>
+                    ))}
+                  </svg>
+                  
+                  {/* X-axis Labels */}
+                  <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-gray-500 dark:text-gray-400 px-2">
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                    <span>Sun</span>
+                  </div>
+                </div>
+
+                {/* Chart Summary */}
+                <div className="mt-4 grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Highest</p>
+                    <p className="text-sm font-semibold text-green-600">₱108,420</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Lowest</p>
+                    <p className="text-sm font-semibold text-red-600">₱65,280</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Growth</p>
+                    <p className="text-sm font-semibold text-blue-600">+18.5%</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Restaurant Performance */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Restaurant Performance</h3>
+                
+                <div className="space-y-4">
+                  {[
+                    { name: "Sunset Grill & Bar", revenue: 1250000, percentage: 44, growth: "+12%" },
+                    { name: "Island Café", revenue: 850000, percentage: 30, growth: "+8%" },
+                    { name: "Beach Bar Lounge", revenue: 420000, percentage: 15, growth: "+15%" },
+                    { name: "Quick Bites Express", revenue: 280000, percentage: 10, growth: "+22%" },
+                    { name: "Boracay Catering", revenue: 47650, percentage: 1, growth: "+5%" }
+                  ].map((restaurant, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div className="flex-1">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-sm font-medium text-gray-900 dark:text-white">{restaurant.name}</span>
+                          <span className="text-sm text-green-600">{restaurant.growth}</span>
+                        </div>
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-xs text-gray-500 dark:text-gray-400">₱{restaurant.revenue.toLocaleString()}</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">{restaurant.percentage}%</span>
+                        </div>
+                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                          <div 
+                            className="bg-orange-600 h-2 rounded-full transition-all duration-300"
+                            style={{ width: `${restaurant.percentage}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Detailed Earnings Table */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+              <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Detailed Earnings Report</h3>
+                  <div className="flex gap-4">
+                    <select className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+                      <option value="all">All Restaurants</option>
+                      <option value="sunset-grill">Sunset Grill</option>
+                      <option value="island-cafe">Island Café</option>
+                      <option value="beach-bar">Beach Bar</option>
+                    </select>
+                    <button className="px-4 py-1 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      Export Report
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Date</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Restaurant</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Orders</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Gross Revenue</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Expenses</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Net Profit</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Margin</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                    {[
+                      {
+                        date: "Dec 15, 2024",
+                        restaurant: "Sunset Grill & Bar",
+                        orders: 89,
+                        grossRevenue: 45280,
+                        expenses: 31696,
+                        netProfit: 13584,
+                        margin: 30.0
+                      },
+                      {
+                        date: "Dec 15, 2024",
+                        restaurant: "Island Café",
+                        orders: 67,
+                        grossRevenue: 28450,
+                        expenses: 19915,
+                        netProfit: 8535,
+                        margin: 30.0
+                      },
+                      {
+                        date: "Dec 15, 2024",
+                        restaurant: "Beach Bar Lounge",
+                        orders: 45,
+                        grossRevenue: 18920,
+                        expenses: 13244,
+                        netProfit: 5676,
+                        margin: 30.0
+                      },
+                      {
+                        date: "Dec 14, 2024",
+                        restaurant: "Sunset Grill & Bar",
+                        orders: 92,
+                        grossRevenue: 48650,
+                        expenses: 34055,
+                        netProfit: 14595,
+                        margin: 30.0
+                      },
+                      {
+                        date: "Dec 14, 2024",
+                        restaurant: "Quick Bites Express",
+                        orders: 156,
+                        grossRevenue: 24780,
+                        expenses: 17346,
+                        netProfit: 7434,
+                        margin: 30.0
+                      }
+                    ].map((row, index) => (
+                      <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">{row.date}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">{row.restaurant}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">{row.orders}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">₱{row.grossRevenue.toLocaleString()}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600 dark:text-red-400">₱{row.expenses.toLocaleString()}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600 dark:text-green-400">₱{row.netProfit.toLocaleString()}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">{row.margin}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Table Footer */}
+              <div className="bg-gray-50 dark:bg-gray-700 px-6 py-3">
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-gray-600 dark:text-gray-400">Showing last 5 days</span>
+                  <div className="flex space-x-6">
+                    <span className="text-gray-900 dark:text-white">Total Revenue: <strong>₱166,080</strong></span>
+                    <span className="text-green-600 dark:text-green-400">Total Profit: <strong>₱49,824</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Payment Methods & Analytics */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Payment Methods */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Payment Methods</h3>
+                
+                <div className="space-y-4">
+                  {[
+                    { method: "Cash", amount: 1420850, percentage: 50, icon: "💵" },
+                    { method: "GCash", amount: 852510, percentage: 30, icon: "📱" },
+                    { method: "Credit Card", amount: 426255, percentage: 15, icon: "💳" },
+                    { method: "Bank Transfer", amount: 142085, percentage: 5, icon: "🏦" }
+                  ].map((payment, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-2xl">{payment.icon}</span>
+                        <div>
+                          <p className="text-sm font-medium text-gray-900 dark:text-white">{payment.method}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">₱{payment.amount.toLocaleString()}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">{payment.percentage}%</p>
+                        <div className="w-20 bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-1">
+                          <div 
+                            className="bg-orange-600 h-2 rounded-full"
+                            style={{ width: `${payment.percentage}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Expense Breakdown */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Expense Breakdown</h3>
+                
+                <div className="space-y-4">
+                  {[
+                    { category: "Food Costs", amount: 1138296, percentage: 40, color: "bg-red-500" },
+                    { category: "Staff Wages", amount: 853722, percentage: 30, color: "bg-blue-500" },
+                    { category: "Utilities", amount: 284574, percentage: 10, color: "bg-yellow-500" },
+                    { category: "Rent", amount: 284574, percentage: 10, color: "bg-purple-500" },
+                    { category: "Marketing", amount: 142287, percentage: 5, color: "bg-green-500" },
+                    { category: "Other", amount: 142287, percentage: 5, color: "bg-gray-500" }
+                  ].map((expense, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-3 h-3 rounded-full ${expense.color}`}></div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-900 dark:text-white">{expense.category}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">₱{expense.amount.toLocaleString()}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">{expense.percentage}%</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Other tabs placeholders */}
-        {activeTab !== 'overview' && activeTab !== 'restaurants' && activeTab !== 'menu' && activeTab !== 'orders' && (
+        {activeTab !== 'overview' && activeTab !== 'restaurants' && activeTab !== 'menu' && activeTab !== 'orders' && activeTab !== 'earnings' && (
           <div className="text-center py-12">
             <p className="text-gray-600 dark:text-gray-400">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} section coming soon...</p>
           </div>
