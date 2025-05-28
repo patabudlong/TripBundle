@@ -52,6 +52,7 @@ export default function PropertyManagement() {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'maintenance' | 'inactive' | 'pending'>('all');
   const [typeFilter, setTypeFilter] = useState<'all' | 'hotel' | 'resort' | 'apartment' | 'villa' | 'hostel'>('all');
+  const [showAddRoom, setShowAddRoom] = useState(false);
 
   // Mock data
   const ownerInfo = {
@@ -1074,7 +1075,10 @@ export default function PropertyManagement() {
                     <option value="suite">Suite</option>
                     <option value="family">Family</option>
                   </select>
-                  <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                  <button 
+                    onClick={() => setShowAddRoom(true)}
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                  >
                     Add Room
                   </button>
                 </div>
@@ -1322,6 +1326,267 @@ export default function PropertyManagement() {
                 <div className="flex items-center space-x-2">
                   <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
                   <span className="text-sm">Cleaning - Being cleaned</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Add Room Modal */}
+        {showAddRoom && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-xl font-semibold">Add New Room</h3>
+                  <button 
+                    onClick={() => setShowAddRoom(false)}
+                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                <form className="space-y-6">
+                  {/* Basic Information */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Room Number</label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g., 101, A-205"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Property</label>
+                      <select className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Select Property</option>
+                        <option value="grand-palace">Grand Palace Hotel Boracay</option>
+                        <option value="sunset-resort">Sunset Beach Resort</option>
+                        <option value="paradise-villa">Paradise Villa</option>
+                        <option value="ocean-view">Ocean View Apartments</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Room Type</label>
+                      <select className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Select Type</option>
+                        <option value="standard">Standard</option>
+                        <option value="deluxe">Deluxe</option>
+                        <option value="suite">Suite</option>
+                        <option value="family">Family</option>
+                        <option value="presidential">Presidential</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Floor</label>
+                      <select className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Select Floor</option>
+                        <option value="ground">Ground Floor</option>
+                        <option value="1">1st Floor</option>
+                        <option value="2">2nd Floor</option>
+                        <option value="3">3rd Floor</option>
+                        <option value="4">4th Floor</option>
+                        <option value="5">5th Floor</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Status</label>
+                      <select className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="available">Available</option>
+                        <option value="maintenance">Under Maintenance</option>
+                        <option value="cleaning">Cleaning</option>
+                        <option value="out-of-order">Out of Order</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Room Specifications */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <h4 className="text-lg font-medium mb-4">Room Specifications</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Size (sqm)</label>
+                        <input 
+                          type="number" 
+                          placeholder="25"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Max Adults</label>
+                        <input 
+                          type="number" 
+                          placeholder="2"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Max Children</label>
+                        <input 
+                          type="number" 
+                          placeholder="1"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Beds</label>
+                        <select className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                          <option value="">Select Bed Type</option>
+                          <option value="single">1 Single Bed</option>
+                          <option value="double">1 Double Bed</option>
+                          <option value="queen">1 Queen Bed</option>
+                          <option value="king">1 King Bed</option>
+                          <option value="twin">2 Twin Beds</option>
+                          <option value="bunk">Bunk Beds</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pricing */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <h4 className="text-lg font-medium mb-4">Pricing</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Base Rate (₱/night)</label>
+                        <input 
+                          type="number" 
+                          placeholder="3500"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Weekend Rate (₱/night)</label>
+                        <input 
+                          type="number" 
+                          placeholder="4200"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Peak Season Rate (₱/night)</label>
+                        <input 
+                          type="number" 
+                          placeholder="5500"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Amenities */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <h4 className="text-lg font-medium mb-4">Room Amenities</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      {[
+                        'Air Conditioning', 'WiFi', 'TV', 'Mini Bar', 'Safe', 'Balcony',
+                        'Ocean View', 'Garden View', 'Bathtub', 'Shower', 'Hair Dryer',
+                        'Coffee Maker', 'Refrigerator', 'Microwave', 'Iron', 'Telephone'
+                      ].map((amenity) => (
+                        <label key={amenity} className="flex items-center space-x-2">
+                          <input 
+                            type="checkbox" 
+                            className="rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="text-sm">{amenity}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Room Features */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <h4 className="text-lg font-medium mb-4">Special Features</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {[
+                        'Wheelchair Accessible', 'Pet Friendly', 'Smoking Allowed',
+                        'Kitchenette', 'Living Area', 'Work Desk', 'Connecting Rooms',
+                        'Private Entrance', 'Soundproof'
+                      ].map((feature) => (
+                        <label key={feature} className="flex items-center space-x-2">
+                          <input 
+                            type="checkbox" 
+                            className="rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="text-sm">{feature}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Room Images */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <h4 className="text-lg font-medium mb-4">Room Images</h4>
+                    <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6">
+                      <div className="text-center">
+                        <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                          <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <div className="mt-4">
+                          <label htmlFor="room-images" className="cursor-pointer">
+                            <span className="mt-2 block text-sm font-medium text-gray-900 dark:text-white">
+                              Upload room images
+                            </span>
+                            <input id="room-images" name="room-images" type="file" multiple accept="image/*" className="sr-only" />
+                          </label>
+                          <p className="mt-1 text-xs text-gray-500">PNG, JPG, GIF up to 10MB each</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <h4 className="text-lg font-medium mb-4">Room Description</h4>
+                    <textarea 
+                      rows={4}
+                      placeholder="Describe the room, its features, and what makes it special..."
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    ></textarea>
+                  </div>
+
+                  {/* Housekeeping */}
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <h4 className="text-lg font-medium mb-4">Housekeeping Settings</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Cleaning Time (minutes)</label>
+                        <input 
+                          type="number" 
+                          placeholder="30"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Maintenance Schedule</label>
+                        <select className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                          <option value="weekly">Weekly</option>
+                          <option value="bi-weekly">Bi-weekly</option>
+                          <option value="monthly">Monthly</option>
+                          <option value="quarterly">Quarterly</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+                <div className="flex justify-end space-x-4 pt-6 mt-6 border-t border-gray-200 dark:border-gray-700">
+                  <button 
+                    onClick={() => setShowAddRoom(false)}
+                    className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                    Add Room
+                  </button>
                 </div>
               </div>
             </div>
