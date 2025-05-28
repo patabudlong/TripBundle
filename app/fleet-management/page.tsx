@@ -46,6 +46,8 @@ export default function FleetManagement() {
   const [activeTab, setActiveTab] = useState<'overview' | 'vehicles' | 'drivers' | 'bookings' | 'earnings' | 'analytics'>('overview');
   const [showAddVehicle, setShowAddVehicle] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'maintenance' | 'inactive'>('all');
 
   // Mock data
   const ownerInfo = {
@@ -187,6 +189,18 @@ export default function FleetManagement() {
     }
   };
 
+  const filteredVehicles = vehicles.filter(vehicle => {
+    const matchesSearch = vehicle.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         vehicle.plateNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         vehicle.color.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         vehicle.driver?.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         vehicle.location.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesStatus = statusFilter === 'all' || vehicle.status === statusFilter;
+    
+    return matchesSearch && matchesStatus;
+  });
+
   const renderOverview = () => (
     <div className="space-y-6">
       {/* Stats Cards */}
@@ -290,82 +304,158 @@ export default function FleetManagement() {
 
   const renderVehicles = () => (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Vehicle Management</h2>
-        <button 
-          onClick={() => setShowAddVehicle(true)}
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
-        >
-          Add New Vehicle
-        </button>
+      {/* Search and Filter Bar */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div className="flex-1 max-w-md">
+            <div className="relative">
+              <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search vehicles by model, plate, driver, or location..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            {/* Status Filter */}
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value as 'all' | 'active' | 'maintenance' | 'inactive')}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value="all">All Status</option>
+              <option value="active">Active</option>
+              <option value="maintenance">Maintenance</option>
+              <option value="inactive">Inactive</option>
+            </select>
+
+            {/* Add Vehicle Button */}
+            <button 
+              onClick={() => setShowAddVehicle(true)}
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center space-x-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              <span>Add Vehicle</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Search Results Info */}
+        {searchQuery && (
+          <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            Found {filteredVehicles.length} vehicle{filteredVehicles.length !== 1 ? 's' : ''} matching "{searchQuery}"
+          </div>
+        )}
       </div>
 
       {/* Vehicles Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {vehicles.map((vehicle) => (
-          <div key={vehicle.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
-            <div className="relative">
-              <img src={vehicle.images[0]} alt={vehicle.model} className="w-full h-48 object-cover" />
-              <span className={`absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(vehicle.status)}`}>
-                {vehicle.status}
-              </span>
-            </div>
-            
-            <div className="p-4">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-lg font-semibold">{vehicle.model} {vehicle.year}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{vehicle.plateNumber}</p>
+      {filteredVehicles.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredVehicles.map((vehicle) => (
+            <div key={vehicle.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="relative">
+                <img src={vehicle.images[0]} alt={vehicle.model} className="w-full h-48 object-cover" />
+                <span className={`absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(vehicle.status)}`}>
+                  {vehicle.status}
+                </span>
               </div>
               
-              <div className="grid grid-cols-2 gap-2 text-sm mb-4">
-                <div>
-                  <p className="text-gray-600 dark:text-gray-400">Type</p>
-                  <p className="font-medium capitalize">{vehicle.type}</p>
+              <div className="p-4">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-lg font-semibold">{vehicle.model} {vehicle.year}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{vehicle.plateNumber}</p>
                 </div>
-                <div>
-                  <p className="text-gray-600 dark:text-gray-400">Capacity</p>
-                  <p className="font-medium">{vehicle.capacity} passengers</p>
-                </div>
-                <div>
-                  <p className="text-gray-600 dark:text-gray-400">Location</p>
-                  <p className="font-medium">{vehicle.location}</p>
-                </div>
-                <div>
-                  <p className="text-gray-600 dark:text-gray-400">Monthly Earnings</p>
-                  <p className="font-medium text-green-600">₱{vehicle.earnings.thisMonth.toLocaleString()}</p>
-                </div>
-              </div>
-
-              {vehicle.driver && (
-                <div className="mb-4 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="text-sm font-medium">{vehicle.driver.name}</p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">{vehicle.driver.phone}</p>
-                    </div>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(vehicle.driver.status)}`}>
-                      {vehicle.driver.status}
-                    </span>
+                
+                <div className="grid grid-cols-2 gap-2 text-sm mb-4">
+                  <div>
+                    <p className="text-gray-600 dark:text-gray-400">Type</p>
+                    <p className="font-medium capitalize">{vehicle.type}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 dark:text-gray-400">Capacity</p>
+                    <p className="font-medium">{vehicle.capacity} passengers</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 dark:text-gray-400">Location</p>
+                    <p className="font-medium">{vehicle.location}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600 dark:text-gray-400">Monthly Earnings</p>
+                    <p className="font-medium text-green-600">₱{vehicle.earnings.thisMonth.toLocaleString()}</p>
                   </div>
                 </div>
-              )}
 
-              <div className="flex space-x-2">
-                <button 
-                  onClick={() => setSelectedVehicle(vehicle)}
-                  className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
-                >
-                  View Details
-                </button>
-                <button className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
-                  Edit
-                </button>
+                {vehicle.driver && (
+                  <div className="mb-4 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-sm font-medium">{vehicle.driver.name}</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">{vehicle.driver.phone}</p>
+                      </div>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(vehicle.driver.status)}`}>
+                        {vehicle.driver.status}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex space-x-2">
+                  <button 
+                    onClick={() => setSelectedVehicle(vehicle)}
+                    className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
+                  >
+                    View Details
+                  </button>
+                  <button className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                    Edit
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-12">
+          <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.175-5.5-2.709M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+          </svg>
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+            {searchQuery ? 'No vehicles found' : 'No vehicles available'}
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            {searchQuery 
+              ? 'Try adjusting your search criteria or filters' 
+              : 'Add your first vehicle to get started'
+            }
+          </p>
+          {!searchQuery && (
+            <button 
+              onClick={() => setShowAddVehicle(true)}
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+            >
+              Add Your First Vehicle
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 
