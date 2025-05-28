@@ -2879,10 +2879,359 @@ export default function FoodServiceManagement() {
           </div>
         )}
 
+        {/* Analytics Tab */}
+        {activeTab === 'analytics' && (
+          <div className="space-y-6">
+            {/* Analytics Overview Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Customers</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">8,247</p>
+                    <p className="text-sm text-blue-600">+12.5% this month</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Customer Satisfaction</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">4.7/5</p>
+                    <p className="text-sm text-green-600">94% positive reviews</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-orange-100 dark:bg-orange-900 rounded-lg">
+                    <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Peak Hours</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">7-9 PM</p>
+                    <p className="text-sm text-orange-600">35% of daily orders</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                    <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Repeat Customers</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">68%</p>
+                    <p className="text-sm text-purple-600">High loyalty rate</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Customer Demographics and Order Patterns */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Customer Demographics */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Customer Demographics</h3>
+                
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Age Groups</h4>
+                    <div className="space-y-3">
+                      {[
+                        { age: "18-25", percentage: 25, count: 2062 },
+                        { age: "26-35", percentage: 35, count: 2886 },
+                        { age: "36-45", percentage: 22, count: 1814 },
+                        { age: "46-55", percentage: 12, count: 990 },
+                        { age: "55+", percentage: 6, count: 495 }
+                      ].map((group, index) => (
+                        <div key={index} className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <span className="text-sm font-medium text-gray-900 dark:text-white w-12">{group.age}</span>
+                            <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2 w-32">
+                              <div 
+                                className="bg-blue-600 h-2 rounded-full"
+                                style={{ width: `${group.percentage}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-sm font-medium text-gray-900 dark:text-white">{group.percentage}%</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">{group.count} customers</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Customer Type</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <p className="text-2xl font-bold text-blue-600">72%</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Local Customers</p>
+                      </div>
+                      <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <p className="text-2xl font-bold text-green-600">28%</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">Tourists</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Order Patterns */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Order Patterns</h3>
+                
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Peak Hours Distribution</h4>
+                    <div className="h-32 relative">
+                      <svg className="w-full h-full" viewBox="0 0 300 100">
+                        {/* Bar Chart for Peak Hours */}
+                        {[
+                          { hour: "6AM", height: 15, orders: 45 },
+                          { hour: "9AM", height: 25, orders: 78 },
+                          { hour: "12PM", height: 65, orders: 195 },
+                          { hour: "3PM", height: 35, orders: 105 },
+                          { hour: "6PM", height: 85, orders: 255 },
+                          { hour: "9PM", height: 90, orders: 270 },
+                          { hour: "12AM", height: 20, orders: 60 }
+                        ].map((bar, index) => (
+                          <g key={index}>
+                            <rect
+                              x={index * 40 + 10}
+                              y={100 - bar.height}
+                              width="30"
+                              height={bar.height}
+                              fill="#f97316"
+                              rx="2"
+                            />
+                            <text
+                              x={index * 40 + 25}
+                              y={95}
+                              textAnchor="middle"
+                              className="text-xs fill-gray-600 dark:fill-gray-400"
+                            >
+                              {bar.hour}
+                            </text>
+                          </g>
+                        ))}
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Order Types</h4>
+                    <div className="space-y-3">
+                      {[
+                        { type: "Dine-in", percentage: 45, icon: "🍽️" },
+                        { type: "Takeout", percentage: 35, icon: "🥡" },
+                        { type: "Delivery", percentage: 20, icon: "🚚" }
+                      ].map((orderType, index) => (
+                        <div key={index} className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <span className="text-lg">{orderType.icon}</span>
+                            <span className="text-sm font-medium text-gray-900 dark:text-white">{orderType.type}</span>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            <div className="w-20 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                              <div 
+                                className="bg-orange-600 h-2 rounded-full"
+                                style={{ width: `${orderType.percentage}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-sm font-medium text-gray-900 dark:text-white w-8">{orderType.percentage}%</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Popular Menu Items and Restaurant Performance */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Popular Menu Items */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Top Performing Menu Items</h3>
+                
+                <div className="space-y-4">
+                  {[
+                    { name: "Adobo Rice Bowl", orders: 1247, revenue: 498800, trend: "+15%" },
+                    { name: "Grilled Seafood Platter", orders: 892, revenue: 624400, trend: "+8%" },
+                    { name: "Chicken Inasal", orders: 756, revenue: 302400, trend: "+22%" },
+                    { name: "Beef Kare-Kare", orders: 634, revenue: 380400, trend: "+5%" },
+                    { name: "Fresh Fruit Shake", orders: 1156, revenue: 173400, trend: "+18%" }
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <div className="flex-1">
+                        <h4 className="text-sm font-medium text-gray-900 dark:text-white">{item.name}</h4>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{item.orders} orders • ₱{item.revenue.toLocaleString()}</p>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-sm font-medium text-green-600">{item.trend}</span>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">vs last month</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Restaurant Performance Comparison */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Restaurant Performance</h3>
+                
+                <div className="space-y-4">
+                  {[
+                    { name: "Sunset Grill & Bar", rating: 4.8, orders: 2847, revenue: 1423500, efficiency: 92 },
+                    { name: "Island Café", rating: 4.6, orders: 1956, revenue: 782400, efficiency: 88 },
+                    { name: "Beach Bar Lounge", rating: 4.7, orders: 1234, revenue: 617000, efficiency: 85 },
+                    { name: "Quick Bites Express", rating: 4.4, orders: 3456, revenue: 691200, efficiency: 90 },
+                    { name: "Boracay Catering", rating: 4.9, orders: 567, revenue: 340200, efficiency: 95 }
+                  ].map((restaurant, index) => (
+                    <div key={index} className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg">
+                      <div className="flex justify-between items-start mb-2">
+                        <h4 className="text-sm font-medium text-gray-900 dark:text-white">{restaurant.name}</h4>
+                        <div className="flex items-center space-x-1">
+                          <span className="text-yellow-500">⭐</span>
+                          <span className="text-sm font-medium">{restaurant.rating}</span>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-3 gap-2 text-xs">
+                        <div>
+                          <p className="text-gray-500 dark:text-gray-400">Orders</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{restaurant.orders.toLocaleString()}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-500 dark:text-gray-400">Revenue</p>
+                          <p className="font-medium text-gray-900 dark:text-white">₱{(restaurant.revenue / 1000).toFixed(0)}k</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-500 dark:text-gray-400">Efficiency</p>
+                          <p className="font-medium text-gray-900 dark:text-white">{restaurant.efficiency}%</p>
+                        </div>
+                      </div>
+                      
+                      <div className="mt-2">
+                        <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5">
+                          <div 
+                            className="bg-orange-600 h-1.5 rounded-full"
+                            style={{ width: `${restaurant.efficiency}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* AI-Powered Insights */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">AI-Powered Business Insights</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                    <h4 className="font-medium text-blue-900 dark:text-blue-100">Revenue Optimization</h4>
+                  </div>
+                  <p className="text-sm text-blue-800 dark:text-blue-200">
+                    Consider increasing prices for Adobo Rice Bowl by 8-12% based on high demand and customer satisfaction scores.
+                  </p>
+                </div>
+
+                <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h4 className="font-medium text-green-900 dark:text-green-100">Operational Efficiency</h4>
+                  </div>
+                  <p className="text-sm text-green-800 dark:text-green-200">
+                    Peak hour staffing at Beach Bar Lounge should be increased by 2 staff members to reduce wait times.
+                  </p>
+                </div>
+
+                <div className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <svg className="w-5 h-5 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <h4 className="font-medium text-orange-900 dark:text-orange-100">Customer Retention</h4>
+                  </div>
+                  <p className="text-sm text-orange-800 dark:text-orange-200">
+                    Launch a loyalty program targeting the 26-35 age group to increase repeat visits by an estimated 15%.
+                  </p>
+                </div>
+
+                <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    <h4 className="font-medium text-purple-900 dark:text-purple-100">Menu Optimization</h4>
+                  </div>
+                  <p className="text-sm text-purple-800 dark:text-purple-200">
+                    Remove underperforming items with less than 50 monthly orders and introduce 2 new vegetarian options.
+                  </p>
+                </div>
+
+                <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                    <h4 className="font-medium text-red-900 dark:text-red-100">Quality Alert</h4>
+                  </div>
+                  <p className="text-sm text-red-800 dark:text-red-200">
+                    Quick Bites Express has received 3 complaints about food temperature. Review kitchen procedures.
+                  </p>
+                </div>
+
+                <div className="p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-200 dark:border-indigo-800">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <svg className="w-5 h-5 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                    </svg>
+                    <h4 className="font-medium text-indigo-900 dark:text-indigo-100">Marketing Opportunity</h4>
+                  </div>
+                  <p className="text-sm text-indigo-800 dark:text-indigo-200">
+                    Tourist customers show 40% higher spending. Focus social media marketing on travel hashtags.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Other tabs placeholders */}
-        {activeTab !== 'overview' && activeTab !== 'restaurants' && activeTab !== 'menu' && activeTab !== 'orders' && activeTab !== 'earnings' && (
+        {!['overview', 'restaurants', 'menu', 'orders', 'earnings', 'analytics'].includes(activeTab) && (
           <div className="text-center py-12">
-            <p className="text-gray-600 dark:text-gray-400">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} section coming soon...</p>
+            <p className="text-gray-600 dark:text-gray-400">{(activeTab as string).charAt(0).toUpperCase() + (activeTab as string).slice(1)} section coming soon...</p>
           </div>
         )}
       </div>
