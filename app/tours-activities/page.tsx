@@ -733,527 +733,576 @@ export default function ToursActivitiesManagement() {
           </div>
         )}
 
-        {/* Add Tour Modal */}
-        {showAddTour && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-xl font-semibold">Add New Tour/Activity</h3>
-                  <button 
-                    onClick={() => setShowAddTour(false)}
-                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                  >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        {/* Guides Tab */}
+        {activeTab === 'guides' && (
+          <div className="space-y-6">
+            {/* Guides Overview Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                     </svg>
-                  </button>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Guides</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">8</p>
+                  </div>
                 </div>
+              </div>
 
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Tour/Activity Name</label>
-                      <input 
-                        type="text" 
-                        placeholder="e.g., Ultimate Island Hopping Adventure"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Activity Type</label>
-                      <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                        <option value="">Select Type</option>
-                        <option value="island-hopping">Island Hopping</option>
-                        <option value="water-sports">Water Sports</option>
-                        <option value="cultural">Cultural</option>
-                        <option value="adventure">Adventure</option>
-                        <option value="food-tour">Food Tour</option>
-                        <option value="nightlife">Nightlife</option>
-                        <option value="wellness">Wellness</option>
-                      </select>
-                    </div>
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Location</label>
-                      <input 
-                        type="text" 
-                        placeholder="e.g., Boracay & Nearby Islands"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Duration</label>
-                      <input 
-                        type="text" 
-                        placeholder="e.g., Full day (8 hours)"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Difficulty Level</label>
-                      <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                        <option value="">Select Difficulty</option>
-                        <option value="easy">Easy</option>
-                        <option value="moderate">Moderate</option>
-                        <option value="challenging">Challenging</option>
-                        <option value="extreme">Extreme</option>
-                      </select>
-                    </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Available Today</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">6</p>
                   </div>
+                </div>
+              </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Status</label>
-                      <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                        <option value="seasonal">Seasonal</option>
-                        <option value="maintenance">Maintenance</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Tour Guide</label>
-                      <input 
-                        type="text" 
-                        placeholder="e.g., Captain Jose"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+                    <svg className="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Adult Price (₱)</label>
-                      <input 
-                        type="number" 
-                        placeholder="e.g., 2500"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Child Price (₱)</label>
-                      <input 
-                        type="number" 
-                        placeholder="e.g., 1800"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Senior Price (₱)</label>
-                      <input 
-                        type="number" 
-                        placeholder="e.g., 2200"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Group Price (₱)</label>
-                      <input 
-                        type="number" 
-                        placeholder="e.g., 2200"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">On Duty</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">4</p>
                   </div>
+                </div>
+              </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Max Participants</label>
-                      <input 
-                        type="number" 
-                        placeholder="e.g., 25"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Min Participants</label>
-                      <input 
-                        type="number" 
-                        placeholder="e.g., 4"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Daily Slots</label>
-                      <input 
-                        type="number" 
-                        placeholder="e.g., 2"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                    <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                    </svg>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Contact Phone</label>
-                      <input 
-                        type="tel" 
-                        placeholder="+63 917 111 2222"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Contact Email</label>
-                      <input 
-                        type="email" 
-                        placeholder="tours@example.com"
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
-                      />
-                    </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Rating</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">4.6 ⭐</p>
                   </div>
+                </div>
+              </div>
+            </div>
 
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Start Times</label>
-                    <input 
-                      type="text" 
-                      placeholder="e.g., 08:00, 13:00 (comma separated)"
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent" 
+            {/* Search and Filter Bar */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+                <div className="flex-1 max-w-md">
+                  <div className="relative">
+                    <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input
+                      type="text"
+                      placeholder="Search guides by name, specialization, or language..."
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                     />
                   </div>
+                </div>
 
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Operating Days</label>
-                    <div className="grid grid-cols-4 md:grid-cols-7 gap-2">
-                      {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
-                        <label key={day} className="flex items-center space-x-2 p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
-                          <input type="checkbox" className="rounded border-gray-300 text-orange-600 focus:ring-orange-500" />
-                          <span className="text-sm">{day.slice(0, 3)}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
+                <div className="flex items-center space-x-4">
+                  <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <option value="all">All Status</option>
+                    <option value="available">Available</option>
+                    <option value="on-duty">On Duty</option>
+                    <option value="off-duty">Off Duty</option>
+                    <option value="vacation">On Vacation</option>
+                  </select>
 
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Inclusions</label>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                      {['Boat Transfer', 'Snorkeling Gear', 'Lunch', 'Tour Guide', 'Life Jackets', 'Fresh Fruits', 'Drinks', 'Insurance', 'Photos', 'Equipment', 'Transportation', 'Entrance Fees'].map((inclusion) => (
-                        <label key={inclusion} className="flex items-center space-x-2 p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
-                          <input type="checkbox" className="rounded border-gray-300 text-orange-600 focus:ring-orange-500" />
-                          <span className="text-sm">{inclusion}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
+                  <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <option value="all">All Specializations</option>
+                    <option value="island-hopping">Island Hopping</option>
+                    <option value="water-sports">Water Sports</option>
+                    <option value="cultural">Cultural Tours</option>
+                    <option value="adventure">Adventure</option>
+                    <option value="food-tour">Food Tours</option>
+                  </select>
 
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Equipment Provided</label>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                      {['Snorkeling Gear', 'Life Jackets', 'Underwater Camera', 'Towels', 'Fins', 'Masks', 'Safety Equipment', 'First Aid Kit', 'Communication Device', 'Cooler', 'Umbrellas', 'Chairs'].map((equipment) => (
-                        <label key={equipment} className="flex items-center space-x-2 p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
-                          <input type="checkbox" className="rounded border-gray-300 text-orange-600 focus:ring-orange-500" />
-                          <span className="text-sm">{equipment}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Requirements</label>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                      {['Swimming Ability', 'Valid ID', 'Sun Protection', 'Swimwear', 'Comfortable Shoes', 'Physical Fitness', 'Age Restriction', 'Medical Clearance', 'Waiver Form', 'Advance Booking', 'Group Size', 'Weather Dependent'].map((requirement) => (
-                        <label key={requirement} className="flex items-center space-x-2 p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
-                          <input type="checkbox" className="rounded border-gray-300 text-orange-600 focus:ring-orange-500" />
-                          <span className="text-sm">{requirement}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Tour Images</label>
-                    <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
-                      <svg className="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                      </svg>
-                      <p className="text-gray-600 dark:text-gray-400 mb-2">Upload tour images</p>
-                      <button type="button" className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors">
-                        Choose Files
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700">
-                    <button 
-                      type="button"
-                      onClick={() => setShowAddTour(false)}
-                      className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                    >
-                      Cancel
-                    </button>
-                    <button 
-                      type="submit"
-                      className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors"
-                    >
-                      Add Tour/Activity
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Tour Details Modal */}
-        {selectedTour && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white dark:bg-gray-800 rounded-xl max-w-6xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <div>
-                    <h3 className="text-xl font-semibold">{selectedTour.name}</h3>
-                    <p className="text-gray-600 dark:text-gray-400">{selectedTour.location} • {selectedTour.duration}</p>
-                  </div>
-                  <button 
-                    onClick={() => setSelectedTour(null)}
-                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                  >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <button className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors flex items-center space-x-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                     </svg>
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Image Gallery */}
-                  <div className="lg:col-span-2">
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      {selectedTour.images.map((image, index) => (
-                        <img key={index} src={image} alt={`${selectedTour.name} ${index + 1}`} className="w-full h-48 object-cover rounded-lg" />
-                      ))}
-                    </div>
-
-                    <div className="space-y-6">
-                      <div>
-                        <h4 className="font-semibold mb-3">Tour Information</h4>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="flex items-center space-x-2">
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(selectedTour.status)}`}>
-                              {selectedTour.status}
-                            </span>
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(selectedTour.type)}`}>
-                              {selectedTour.type.replace('-', ' ')}
-                            </span>
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(selectedTour.difficulty)}`}>
-                              {selectedTour.difficulty}
-                            </span>
-                          </div>
-                          <div className="text-right">
-                            <span className="text-yellow-500">⭐</span>
-                            <span className="font-medium">{selectedTour.rating}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <h4 className="font-semibold mb-3">Inclusions</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {selectedTour.inclusions.map((inclusion, index) => (
-                            <span key={index} className="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full text-sm">
-                              {inclusion}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div>
-                        <h4 className="font-semibold mb-3">Equipment Provided</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {selectedTour.equipment.provided.map((item, index) => (
-                            <span key={index} className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">
-                              {item}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div>
-                        <h4 className="font-semibold mb-3">Requirements</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {selectedTour.requirements.map((requirement, index) => (
-                            <span key={index} className="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded-full text-sm">
-                              {requirement}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Details Sidebar */}
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="font-semibold mb-4">Revenue Overview</h4>
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <span className="font-medium">Today</span>
-                          <span className="text-lg font-bold text-green-600">₱{selectedTour.earnings.today.toLocaleString()}</span>
-                        </div>
-                        <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <span className="font-medium">This Week</span>
-                          <span className="text-lg font-bold text-blue-600">₱{selectedTour.earnings.thisWeek.toLocaleString()}</span>
-                        </div>
-                        <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <span className="font-medium">This Month</span>
-                          <span className="text-lg font-bold text-purple-600">₱{selectedTour.earnings.thisMonth.toLocaleString()}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold mb-4">Booking Statistics</h4>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <p className="text-lg font-bold">{selectedTour.bookings.total}</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">Total Bookings</p>
-                        </div>
-                        <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <p className="text-lg font-bold text-green-600">{selectedTour.bookings.completed}</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">Completed</p>
-                        </div>
-                        <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <p className="text-lg font-bold text-red-600">{selectedTour.bookings.cancelled}</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">Cancelled</p>
-                        </div>
-                        <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <p className="text-lg font-bold text-orange-600">{selectedTour.bookings.pending}</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">Pending</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold mb-4">Performance Metrics</h4>
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <span className="font-medium">Completion Rate</span>
-                          <span className="text-lg font-bold text-green-600">{selectedTour.performance.completionRate}%</span>
-                        </div>
-                        <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <span className="font-medium">Average Rating</span>
-                          <span className="text-lg font-bold text-yellow-600">{selectedTour.performance.averageRating} ⭐</span>
-                        </div>
-                        <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <span className="font-medium">Repeat Customers</span>
-                          <span className="text-lg font-bold text-blue-600">{selectedTour.performance.repeatCustomers}%</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold mb-4">Today's Capacity</h4>
-                      <div className="text-center p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                        <p className="text-3xl font-bold text-blue-600">{selectedTour.capacity.bookedToday}/{selectedTour.capacity.dailySlots}</p>
-                        <p className="text-sm text-blue-800 dark:text-blue-400">Slots Booked Today</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{selectedTour.capacity.availableToday} slots available</p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold mb-4">Pricing Structure</h4>
-                      <div className="space-y-3">
-                        <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <span className="font-medium">Adult</span>
-                          <span className="text-lg font-bold text-green-600">₱{selectedTour.pricing.adult.toLocaleString()}</span>
-                        </div>
-                        <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <span className="font-medium">Child</span>
-                          <span className="text-lg font-bold text-blue-600">₱{selectedTour.pricing.child.toLocaleString()}</span>
-                        </div>
-                        <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <span className="font-medium">Senior</span>
-                          <span className="text-lg font-bold text-purple-600">₱{selectedTour.pricing.senior.toLocaleString()}</span>
-                        </div>
-                        <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <span className="font-medium">Group (10+)</span>
-                          <span className="text-lg font-bold text-orange-600">₱{selectedTour.pricing.group.toLocaleString()}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold mb-4">Schedule Information</h4>
-                      <div className="space-y-3">
-                        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <p className="font-medium">Operating Days</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {selectedTour.schedule.days.length === 7 ? 'Daily' : selectedTour.schedule.days.join(', ')}
-                          </p>
-                        </div>
-                        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <p className="font-medium">Start Times</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{selectedTour.schedule.startTimes.join(', ')}</p>
-                        </div>
-                        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <p className="font-medium">Capacity</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {selectedTour.schedule.minParticipants} - {selectedTour.schedule.maxParticipants} participants
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold mb-4">Contact Information</h4>
-                      <div className="space-y-3">
-                        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <p className="font-medium">Guide</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{selectedTour.contact.guide}</p>
-                        </div>
-                        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <p className="font-medium">Phone</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{selectedTour.contact.phone}</p>
-                        </div>
-                        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                          <p className="font-medium">Email</p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{selectedTour.contact.email}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold mb-4">Documents Status</h4>
-                      <div className="space-y-3">
-                        {Object.entries(selectedTour.documents).map(([doc, info]) => (
-                          <div key={doc} className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <span className="capitalize font-medium">{doc.replace(/([A-Z])/g, ' $1').trim()}</span>
-                            <div className="flex items-center space-x-2">
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${info.uploaded ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'}`}>
-                                {info.uploaded ? 'Valid' : 'Missing'}
-                              </span>
-                              <span className="text-sm text-gray-600 dark:text-gray-400">
-                                {new Date(info.expiry).toLocaleDateString()}
-                              </span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex justify-end space-x-4 pt-6 mt-6 border-t border-gray-200 dark:border-gray-700">
-                  <button className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                    Edit Tour
-                  </button>
-                  <button className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors">
-                    Manage Schedule
-                  </button>
-                  <button className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
-                    View Bookings
+                    <span>Add Guide</span>
                   </button>
                 </div>
               </div>
             </div>
-          </div>
-        )}
 
-        {/* Other tabs placeholders */}
-        {activeTab !== 'overview' && activeTab !== 'tours' && (
-          <div className="text-center py-12">
-            <p className="text-gray-600 dark:text-gray-400">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} section coming soon...</p>
+            {/* Guides Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              {/* Guide Card 1 */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" alt="Captain Jose" className="w-full h-48 object-cover" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                      Available
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4 bg-white dark:bg-gray-800 rounded-lg px-2 py-1">
+                    <div className="flex items-center space-x-1">
+                      <span className="text-yellow-500">⭐</span>
+                      <span className="text-sm font-medium">4.9</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-1">Captain Jose Santos</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Senior Island Hopping Guide</p>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs">
+                        Island Hopping
+                      </span>
+                      <span className="px-2 py-1 bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 rounded text-xs">
+                        Water Sports
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Experience</p>
+                      <p className="font-medium">8 years</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Tours Completed</p>
+                      <p className="font-medium">1,250</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Languages</p>
+                      <p className="font-medium">EN, FIL, KOR</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Certifications</p>
+                      <p className="font-medium">3 Active</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Today's Schedule</p>
+                    <div className="text-sm">
+                      <p className="font-medium text-green-600">08:00 - Island Hopping (25 pax)</p>
+                      <p className="font-medium text-blue-600">14:00 - Available</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">This Month</p>
+                    <div className="flex justify-between text-sm">
+                      <span>Tours: <span className="font-medium text-blue-600">42</span></span>
+                      <span>Earnings: <span className="font-medium text-green-600">₱84,000</span></span>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button className="flex-1 px-3 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      View Profile
+                    </button>
+                    <button className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                      Schedule
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Guide Card 2 */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative">
+                  <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=300&fit=crop" alt="Maria Cruz" className="w-full h-48 object-cover" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                      On Duty
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4 bg-white dark:bg-gray-800 rounded-lg px-2 py-1">
+                    <div className="flex items-center space-x-1">
+                      <span className="text-yellow-500">⭐</span>
+                      <span className="text-sm font-medium">4.8</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-1">Maria Cruz</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Cultural & Food Tour Specialist</p>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-xs">
+                        Cultural
+                      </span>
+                      <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-xs">
+                        Food Tours
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Experience</p>
+                      <p className="font-medium">5 years</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Tours Completed</p>
+                      <p className="font-medium">890</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Languages</p>
+                      <p className="font-medium">EN, FIL, JPN</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Certifications</p>
+                      <p className="font-medium">2 Active</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Today's Schedule</p>
+                    <div className="text-sm">
+                      <p className="font-medium text-yellow-600">10:00 - Cultural Tour (12 pax) - In Progress</p>
+                      <p className="font-medium text-green-600">16:00 - Available</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">This Month</p>
+                    <div className="flex justify-between text-sm">
+                      <span>Tours: <span className="font-medium text-blue-600">38</span></span>
+                      <span>Earnings: <span className="font-medium text-green-600">₱76,000</span></span>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button className="flex-1 px-3 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      View Profile
+                    </button>
+                    <button className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                      Schedule
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Guide Card 3 */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop" alt="Mike Rodriguez" className="w-full h-48 object-cover" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                      Available
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4 bg-white dark:bg-gray-800 rounded-lg px-2 py-1">
+                    <div className="flex items-center space-x-1">
+                      <span className="text-yellow-500">⭐</span>
+                      <span className="text-sm font-medium">4.7</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-1">Mike Rodriguez</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Adventure & Water Sports Guide</p>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      <span className="px-2 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded text-xs">
+                        Adventure
+                      </span>
+                      <span className="px-2 py-1 bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 rounded text-xs">
+                        Water Sports
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Experience</p>
+                      <p className="font-medium">6 years</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Tours Completed</p>
+                      <p className="font-medium">1,100</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Languages</p>
+                      <p className="font-medium">EN, FIL, ESP</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Certifications</p>
+                      <p className="font-medium">4 Active</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Today's Schedule</p>
+                    <div className="text-sm">
+                      <p className="font-medium text-green-600">09:00 - Available</p>
+                      <p className="font-medium text-blue-600">15:00 - Water Sports (8 pax)</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">This Month</p>
+                    <div className="flex justify-between text-sm">
+                      <span>Tours: <span className="font-medium text-blue-600">35</span></span>
+                      <span>Earnings: <span className="font-medium text-green-600">₱70,000</span></span>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button className="flex-1 px-3 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      View Profile
+                    </button>
+                    <button className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                      Schedule
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Guide Card 4 */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop" alt="Lisa Garcia" className="w-full h-48 object-cover" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                      Available
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4 bg-white dark:bg-gray-800 rounded-lg px-2 py-1">
+                    <div className="flex items-center space-x-1">
+                      <span className="text-yellow-500">⭐</span>
+                      <span className="text-sm font-medium">4.8</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-1">Lisa Garcia</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Multi-Language Cultural Guide</p>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-xs">
+                        Cultural
+                      </span>
+                      <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs">
+                        Island Hopping
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Experience</p>
+                      <p className="font-medium">7 years</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Tours Completed</p>
+                      <p className="font-medium">980</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Languages</p>
+                      <p className="font-medium">EN, FIL, GER, FRA</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Certifications</p>
+                      <p className="font-medium">5 Active</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Today's Schedule</p>
+                    <div className="text-sm">
+                      <p className="font-medium text-green-600">11:00 - Available</p>
+                      <p className="font-medium text-green-600">16:00 - Available</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">This Month</p>
+                    <div className="flex justify-between text-sm">
+                      <span>Tours: <span className="font-medium text-blue-600">40</span></span>
+                      <span>Earnings: <span className="font-medium text-green-600">₱80,000</span></span>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button className="flex-1 px-3 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      View Profile
+                    </button>
+                    <button className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                      Schedule
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Guide Card 5 */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop" alt="Carlos Mendoza" className="w-full h-48 object-cover" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                      On Duty
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4 bg-white dark:bg-gray-800 rounded-lg px-2 py-1">
+                    <div className="flex items-center space-x-1">
+                      <span className="text-yellow-500">⭐</span>
+                      <span className="text-sm font-medium">4.5</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-1">Carlos Mendoza</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Nightlife & Entertainment Guide</p>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      <span className="px-2 py-1 bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 rounded text-xs">
+                        Nightlife
+                      </span>
+                      <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-xs">
+                        Food Tours
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Experience</p>
+                      <p className="font-medium">3 years</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Tours Completed</p>
+                      <p className="font-medium">420</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Languages</p>
+                      <p className="font-medium">EN, FIL</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Certifications</p>
+                      <p className="font-medium">2 Active</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Today's Schedule</p>
+                    <div className="text-sm">
+                      <p className="font-medium text-green-600">14:00 - Available</p>
+                      <p className="font-medium text-yellow-600">20:00 - Nightlife Tour (15 pax)</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">This Month</p>
+                    <div className="flex justify-between text-sm">
+                      <span>Tours: <span className="font-medium text-blue-600">32</span></span>
+                      <span>Earnings: <span className="font-medium text-green-600">₱64,000</span></span>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button className="flex-1 px-3 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      View Profile
+                    </button>
+                    <button className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                      Schedule
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Guide Card 6 */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop" alt="Lisa Garcia" className="w-full h-48 object-cover" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                      Available
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4 bg-white dark:bg-gray-800 rounded-lg px-2 py-1">
+                    <div className="flex items-center space-x-1">
+                      <span className="text-yellow-500">⭐</span>
+                      <span className="text-sm font-medium">4.8</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-1">Lisa Garcia</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Multi-Language Cultural Guide</p>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded text-xs">
+                        Cultural
+                      </span>
+                      <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs">
+                        Island Hopping
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Experience</p>
+                      <p className="font-medium">7 years</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Tours Completed</p>
+                      <p className="font-medium">980</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Languages</p>
+                      <p className="font-medium">EN, FIL, GER, FRA</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Certifications</p>
+                      <p className="font-medium">5 Active</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Today's Schedule</p>
+                    <div className="text-sm">
+                      <p className="font-medium text-green-600">11:00 - Available</p>
+                      <p className="font-medium text-green-600">16:00 - Available</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">This Month</p>
+                    <div className="flex justify-between text-sm">
+                      <span>Tours: <span className="font-medium text-blue-600">40</span></span>
+                      <span>Earnings: <span className="font-medium text-green-600">₱80,000</span></span>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button className="flex-1 px-3 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      View Profile
+                    </button>
+                    <button className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                      Schedule
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
