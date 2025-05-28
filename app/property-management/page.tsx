@@ -972,8 +972,364 @@ export default function PropertyManagement() {
           </div>
         )}
 
+        {/* Room Management Tab */}
+        {activeTab === 'rooms' && (
+          <div className="space-y-6">
+            {/* Room Overview Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Rooms</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">156</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Available</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">42</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-red-100 dark:bg-red-900 rounded-lg">
+                    <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Occupied</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">98</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+                    <svg className="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Maintenance</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">16</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Search and Filter Bar */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1">
+                  <div className="relative">
+                    <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input
+                      type="text"
+                      placeholder="Search rooms by number, type, or guest name..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <select 
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value as any)}
+                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="all">All Status</option>
+                    <option value="available">Available</option>
+                    <option value="occupied">Occupied</option>
+                    <option value="maintenance">Maintenance</option>
+                    <option value="cleaning">Cleaning</option>
+                  </select>
+                  <select 
+                    value={typeFilter}
+                    onChange={(e) => setTypeFilter(e.target.value as any)}
+                    className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="all">All Types</option>
+                    <option value="standard">Standard</option>
+                    <option value="deluxe">Deluxe</option>
+                    <option value="suite">Suite</option>
+                    <option value="family">Family</option>
+                  </select>
+                  <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                    Add Room
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Room Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {/* Room Card 1 */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=300&h=200&fit=crop" 
+                    alt="Room 101" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full text-xs font-medium">
+                      Available
+                    </span>
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded text-xs font-medium">
+                      Deluxe
+                    </span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-semibold">Room 101</h3>
+                    <p className="text-lg font-bold text-blue-600">₱5,500</p>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Grand Palace Hotel Boracay</p>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Capacity</p>
+                      <p className="font-medium">2 Adults</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Size</p>
+                      <p className="font-medium">35 sqm</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Amenities</p>
+                    <div className="flex flex-wrap gap-1">
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">AC</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">WiFi</span>
+                      <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">TV</span>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      View Details
+                    </button>
+                    <button className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                      Edit
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Room Card 2 */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1618773928121-c33d57733427?w=300&h=200&fit=crop" 
+                    alt="Room 102" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2 py-1 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 rounded-full text-xs font-medium">
+                      Occupied
+                    </span>
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <span className="px-2 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded text-xs font-medium">
+                      Suite
+                    </span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-semibold">Room 102</h3>
+                    <p className="text-lg font-bold text-blue-600">₱8,500</p>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Grand Palace Hotel Boracay</p>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Capacity</p>
+                      <p className="font-medium">4 Adults</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Size</p>
+                      <p className="font-medium">65 sqm</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Guest</p>
+                    <p className="font-medium text-sm">John & Sarah Smith</p>
+                    <p className="text-xs text-gray-500">Check-out: Dec 18, 2024</p>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      View Details
+                    </button>
+                    <button className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                      Contact
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Room Card 3 */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=300&h=200&fit=crop" 
+                    alt="Room 103" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 rounded-full text-xs font-medium">
+                      Maintenance
+                    </span>
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <span className="px-2 py-1 bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded text-xs font-medium">
+                      Standard
+                    </span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-semibold">Room 103</h3>
+                    <p className="text-lg font-bold text-blue-600">₱3,500</p>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Grand Palace Hotel Boracay</p>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Capacity</p>
+                      <p className="font-medium">2 Adults</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Size</p>
+                      <p className="font-medium">25 sqm</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Maintenance Issue</p>
+                    <p className="font-medium text-sm text-yellow-600">AC Unit Repair</p>
+                    <p className="text-xs text-gray-500">Est. completion: Dec 16, 2024</p>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      View Details
+                    </button>
+                    <button className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Room Card 4 */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=300&h=200&fit=crop" 
+                    alt="Room 201" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute top-3 left-3">
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full text-xs font-medium">
+                      Cleaning
+                    </span>
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <span className="px-2 py-1 bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 rounded text-xs font-medium">
+                      Family
+                    </span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-semibold">Room 201</h3>
+                    <p className="text-lg font-bold text-blue-600">₱6,500</p>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">Grand Palace Hotel Boracay</p>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Capacity</p>
+                      <p className="font-medium">6 Adults</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-400">Size</p>
+                      <p className="font-medium">45 sqm</p>
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Cleaning Status</p>
+                    <p className="font-medium text-sm text-blue-600">Deep Cleaning</p>
+                    <p className="text-xs text-gray-500">Est. completion: 2:00 PM</p>
+                  </div>
+
+                  <div className="flex space-x-2">
+                    <button className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      View Details
+                    </button>
+                    <button className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors">
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Room Status Legend */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <h3 className="text-lg font-semibold mb-4">Room Status Legend</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="flex items-center space-x-2">
+                  <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+                  <span className="text-sm">Available - Ready for booking</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="w-3 h-3 bg-red-500 rounded-full"></span>
+                  <span className="text-sm">Occupied - Guest checked in</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                  <span className="text-sm">Maintenance - Under repair</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
+                  <span className="text-sm">Cleaning - Being cleaned</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Other tabs placeholders */}
-        {activeTab !== 'overview' && activeTab !== 'properties' && (
+        {activeTab !== 'overview' && activeTab !== 'properties' && activeTab !== 'rooms' && (
           <div className="text-center py-12">
             <p className="text-gray-600 dark:text-gray-400">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} section coming soon...</p>
           </div>
