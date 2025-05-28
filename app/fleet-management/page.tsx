@@ -83,7 +83,10 @@ export default function FleetManagement() {
         airport: 1500
       },
       features: ['Air Conditioning', 'GPS Navigation', 'Phone Charger', 'WiFi'],
-      images: ['/api/placeholder/300/200', '/api/placeholder/300/200'],
+      images: [
+        'https://images.unsplash.com/photo-1549924231-f129b911e442?w=400&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&h=300&fit=crop'
+      ],
       documents: {
         registration: { uploaded: true, expiry: '2025-12-31' },
         insurance: { uploaded: true, expiry: '2025-06-30' },
@@ -120,22 +123,25 @@ export default function FleetManagement() {
         daily: 7500,
         airport: 2000
       },
-      features: ['Air Conditioning', 'GPS Navigation', 'Phone Charger', 'WiFi', 'Leather Seats'],
-      images: ['/api/placeholder/300/200', '/api/placeholder/300/200'],
+      features: ['Air Conditioning', 'GPS Navigation', 'Phone Charger', 'WiFi', '4WD'],
+      images: [
+        'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=400&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1581540222194-0def2dda95b8?w=400&h=300&fit=crop'
+      ],
       documents: {
-        registration: { uploaded: true, expiry: '2026-01-15' },
-        insurance: { uploaded: true, expiry: '2025-08-20' },
-        inspection: { uploaded: false, expiry: '2024-11-30' }
+        registration: { uploaded: true, expiry: '2025-12-31' },
+        insurance: { uploaded: true, expiry: '2025-06-30' },
+        inspection: { uploaded: false, expiry: '2024-12-31' }
       },
       earnings: {
         today: 3600,
         thisWeek: 21000,
-        thisMonth: 67800
+        thisMonth: 67500
       },
       trips: {
-        total: 203,
-        completed: 195,
-        cancelled: 8
+        total: 89,
+        completed: 85,
+        cancelled: 4
       }
     },
     {
@@ -147,27 +153,148 @@ export default function FleetManagement() {
       type: 'van',
       capacity: 15,
       status: 'maintenance',
-      location: 'Service Center',
+      location: 'Kalibo Garage',
       pricing: {
         hourly: 1500,
         daily: 10000,
         airport: 2500
       },
       features: ['Air Conditioning', 'GPS Navigation', 'Phone Charger', 'WiFi', 'Large Luggage Space'],
-      images: ['/api/placeholder/300/200'],
+      images: [
+        'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'
+      ],
       documents: {
-        registration: { uploaded: true, expiry: '2025-09-10' },
-        insurance: { uploaded: true, expiry: '2025-03-15' },
-        inspection: { uploaded: true, expiry: '2024-10-20' }
+        registration: { uploaded: true, expiry: '2025-12-31' },
+        insurance: { uploaded: true, expiry: '2025-06-30' },
+        inspection: { uploaded: true, expiry: '2024-12-31' }
       },
       earnings: {
         today: 0,
         thisWeek: 8500,
-        thisMonth: 38900
+        thisMonth: 42000
       },
       trips: {
-        total: 89,
-        completed: 84,
+        total: 67,
+        completed: 63,
+        cancelled: 4
+      }
+    },
+    {
+      id: 'VH004',
+      model: 'Mitsubishi Montero',
+      year: 2020,
+      plateNumber: 'JKL 012',
+      color: 'Black',
+      type: 'suv',
+      capacity: 7,
+      status: 'active',
+      location: 'Boracay Station 3',
+      driver: {
+        name: 'Carlos Rodriguez',
+        phone: '+63 917 333 3333',
+        status: 'available'
+      },
+      pricing: {
+        hourly: 1100,
+        daily: 6500,
+        airport: 1800
+      },
+      features: ['Air Conditioning', 'GPS Navigation', 'Phone Charger', '4WD', 'Leather Seats'],
+      images: [
+        'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=400&h=300&fit=crop'
+      ],
+      documents: {
+        registration: { uploaded: true, expiry: '2025-12-31' },
+        insurance: { uploaded: true, expiry: '2025-06-30' },
+        inspection: { uploaded: true, expiry: '2024-12-31' }
+      },
+      earnings: {
+        today: 1800,
+        thisWeek: 12600,
+        thisMonth: 38500
+      },
+      trips: {
+        total: 112,
+        completed: 108,
+        cancelled: 4
+      }
+    },
+    {
+      id: 'VH005',
+      model: 'Nissan Navara',
+      year: 2023,
+      plateNumber: 'MNO 345',
+      color: 'Red',
+      type: 'suv',
+      capacity: 5,
+      status: 'inactive',
+      location: 'Kalibo Service Center',
+      pricing: {
+        hourly: 1000,
+        daily: 6000,
+        airport: 1700
+      },
+      features: ['Air Conditioning', 'GPS Navigation', 'Phone Charger', '4WD', 'Pickup Bed'],
+      images: [
+        'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=400&h=300&fit=crop'
+      ],
+      documents: {
+        registration: { uploaded: true, expiry: '2025-12-31' },
+        insurance: { uploaded: false, expiry: '2025-06-30' },
+        inspection: { uploaded: true, expiry: '2024-12-31' }
+      },
+      earnings: {
+        today: 0,
+        thisWeek: 0,
+        thisMonth: 15200
+      },
+      trips: {
+        total: 45,
+        completed: 42,
+        cancelled: 3
+      }
+    },
+    {
+      id: 'VH006',
+      model: 'Honda City',
+      year: 2022,
+      plateNumber: 'PQR 678',
+      color: 'Gray',
+      type: 'sedan',
+      capacity: 4,
+      status: 'active',
+      location: 'Caticlan Port',
+      driver: {
+        name: 'Ana Reyes',
+        phone: '+63 917 444 4444',
+        status: 'busy'
+      },
+      pricing: {
+        hourly: 750,
+        daily: 4500,
+        airport: 1400
+      },
+      features: ['Air Conditioning', 'GPS Navigation', 'Phone Charger', 'Fuel Efficient'],
+      images: [
+        'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=400&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1550355291-bbee04a92027?w=400&h=300&fit=crop'
+      ],
+      documents: {
+        registration: { uploaded: true, expiry: '2025-12-31' },
+        insurance: { uploaded: true, expiry: '2025-06-30' },
+        inspection: { uploaded: true, expiry: '2024-12-31' }
+      },
+      earnings: {
+        today: 2100,
+        thisWeek: 13500,
+        thisMonth: 41200
+      },
+      trips: {
+        total: 134,
+        completed: 129,
         cancelled: 5
       }
     }
