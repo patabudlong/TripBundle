@@ -2122,6 +2122,441 @@ export default function ToursActivitiesManagement() {
             </div>
           </div>
         )}
+
+        {/* Analytics Tab */}
+        {activeTab === 'analytics' && (
+          <div className="space-y-6">
+            {/* Key Performance Indicators */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Conversion Rate</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">68.5%</p>
+                    <p className="text-sm text-green-600">+4.2% from last month</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Booking Time</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">3.2 days</p>
+                    <p className="text-sm text-red-600">+0.5 days from last month</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                    <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Repeat Customers</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">42%</p>
+                    <p className="text-sm text-green-600">+8.1% from last month</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-orange-100 dark:bg-orange-900 rounded-lg">
+                    <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Customer Satisfaction</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">4.7/5</p>
+                    <p className="text-sm text-green-600">+0.2 from last month</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Analytics Controls */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <h3 className="text-lg font-semibold">Performance Analytics</h3>
+                <div className="flex items-center space-x-4">
+                  <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <option value="7days">Last 7 Days</option>
+                    <option value="30days">Last 30 Days</option>
+                    <option value="3months">Last 3 Months</option>
+                    <option value="year">This Year</option>
+                  </select>
+                  <button className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors">
+                    Generate Report
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Charts Section */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Booking Trends Chart */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">Booking Trends</h3>
+                <div className="h-64 flex items-end justify-between space-x-2">
+                  {/* Simulated Line Chart */}
+                  <div className="flex flex-col items-center">
+                    <div className="w-4 h-32 bg-gradient-to-t from-blue-500 to-blue-300 rounded-t"></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Week 1</span>
+                    <span className="text-xs font-medium">45</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-4 h-40 bg-gradient-to-t from-blue-500 to-blue-300 rounded-t"></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Week 2</span>
+                    <span className="text-xs font-medium">52</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-4 h-36 bg-gradient-to-t from-blue-500 to-blue-300 rounded-t"></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Week 3</span>
+                    <span className="text-xs font-medium">48</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-4 h-48 bg-gradient-to-t from-blue-500 to-blue-300 rounded-t"></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Week 4</span>
+                    <span className="text-xs font-medium">58</span>
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                  <span>Peak: 58 bookings</span>
+                  <span>Avg: 50.8 bookings/week</span>
+                </div>
+              </div>
+
+              {/* Tour Type Distribution */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">Tour Type Distribution</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                      <span className="text-sm">Island Hopping</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-24 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="bg-blue-500 h-2 rounded-full" style={{width: '35%'}}></div>
+                      </div>
+                      <span className="text-sm font-medium">35%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-4 h-4 bg-cyan-500 rounded"></div>
+                      <span className="text-sm">Water Sports</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-24 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="bg-cyan-500 h-2 rounded-full" style={{width: '28%'}}></div>
+                      </div>
+                      <span className="text-sm font-medium">28%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-4 h-4 bg-purple-500 rounded"></div>
+                      <span className="text-sm">Cultural Tours</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-24 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="bg-purple-500 h-2 rounded-full" style={{width: '18%'}}></div>
+                      </div>
+                      <span className="text-sm font-medium">18%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-4 h-4 bg-orange-500 rounded"></div>
+                      <span className="text-sm">Adventure</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-24 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="bg-orange-500 h-2 rounded-full" style={{width: '12%'}}></div>
+                      </div>
+                      <span className="text-sm font-medium">12%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-4 h-4 bg-green-500 rounded"></div>
+                      <span className="text-sm">Food Tours</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-24 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="bg-green-500 h-2 rounded-full" style={{width: '7%'}}></div>
+                      </div>
+                      <span className="text-sm font-medium">7%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Customer Demographics and Seasonal Trends */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Customer Demographics */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">Customer Demographics</h3>
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="font-medium mb-3">Age Groups</h4>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm">18-25</span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div className="bg-blue-500 h-2 rounded-full" style={{width: '22%'}}></div>
+                          </div>
+                          <span className="text-sm font-medium">22%</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm">26-35</span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div className="bg-green-500 h-2 rounded-full" style={{width: '38%'}}></div>
+                          </div>
+                          <span className="text-sm font-medium">38%</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm">36-45</span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div className="bg-orange-500 h-2 rounded-full" style={{width: '25%'}}></div>
+                          </div>
+                          <span className="text-sm font-medium">25%</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm">46+</span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div className="bg-purple-500 h-2 rounded-full" style={{width: '15%'}}></div>
+                          </div>
+                          <span className="text-sm font-medium">15%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="font-medium mb-3">Customer Origin</h4>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm">Domestic</span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div className="bg-blue-500 h-2 rounded-full" style={{width: '65%'}}></div>
+                          </div>
+                          <span className="text-sm font-medium">65%</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm">International</span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                            <div className="bg-green-500 h-2 rounded-full" style={{width: '35%'}}></div>
+                          </div>
+                          <span className="text-sm font-medium">35%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Seasonal Trends */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">Seasonal Trends</h3>
+                <div className="space-y-4">
+                  <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <h4 className="font-medium text-blue-800 dark:text-blue-400">Peak Season</h4>
+                      <span className="text-sm text-blue-600">Dec - Feb</span>
+                    </div>
+                    <p className="text-sm text-blue-700 dark:text-blue-300">Average 85 bookings/week</p>
+                    <div className="mt-2 w-full bg-blue-200 dark:bg-blue-800 rounded-full h-2">
+                      <div className="bg-blue-600 h-2 rounded-full" style={{width: '85%'}}></div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <h4 className="font-medium text-green-800 dark:text-green-400">High Season</h4>
+                      <span className="text-sm text-green-600">Mar - May</span>
+                    </div>
+                    <p className="text-sm text-green-700 dark:text-green-300">Average 65 bookings/week</p>
+                    <div className="mt-2 w-full bg-green-200 dark:bg-green-800 rounded-full h-2">
+                      <div className="bg-green-600 h-2 rounded-full" style={{width: '65%'}}></div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <h4 className="font-medium text-yellow-800 dark:text-yellow-400">Low Season</h4>
+                      <span className="text-sm text-yellow-600">Jun - Aug</span>
+                    </div>
+                    <p className="text-sm text-yellow-700 dark:text-yellow-300">Average 35 bookings/week</p>
+                    <div className="mt-2 w-full bg-yellow-200 dark:bg-yellow-800 rounded-full h-2">
+                      <div className="bg-yellow-600 h-2 rounded-full" style={{width: '35%'}}></div>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <h4 className="font-medium text-orange-800 dark:text-orange-400">Recovery Season</h4>
+                      <span className="text-sm text-orange-600">Sep - Nov</span>
+                    </div>
+                    <p className="text-sm text-orange-700 dark:text-orange-300">Average 50 bookings/week</p>
+                    <div className="mt-2 w-full bg-orange-200 dark:bg-orange-800 rounded-full h-2">
+                      <div className="bg-orange-600 h-2 rounded-full" style={{width: '50%'}}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Performance Metrics and Insights */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Guide Performance */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">Guide Performance Metrics</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                      <p className="font-medium text-sm">Average Rating</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Across all guides</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-yellow-600">4.6 ⭐</p>
+                      <p className="text-xs text-green-600">+0.3</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                      <p className="font-medium text-sm">Completion Rate</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Tours completed successfully</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-green-600">96.8%</p>
+                      <p className="text-xs text-green-600">+1.2%</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                      <p className="font-medium text-sm">Response Time</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Average booking response</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-blue-600">2.3 hrs</p>
+                      <p className="text-xs text-red-600">+0.5 hrs</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div>
+                      <p className="font-medium text-sm">No-Show Rate</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Customer no-shows</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-red-600">3.2%</p>
+                      <p className="text-xs text-green-600">-0.8%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Revenue Insights */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">Revenue Insights</h3>
+                <div className="space-y-4">
+                  <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium">Best Performing Day</span>
+                      <span className="text-sm text-blue-600">Saturday</span>
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">Average ₱45,000/day</p>
+                  </div>
+
+                  <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium">Peak Booking Hour</span>
+                      <span className="text-sm text-green-600">2:00 PM</span>
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">25% of daily bookings</p>
+                  </div>
+
+                  <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium">Average Group Size</span>
+                      <span className="text-sm text-purple-600">4.2 people</span>
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">Optimal for pricing</p>
+                  </div>
+
+                  <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium">Cancellation Rate</span>
+                      <span className="text-sm text-orange-600">5.4%</span>
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400">Within industry average</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Recommendations */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">AI Recommendations</h3>
+                <div className="space-y-4">
+                  <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-4 border-blue-500">
+                    <h4 className="font-medium text-blue-800 dark:text-blue-400 text-sm mb-1">Pricing Optimization</h4>
+                    <p className="text-xs text-blue-700 dark:text-blue-300">Consider increasing weekend prices by 15% during peak season</p>
+                  </div>
+
+                  <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border-l-4 border-green-500">
+                    <h4 className="font-medium text-green-800 dark:text-green-400 text-sm mb-1">Capacity Management</h4>
+                    <p className="text-xs text-green-700 dark:text-green-300">Add more island hopping tours on Saturdays to meet demand</p>
+                  </div>
+
+                  <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border-l-4 border-yellow-500">
+                    <h4 className="font-medium text-yellow-800 dark:text-yellow-400 text-sm mb-1">Marketing Focus</h4>
+                    <p className="text-xs text-yellow-700 dark:text-yellow-300">Target 26-35 age group for cultural tours - highest conversion</p>
+                  </div>
+
+                  <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+                    <h4 className="font-medium text-purple-800 dark:text-purple-400 text-sm mb-1">Guide Training</h4>
+                    <p className="text-xs text-purple-700 dark:text-purple-300">Focus on response time improvement for better customer satisfaction</p>
+                  </div>
+
+                  <div className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border-l-4 border-orange-500">
+                    <h4 className="font-medium text-orange-800 dark:text-orange-400 text-sm mb-1">Seasonal Strategy</h4>
+                    <p className="text-xs text-orange-700 dark:text-orange-300">Develop indoor activities for low season to maintain revenue</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
