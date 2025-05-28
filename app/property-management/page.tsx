@@ -2408,6 +2408,134 @@ export default function PropertyManagement() {
                 </div>
               </div>
             </div>
+
+            {/* Revenue Chart */}
+            <div className="h-64 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6 relative">
+              {/* Chart Title and Legend */}
+              <div className="flex justify-between items-center mb-4">
+                <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Daily Revenue Trend</h4>
+                <div className="flex items-center space-x-4 text-xs">
+                  <div className="flex items-center space-x-1">
+                    <div className="w-3 h-3 bg-blue-500 rounded"></div>
+                    <span className="text-gray-600 dark:text-gray-400">Revenue</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-3 h-3 bg-green-500 rounded"></div>
+                    <span className="text-gray-600 dark:text-gray-400">Target</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Chart Container */}
+              <div className="relative h-40">
+                {/* Y-axis Grid Lines */}
+                <div className="absolute inset-0">
+                  {[0, 25, 50, 75, 100].map((percentage) => (
+                    <div
+                      key={percentage}
+                      className="absolute w-full border-t border-gray-100 dark:border-gray-600"
+                      style={{ bottom: `${percentage}%` }}
+                    >
+                      <span className="absolute -left-12 -top-2 text-xs text-gray-500 dark:text-gray-400">
+                        ₱{Math.round((percentage / 100) * 250)}k
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Chart Bars and Line */}
+                <div className="relative h-full flex items-end justify-between space-x-1 pl-8">
+                  {[
+                    { day: 'Dec 1', revenue: 125000, target: 150000, height: 50 },
+                    { day: 'Dec 2', revenue: 145000, target: 150000, height: 58 },
+                    { day: 'Dec 3', revenue: 135000, target: 150000, height: 54 },
+                    { day: 'Dec 4', revenue: 165000, target: 150000, height: 66 },
+                    { day: 'Dec 5', revenue: 185000, target: 150000, height: 74 },
+                    { day: 'Dec 6', revenue: 225000, target: 150000, height: 90 },
+                    { day: 'Dec 7', revenue: 195000, target: 150000, height: 78 },
+                    { day: 'Dec 8', revenue: 175000, target: 150000, height: 70 },
+                    { day: 'Dec 9', revenue: 155000, target: 150000, height: 62 },
+                    { day: 'Dec 10', revenue: 205000, target: 150000, height: 82 },
+                    { day: 'Dec 11', revenue: 235000, target: 150000, height: 94 },
+                    { day: 'Dec 12', revenue: 215000, target: 150000, height: 86 },
+                    { day: 'Dec 13', revenue: 185000, target: 150000, height: 74 },
+                    { day: 'Dec 14', revenue: 165000, target: 150000, height: 66 }
+                  ].map((data, index) => (
+                    <div key={index} className="flex flex-col items-center flex-1 group relative">
+                      {/* Revenue Bar */}
+                      <div className="relative w-full max-w-6 mb-2">
+                        <div 
+                          className={`w-full rounded-t transition-all duration-300 cursor-pointer ${
+                            data.revenue >= data.target 
+                              ? 'bg-green-500 hover:bg-green-600' 
+                              : 'bg-blue-500 hover:bg-blue-600'
+                          }`}
+                          style={{ height: `${(data.height / 100) * 140}px` }}
+                        ></div>
+                        
+                        {/* Target Line */}
+                        <div 
+                          className="absolute w-full border-t-2 border-green-400 border-dashed"
+                          style={{ bottom: `${(60 / 100) * 140}px` }}
+                        ></div>
+                      </div>
+
+                      {/* Hover Tooltip */}
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-8 px-3 py-2 bg-gray-900 dark:bg-gray-700 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10 shadow-lg">
+                        <div className="text-center">
+                          <p className="font-medium">{data.day}</p>
+                          <p className="text-green-300">Revenue: ₱{data.revenue.toLocaleString()}</p>
+                          <p className="text-gray-300">Target: ₱{data.target.toLocaleString()}</p>
+                          <p className={`${data.revenue >= data.target ? 'text-green-300' : 'text-red-300'}`}>
+                            {data.revenue >= data.target ? '+' : ''}
+                            {((data.revenue - data.target) / data.target * 100).toFixed(1)}%
+                          </p>
+                        </div>
+                        {/* Tooltip Arrow */}
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
+                      </div>
+
+                      {/* Day Label */}
+                      <span className="text-xs text-gray-600 dark:text-gray-400 mt-1 transform rotate-0">
+                        {data.day.split(' ')[1]}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Trend Line Overlay */}
+                <svg className="absolute inset-0 pointer-events-none" style={{ left: '2rem' }}>
+                  <polyline
+                    fill="none"
+                    stroke="#F59E0B"
+                    strokeWidth="2"
+                    strokeDasharray="4,4"
+                    points="20,120 40,110 60,115 80,95 100,85 120,60 140,75 160,85 180,100 200,70 220,55 240,65 260,85 280,95"
+                    className="opacity-60"
+                  />
+                </svg>
+              </div>
+
+              {/* Chart Footer Stats */}
+              <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Avg Daily</p>
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white">₱178,571</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Best Day</p>
+                  <p className="text-sm font-semibold text-green-600">₱235,000</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Growth</p>
+                  <p className="text-sm font-semibold text-blue-600">+32%</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Target Hit</p>
+                  <p className="text-sm font-semibold text-orange-600">9/14 days</p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
