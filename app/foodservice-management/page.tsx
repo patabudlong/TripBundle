@@ -57,6 +57,9 @@ export default function FoodServiceManagement() {
   const [activeTab, setActiveTab] = useState<'overview' | 'restaurants' | 'menu' | 'orders' | 'earnings' | 'analytics'>('overview');
   const [showAddRestaurant, setShowAddRestaurant] = useState(false);
   const [showAddMenuItem, setShowAddMenuItem] = useState(false);
+  const [showEditMenuItem, setShowEditMenuItem] = useState(false);
+  const [showViewMenuItem, setShowViewMenuItem] = useState(false);
+  const [selectedMenuItem, setSelectedMenuItem] = useState<any>(null);
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'closed' | 'maintenance' | 'pending'>('all');
@@ -1425,10 +1428,22 @@ export default function FoodServiceManagement() {
                     )}
 
                     <div className="flex space-x-2">
-                      <button className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <button 
+                        onClick={() => {
+                          setSelectedMenuItem(item);
+                          setShowEditMenuItem(true);
+                        }}
+                        className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                      >
                         Edit
                       </button>
-                      <button className="flex-1 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors">
+                      <button 
+                        onClick={() => {
+                          setSelectedMenuItem(item);
+                          setShowViewMenuItem(true);
+                        }}
+                        className="flex-1 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors"
+                      >
                         View Details
                       </button>
                     </div>
@@ -1788,6 +1803,385 @@ export default function FoodServiceManagement() {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        )}
+
+        {/* Edit Menu Item Modal */}
+        {showEditMenuItem && selectedMenuItem && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Edit Menu Item</h2>
+                  <button 
+                    onClick={() => {
+                      setShowEditMenuItem(false);
+                      setSelectedMenuItem(null);
+                    }}
+                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <form className="p-6 space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Left Column */}
+                  <div className="space-y-6">
+                    {/* Basic Information */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Basic Information</h3>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Item Name *
+                          </label>
+                          <input
+                            type="text"
+                            defaultValue={selectedMenuItem.name}
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Restaurant *
+                          </label>
+                          <select 
+                            defaultValue={selectedMenuItem.restaurant}
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          >
+                            <option value="Sunset Grill & Bar">Sunset Grill & Bar</option>
+                            <option value="Island Café">Island Café</option>
+                            <option value="Beach Bar Lounge">Beach Bar Lounge</option>
+                            <option value="Quick Bites Express">Quick Bites Express</option>
+                            <option value="Boracay Catering">Boracay Catering</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Category *
+                          </label>
+                          <select 
+                            defaultValue={selectedMenuItem.category}
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          >
+                            <option value="Appetizers">Appetizers</option>
+                            <option value="Main Course">Main Course</option>
+                            <option value="Desserts">Desserts</option>
+                            <option value="Beverages">Beverages</option>
+                            <option value="Alcoholic">Alcoholic</option>
+                          </select>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                              Price (₱) *
+                            </label>
+                            <input
+                              type="number"
+                              defaultValue={selectedMenuItem.price}
+                              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                              Prep Time (minutes) *
+                            </label>
+                            <input
+                              type="number"
+                              defaultValue={selectedMenuItem.preparationTime}
+                              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Description *
+                          </label>
+                          <textarea
+                            rows={3}
+                            defaultValue={selectedMenuItem.description}
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Status *
+                          </label>
+                          <select 
+                            defaultValue={selectedMenuItem.status}
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          >
+                            <option value="available">Available</option>
+                            <option value="out-of-stock">Out of Stock</option>
+                            <option value="seasonal">Seasonal</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column */}
+                  <div className="space-y-6">
+                    {/* Current Image */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Current Image</h3>
+                      <div className="mb-4">
+                        <img 
+                          src={selectedMenuItem.image} 
+                          alt={selectedMenuItem.name}
+                          className="w-full h-48 object-cover rounded-lg"
+                        />
+                      </div>
+                      
+                      <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
+                        <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                          <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <div className="mt-4">
+                          <label htmlFor="edit-file-upload" className="cursor-pointer">
+                            <span className="mt-2 block text-sm font-medium text-gray-900 dark:text-white">
+                              Upload new image
+                            </span>
+                            <input id="edit-file-upload" name="edit-file-upload" type="file" className="sr-only" accept="image/*" />
+                          </label>
+                          <p className="mt-1 text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Ingredients & Allergens */}
+                    <div>
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Ingredients & Allergens</h3>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Main Ingredients
+                          </label>
+                          <input
+                            type="text"
+                            defaultValue={selectedMenuItem.ingredients.join(', ')}
+                            placeholder="e.g., Chicken, Rice, Vegetables"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Allergens
+                          </label>
+                          <div className="grid grid-cols-2 gap-2">
+                            {['Dairy', 'Eggs', 'Fish', 'Shellfish', 'Tree Nuts', 'Peanuts', 'Wheat/Gluten', 'Soy'].map((allergen) => (
+                              <label key={allergen} className="flex items-center">
+                                <input
+                                  type="checkbox"
+                                  defaultChecked={selectedMenuItem.allergens.includes(allergen)}
+                                  className="rounded border-gray-300 text-orange-600 focus:ring-orange-500"
+                                />
+                                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">{allergen}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Form Actions */}
+                <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowEditMenuItem(false);
+                      setSelectedMenuItem(null);
+                    }}
+                    className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+                  >
+                    Delete Item
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors"
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* View Menu Item Details Modal */}
+        {showViewMenuItem && selectedMenuItem && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Menu Item Details</h2>
+                  <button 
+                    onClick={() => {
+                      setShowViewMenuItem(false);
+                      setSelectedMenuItem(null);
+                    }}
+                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Left Column - Image and Basic Info */}
+                  <div className="space-y-6">
+                    <div>
+                      <img 
+                        src={selectedMenuItem.image} 
+                        alt={selectedMenuItem.name}
+                        className="w-full h-64 object-cover rounded-lg"
+                      />
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{selectedMenuItem.name}</h3>
+                          <p className="text-lg text-gray-600 dark:text-gray-400">{selectedMenuItem.restaurant}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-2xl font-bold text-orange-600">₱{selectedMenuItem.price}</p>
+                          <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
+                            selectedMenuItem.status === 'available' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                            selectedMenuItem.status === 'out-of-stock' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
+                            'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                          }`}>
+                            {selectedMenuItem.status.replace('-', ' ')}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-4">
+                          <span className="text-yellow-500 text-lg">⭐</span>
+                          <span className="font-medium">{selectedMenuItem.rating}</span>
+                          <span className="text-gray-500">({selectedMenuItem.orders} orders)</span>
+                        </div>
+
+                        <div className="flex items-center space-x-4">
+                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span className="text-gray-700 dark:text-gray-300">Preparation time: {selectedMenuItem.preparationTime} minutes</span>
+                        </div>
+
+                        <div className="flex items-center space-x-4">
+                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                          </svg>
+                          <span className="text-gray-700 dark:text-gray-300">Category: {selectedMenuItem.category}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column - Details */}
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Description</h4>
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{selectedMenuItem.description}</p>
+                    </div>
+
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Ingredients</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedMenuItem.ingredients.map((ingredient: string, index: number) => (
+                          <span key={index} className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full">
+                            {ingredient}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {selectedMenuItem.allergens.length > 0 && (
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Allergen Information</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedMenuItem.allergens.map((allergen: string, index: number) => (
+                            <span key={index} className="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-sm rounded-full">
+                              ⚠️ {allergen}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Performance Metrics</h4>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">Total Orders</p>
+                          <p className="text-xl font-bold text-gray-900 dark:text-white">{selectedMenuItem.orders}</p>
+                        </div>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">Average Rating</p>
+                          <p className="text-xl font-bold text-gray-900 dark:text-white">{selectedMenuItem.rating}/5</p>
+                        </div>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">Revenue Generated</p>
+                          <p className="text-xl font-bold text-gray-900 dark:text-white">₱{(selectedMenuItem.orders * selectedMenuItem.price).toLocaleString()}</p>
+                        </div>
+                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">Popularity Rank</p>
+                          <p className="text-xl font-bold text-gray-900 dark:text-white">#3</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700 mt-8">
+                  <button
+                    onClick={() => {
+                      setShowViewMenuItem(false);
+                      setShowEditMenuItem(true);
+                    }}
+                    className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    Edit Item
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowViewMenuItem(false);
+                      setSelectedMenuItem(null);
+                    }}
+                    className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}
