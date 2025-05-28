@@ -2186,8 +2186,345 @@ export default function FoodServiceManagement() {
           </div>
         )}
 
+        {/* Orders Tab */}
+        {activeTab === 'orders' && (
+          <div className="space-y-6">
+            {/* Orders Overview Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Orders Today</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">247</p>
+                    <p className="text-sm text-green-600">+18% from yesterday</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-orange-100 dark:bg-orange-900 rounded-lg">
+                    <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Pending Orders</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">23</p>
+                    <p className="text-sm text-orange-600">Needs attention</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Today's Revenue</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱89,450</p>
+                    <p className="text-sm text-green-600">+12.5% from yesterday</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                    <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Avg Order Value</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱362</p>
+                    <p className="text-sm text-purple-600">+8.2% this week</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Orders Management Controls */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <div className="flex flex-col lg:flex-row gap-4 items-center justify-between mb-6">
+                <div className="flex-1 max-w-md">
+                  <div className="relative">
+                    <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input
+                      type="text"
+                      placeholder="Search orders by ID, customer, or restaurant..."
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <option value="all">All Restaurants</option>
+                    <option value="sunset-grill">Sunset Grill</option>
+                    <option value="island-cafe">Island Café</option>
+                    <option value="beach-bar">Beach Bar</option>
+                    <option value="quick-bites">Quick Bites</option>
+                  </select>
+
+                  <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="preparing">Preparing</option>
+                    <option value="ready">Ready</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+
+                  <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <option value="today">Today</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="this-week">This Week</option>
+                    <option value="this-month">This Month</option>
+                  </select>
+
+                  <button className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors">
+                    Export Orders
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Orders List */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Order Details</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Customer</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Restaurant</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Items</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Total</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                    {[
+                      {
+                        id: "ORD-2024-001",
+                        customer: {
+                          name: "Maria Santos",
+                          phone: "+63 917 123 4567",
+                          email: "maria.santos@email.com"
+                        },
+                        restaurant: "Sunset Grill & Bar",
+                        items: [
+                          { name: "Grilled Seafood Platter", quantity: 1, price: 1250 },
+                          { name: "Mango Shake", quantity: 2, price: 180 }
+                        ],
+                        total: 1610,
+                        status: "preparing",
+                        orderTime: "2:45 PM",
+                        estimatedTime: "3:15 PM",
+                        type: "dine-in",
+                        tableNumber: "A-12"
+                      },
+                      {
+                        id: "ORD-2024-002",
+                        customer: {
+                          name: "John Dela Cruz",
+                          phone: "+63 918 987 6543",
+                          email: "john.delacruz@email.com"
+                        },
+                        restaurant: "Island Café",
+                        items: [
+                          { name: "Adobo Rice Bowl", quantity: 2, price: 285 },
+                          { name: "Iced Coffee", quantity: 2, price: 120 }
+                        ],
+                        total: 810,
+                        status: "ready",
+                        orderTime: "2:30 PM",
+                        estimatedTime: "2:50 PM",
+                        type: "takeout",
+                        tableNumber: null
+                      },
+                      {
+                        id: "ORD-2024-003",
+                        customer: {
+                          name: "Sarah Johnson",
+                          phone: "+63 919 555 1234",
+                          email: "sarah.johnson@email.com"
+                        },
+                        restaurant: "Beach Bar Lounge",
+                        items: [
+                          { name: "Fish Tacos", quantity: 3, price: 320 },
+                          { name: "Craft Beer", quantity: 3, price: 165 }
+                        ],
+                        total: 1455,
+                        status: "pending",
+                        orderTime: "2:55 PM",
+                        estimatedTime: "3:25 PM",
+                        type: "delivery",
+                        address: "Station 2, Boracay"
+                      },
+                      {
+                        id: "ORD-2024-004",
+                        customer: {
+                          name: "Michael Chen",
+                          phone: "+63 920 777 8888",
+                          email: "michael.chen@email.com"
+                        },
+                        restaurant: "Quick Bites Express",
+                        items: [
+                          { name: "Chicken Burger", quantity: 1, price: 245 },
+                          { name: "French Fries", quantity: 1, price: 125 },
+                          { name: "Soft Drink", quantity: 1, price: 85 }
+                        ],
+                        total: 455,
+                        status: "delivered",
+                        orderTime: "1:20 PM",
+                        estimatedTime: "1:35 PM",
+                        type: "delivery",
+                        address: "Station 1, Boracay"
+                      },
+                      {
+                        id: "ORD-2024-005",
+                        customer: {
+                          name: "Lisa Rodriguez",
+                          phone: "+63 921 444 5555",
+                          email: "lisa.rodriguez@email.com"
+                        },
+                        restaurant: "Sunset Grill & Bar",
+                        items: [
+                          { name: "Vegetarian Pasta", quantity: 1, price: 385 },
+                          { name: "Caesar Salad", quantity: 1, price: 245 },
+                          { name: "Fresh Juice", quantity: 2, price: 150 }
+                        ],
+                        total: 930,
+                        status: "confirmed",
+                        orderTime: "3:10 PM",
+                        estimatedTime: "3:40 PM",
+                        type: "dine-in",
+                        tableNumber: "B-05"
+                      }
+                    ].map((order) => (
+                      <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div>
+                            <div className="text-sm font-medium text-gray-900 dark:text-white">{order.id}</div>
+                            <div className="text-sm text-gray-500 dark:text-gray-400">
+                              {order.orderTime} • Est: {order.estimatedTime}
+                            </div>
+                            <div className="flex items-center mt-1">
+                              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                                order.type === 'dine-in' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                                order.type === 'takeout' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                                'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200'
+                              }`}>
+                                {order.type === 'dine-in' ? '🍽️ Dine-in' : order.type === 'takeout' ? '🥡 Takeout' : '🚚 Delivery'}
+                              </span>
+                              {order.tableNumber && (
+                                <span className="ml-2 text-xs text-gray-500">Table {order.tableNumber}</span>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div>
+                            <div className="text-sm font-medium text-gray-900 dark:text-white">{order.customer.name}</div>
+                            <div className="text-sm text-gray-500 dark:text-gray-400">{order.customer.phone}</div>
+                            {order.address && (
+                              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{order.address}</div>
+                            )}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900 dark:text-white">{order.restaurant}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm text-gray-900 dark:text-white">
+                            {order.items.map((item, index) => (
+                              <div key={index} className="mb-1">
+                                {item.quantity}x {item.name}
+                              </div>
+                            ))}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">₱{order.total.toLocaleString()}</div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                            order.status === 'pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
+                            order.status === 'confirmed' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                            order.status === 'preparing' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200' :
+                            order.status === 'ready' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' :
+                            order.status === 'delivered' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                            'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                          }`}>
+                            {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <div className="flex space-x-2">
+                            <button className="text-orange-600 hover:text-orange-900 dark:text-orange-400 dark:hover:text-orange-300">
+                              View
+                            </button>
+                            {order.status !== 'delivered' && order.status !== 'cancelled' && (
+                              <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">
+                                Update
+                              </button>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Pagination */}
+              <div className="bg-white dark:bg-gray-800 px-4 py-3 border-t border-gray-200 dark:border-gray-700 sm:px-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      Showing <span className="font-medium">1</span> to <span className="font-medium">5</span> of{' '}
+                      <span className="font-medium">247</span> orders
+                    </p>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <button className="relative inline-flex items-center px-2 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-md">
+                      Previous
+                    </button>
+                    <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-orange-50 dark:bg-orange-900 text-sm font-medium text-orange-600 dark:text-orange-400 rounded-md">
+                      1
+                    </button>
+                    <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-md">
+                      2
+                    </button>
+                    <button className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-md">
+                      3
+                    </button>
+                    <button className="relative inline-flex items-center px-2 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-md">
+                      Next
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Other tabs placeholders */}
-        {activeTab !== 'overview' && activeTab !== 'restaurants' && activeTab !== 'menu' && (
+        {activeTab !== 'overview' && activeTab !== 'restaurants' && activeTab !== 'menu' && activeTab !== 'orders' && (
           <div className="text-center py-12">
             <p className="text-gray-600 dark:text-gray-400">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} section coming soon...</p>
           </div>
