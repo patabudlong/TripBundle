@@ -60,7 +60,7 @@ interface MaintenanceService {
 }
 
 export default function FacilityMaintenanceManagement() {
-  const [activeTab, setActiveTab] = useState<'overview' | 'services' | 'bookings' | 'staff' | 'earnings' | 'analytics'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'services' | 'bookings' | 'staff' | 'analytics' | 'earnings'>('overview');
   const [showAddService, setShowAddService] = useState(false);
   const [selectedService, setSelectedService] = useState<MaintenanceService | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -1070,6 +1070,554 @@ export default function FacilityMaintenanceManagement() {
             </div>
           </div>
         ))}
+      </div>
+    </div>
+  );
+
+  const renderAnalytics = () => (
+    <div className="space-y-6">
+      {/* Analytics Overview Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-green-100 dark:bg-green-900 rounded-lg">
+              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Total Revenue</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">₱2.4M</p>
+              <p className="text-sm text-green-600">+18% from last month</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
+              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Services Completed</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">1,247</p>
+              <p className="text-sm text-blue-600">+12% completion rate</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg">
+              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Customer Satisfaction</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">4.8/5</p>
+              <p className="text-sm text-purple-600">Excellent rating</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-orange-100 dark:bg-orange-900 rounded-lg">
+              <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Avg Response Time</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">18 min</p>
+              <p className="text-sm text-orange-600">-5 min improvement</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Revenue and Performance Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Revenue Chart */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Revenue Trends</h3>
+            <select className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white">
+              <option>Last 6 Months</option>
+              <option>Last 12 Months</option>
+              <option>This Year</option>
+            </select>
+          </div>
+          <div className="h-64 flex items-end justify-between space-x-2">
+            {[
+              { month: 'Jul', amount: 180000, height: 45 },
+              { month: 'Aug', amount: 220000, height: 55 },
+              { month: 'Sep', amount: 195000, height: 49 },
+              { month: 'Oct', amount: 285000, height: 71 },
+              { month: 'Nov', amount: 310000, height: 78 },
+              { month: 'Dec', amount: 340000, height: 85 }
+            ].map((data, index) => (
+              <div key={index} className="flex flex-col items-center flex-1">
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-t-lg relative group cursor-pointer">
+                  <div 
+                    className="bg-gradient-to-t from-blue-600 to-blue-400 rounded-t-lg transition-all duration-300 hover:from-blue-700 hover:to-blue-500"
+                    style={{ height: `${data.height}%` }}
+                  ></div>
+                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    ₱{(data.amount / 1000).toFixed(0)}K
+                  </div>
+                </div>
+                <span className="text-sm text-gray-600 dark:text-gray-400 mt-2">{data.month}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Service Distribution */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Service Distribution</h3>
+          <div className="space-y-4">
+            {[
+              { service: 'HVAC Maintenance', percentage: 35, amount: 840000, color: 'bg-blue-500' },
+              { service: 'Emergency Repairs', percentage: 28, amount: 672000, color: 'bg-red-500' },
+              { service: 'Preventive Service', percentage: 22, amount: 528000, color: 'bg-green-500' },
+              { service: 'Electrical Work', percentage: 10, amount: 240000, color: 'bg-yellow-500' },
+              { service: 'Plumbing', percentage: 5, amount: 120000, color: 'bg-purple-500' }
+            ].map((item, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <div className="flex items-center space-x-3 flex-1">
+                  <div className={`w-3 h-3 rounded-full ${item.color}`}></div>
+                  <span className="text-sm text-gray-900 dark:text-white">{item.service}</span>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="w-24 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div 
+                      className={`h-2 rounded-full ${item.color}`}
+                      style={{ width: `${item.percentage}%` }}
+                    ></div>
+                  </div>
+                  <span className="text-sm font-medium text-gray-900 dark:text-white w-12 text-right">{item.percentage}%</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400 w-20 text-right">₱{(item.amount / 1000).toFixed(0)}K</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Detailed Analytics Tables */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Top Performing Staff */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Top Performing Staff</h3>
+          <div className="space-y-4">
+            {[
+              { name: 'Carlos Rodriguez', specialization: 'HVAC Specialist', jobs: 45, earnings: 125000, rating: 4.9, avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face' },
+              { name: 'Maria Santos', specialization: 'Electrical Technician', jobs: 38, earnings: 98000, rating: 4.8, avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face' },
+              { name: 'Roberto Cruz', specialization: 'General Maintenance', jobs: 42, earnings: 89000, rating: 4.7, avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face' },
+              { name: 'Ana Reyes', specialization: 'Plumbing Specialist', jobs: 35, earnings: 76000, rating: 4.6, avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face' }
+            ].map((staff, index) => (
+              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <img src={staff.avatar} alt={staff.name} className="w-10 h-10 rounded-full object-cover" />
+                  <div>
+                    <p className="font-medium text-gray-900 dark:text-white">{staff.name}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{staff.specialization}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{staff.jobs} jobs</p>
+                  <p className="text-sm text-green-600">₱{(staff.earnings / 1000).toFixed(0)}K</p>
+                  <div className="flex items-center">
+                    <svg className="w-3 h-3 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <span className="text-xs text-gray-600 dark:text-gray-400">{staff.rating}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Top Clients */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Top Clients</h3>
+          <div className="space-y-4">
+            {[
+              { name: 'Paradise Resort', type: 'Hotel', bookings: 28, revenue: 485000, growth: '+15%' },
+              { name: 'Ocean View Hotel', type: 'Hotel', bookings: 22, revenue: 380000, growth: '+8%' },
+              { name: 'Beachfront Villa', type: 'Resort', bookings: 18, revenue: 295000, growth: '+22%' },
+              { name: 'Sunset Restaurant', type: 'Restaurant', bookings: 15, revenue: 185000, growth: '+5%' },
+              { name: 'Marina Bay Resort', type: 'Resort', bookings: 12, revenue: 165000, growth: '+18%' }
+            ].map((client, index) => (
+              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div>
+                  <p className="font-medium text-gray-900 dark:text-white">{client.name}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{client.type} • {client.bookings} bookings</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-medium text-green-600">₱{(client.revenue / 1000).toFixed(0)}K</p>
+                  <p className="text-sm text-blue-600">{client.growth}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Monthly Earnings Breakdown */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Monthly Earnings Breakdown</h3>
+          <div className="flex space-x-2">
+            <button className="px-3 py-1 text-sm bg-blue-600 text-white rounded-lg">2024</button>
+            <button className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">2023</button>
+          </div>
+        </div>
+        
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-gray-200 dark:border-gray-700">
+                <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Month</th>
+                <th className="text-right py-3 px-4 font-medium text-gray-900 dark:text-white">Services</th>
+                <th className="text-right py-3 px-4 font-medium text-gray-900 dark:text-white">Revenue</th>
+                <th className="text-right py-3 px-4 font-medium text-gray-900 dark:text-white">Staff Costs</th>
+                <th className="text-right py-3 px-4 font-medium text-gray-900 dark:text-white">Net Profit</th>
+                <th className="text-right py-3 px-4 font-medium text-gray-900 dark:text-white">Growth</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { month: 'December 2024', services: 156, revenue: 340000, costs: 204000, profit: 136000, growth: '+18%' },
+                { month: 'November 2024', services: 142, revenue: 310000, costs: 186000, profit: 124000, growth: '+12%' },
+                { month: 'October 2024', services: 138, revenue: 285000, costs: 171000, profit: 114000, growth: '+8%' },
+                { month: 'September 2024', services: 125, revenue: 195000, costs: 117000, profit: 78000, growth: '-5%' },
+                { month: 'August 2024', services: 134, revenue: 220000, costs: 132000, profit: 88000, growth: '+15%' },
+                { month: 'July 2024', services: 118, revenue: 180000, costs: 108000, profit: 72000, growth: '+3%' }
+              ].map((data, index) => (
+                <tr key={index} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                  <td className="py-3 px-4 text-gray-900 dark:text-white">{data.month}</td>
+                  <td className="py-3 px-4 text-right text-gray-900 dark:text-white">{data.services}</td>
+                  <td className="py-3 px-4 text-right text-gray-900 dark:text-white">₱{data.revenue.toLocaleString()}</td>
+                  <td className="py-3 px-4 text-right text-gray-900 dark:text-white">₱{data.costs.toLocaleString()}</td>
+                  <td className="py-3 px-4 text-right font-medium text-green-600">₱{data.profit.toLocaleString()}</td>
+                  <td className={`py-3 px-4 text-right font-medium ${
+                    data.growth.startsWith('+') ? 'text-green-600' : 'text-red-600'
+                  }`}>
+                    {data.growth}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderEarnings = () => (
+    <div className="space-y-6">
+      {/* Earnings Overview Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-green-100 dark:bg-green-900 rounded-lg">
+              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Today's Earnings</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">₱28,450</p>
+              <p className="text-sm text-green-600">+12% from yesterday</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
+              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">This Week</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">₱185,200</p>
+              <p className="text-sm text-blue-600">+8% from last week</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg">
+              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">This Month</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">₱742,800</p>
+              <p className="text-sm text-purple-600">+15% from last month</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-orange-100 dark:bg-orange-900 rounded-lg">
+              <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Average Per Job</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">₱2,850</p>
+              <p className="text-sm text-orange-600">+5% increase</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Earnings Filters */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center space-x-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Date Range</label>
+              <select className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                <option>Today</option>
+                <option>This Week</option>
+                <option>This Month</option>
+                <option>Last 3 Months</option>
+                <option>This Year</option>
+                <option>Custom Range</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Service Type</label>
+              <select className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                <option>All Services</option>
+                <option>HVAC Maintenance</option>
+                <option>Emergency Repairs</option>
+                <option>Preventive Service</option>
+                <option>Electrical Work</option>
+                <option>Plumbing</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Staff Member</label>
+              <select className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                <option>All Staff</option>
+                <option>Carlos Rodriguez</option>
+                <option>Maria Santos</option>
+                <option>Roberto Cruz</option>
+                <option>Ana Reyes</option>
+              </select>
+            </div>
+          </div>
+          <div className="flex space-x-2">
+            <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+              Apply Filters
+            </button>
+            <button className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              Export Report
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Daily Earnings Chart */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Daily Earnings Trend</h3>
+          <div className="flex space-x-2">
+            <button className="px-3 py-1 text-sm bg-blue-600 text-white rounded-lg">7 Days</button>
+            <button className="px-3 py-1 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">30 Days</button>
+          </div>
+        </div>
+        <div className="h-64 flex items-end justify-between space-x-1">
+          {[
+            { day: 'Mon', amount: 22500, height: 60 },
+            { day: 'Tue', amount: 18200, height: 48 },
+            { day: 'Wed', amount: 31800, height: 85 },
+            { day: 'Thu', amount: 26400, height: 70 },
+            { day: 'Fri', amount: 35200, height: 94 },
+            { day: 'Sat', amount: 28900, height: 77 },
+            { day: 'Sun', amount: 22450, height: 60 }
+          ].map((data, index) => (
+            <div key={index} className="flex flex-col items-center flex-1">
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-t-lg relative group cursor-pointer">
+                <div 
+                  className="bg-gradient-to-t from-green-600 to-green-400 rounded-t-lg transition-all duration-300 hover:from-green-700 hover:to-green-500"
+                  style={{ height: `${data.height}%` }}
+                ></div>
+                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  ₱{data.amount.toLocaleString()}
+                </div>
+              </div>
+              <span className="text-sm text-gray-600 dark:text-gray-400 mt-2">{data.day}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Earnings by Service Type and Staff Performance */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Earnings by Service Type */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Earnings by Service Type</h3>
+          <div className="space-y-4">
+            {[
+              { service: 'HVAC Maintenance', earnings: 285000, percentage: 38, jobs: 45, avgPrice: 6333, color: 'bg-blue-500' },
+              { service: 'Emergency Repairs', earnings: 220000, percentage: 30, jobs: 32, avgPrice: 6875, color: 'bg-red-500' },
+              { service: 'Preventive Service', earnings: 165000, percentage: 22, jobs: 28, avgPrice: 5893, color: 'bg-green-500' },
+              { service: 'Electrical Work', earnings: 52000, percentage: 7, jobs: 12, avgPrice: 4333, color: 'bg-yellow-500' },
+              { service: 'Plumbing', earnings: 20800, percentage: 3, jobs: 8, avgPrice: 2600, color: 'bg-purple-500' }
+            ].map((item, index) => (
+              <div key={index} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-3 h-3 rounded-full ${item.color}`}></div>
+                    <span className="font-medium text-gray-900 dark:text-white">{item.service}</span>
+                  </div>
+                  <span className="text-lg font-bold text-green-600">₱{item.earnings.toLocaleString()}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
+                  <span>{item.jobs} jobs completed</span>
+                  <span>Avg: ₱{item.avgPrice.toLocaleString()}/job</span>
+                </div>
+                <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                  <div 
+                    className={`h-2 rounded-full ${item.color}`}
+                    style={{ width: `${item.percentage}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Staff Earnings Performance */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Staff Earnings Performance</h3>
+          <div className="space-y-4">
+            {[
+              { name: 'Carlos Rodriguez', specialization: 'HVAC Specialist', earnings: 125000, jobs: 45, commission: 18750, avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face' },
+              { name: 'Maria Santos', specialization: 'Electrical Technician', earnings: 98000, jobs: 32, commission: 14700, avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face' },
+              { name: 'Roberto Cruz', specialization: 'General Maintenance', earnings: 89000, jobs: 42, commission: 13350, avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face' },
+              { name: 'Ana Reyes', specialization: 'Plumbing Specialist', earnings: 76000, jobs: 28, commission: 11400, avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face' },
+              { name: 'Luis Garcia', specialization: 'Emergency Technician', earnings: 68000, jobs: 25, commission: 10200, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face' }
+            ].map((staff, index) => (
+              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <img src={staff.avatar} alt={staff.name} className="w-10 h-10 rounded-full object-cover" />
+                  <div>
+                    <p className="font-medium text-gray-900 dark:text-white">{staff.name}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{staff.specialization}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-bold text-green-600">₱{staff.earnings.toLocaleString()}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">{staff.jobs} jobs • ₱{staff.commission.toLocaleString()} commission</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Detailed Earnings Table */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Earnings Transactions</h3>
+          <div className="flex space-x-2">
+            <input
+              type="text"
+              placeholder="Search transactions..."
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            />
+            <button className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
+              Download CSV
+            </button>
+          </div>
+        </div>
+        
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-gray-200 dark:border-gray-700">
+                <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Date & Time</th>
+                <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Service</th>
+                <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Client</th>
+                <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Staff</th>
+                <th className="text-right py-3 px-4 font-medium text-gray-900 dark:text-white">Amount</th>
+                <th className="text-right py-3 px-4 font-medium text-gray-900 dark:text-white">Commission</th>
+                <th className="text-center py-3 px-4 font-medium text-gray-900 dark:text-white">Payment</th>
+                <th className="text-center py-3 px-4 font-medium text-gray-900 dark:text-white">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { date: 'Dec 16, 2024 2:30 PM', service: 'HVAC Maintenance', client: 'Paradise Resort', staff: 'Carlos Rodriguez', amount: 8500, commission: 1275, payment: 'Credit Card', status: 'Paid' },
+                { date: 'Dec 16, 2024 11:15 AM', service: 'Emergency AC Repair', client: 'Ocean View Hotel', staff: 'Maria Santos', amount: 6200, commission: 930, payment: 'Cash', status: 'Paid' },
+                { date: 'Dec 16, 2024 9:45 AM', service: 'Preventive Service', client: 'Beachfront Villa', staff: 'Roberto Cruz', amount: 4800, commission: 720, payment: 'Bank Transfer', status: 'Paid' },
+                { date: 'Dec 15, 2024 4:20 PM', service: 'Plumbing Repair', client: 'Sunset Restaurant', staff: 'Ana Reyes', amount: 3200, commission: 480, payment: 'Credit Card', status: 'Paid' },
+                { date: 'Dec 15, 2024 1:10 PM', service: 'Electrical Work', client: 'Marina Bay Resort', staff: 'Luis Garcia', amount: 5500, commission: 825, payment: 'Cash', status: 'Pending' }
+              ].map((transaction, index) => (
+                <tr key={index} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                  <td className="py-3 px-4 text-gray-900 dark:text-white">{transaction.date}</td>
+                  <td className="py-3 px-4 text-gray-900 dark:text-white">{transaction.service}</td>
+                  <td className="py-3 px-4 text-gray-900 dark:text-white">{transaction.client}</td>
+                  <td className="py-3 px-4 text-gray-900 dark:text-white">{transaction.staff}</td>
+                  <td className="py-3 px-4 text-right font-medium text-green-600">₱{transaction.amount.toLocaleString()}</td>
+                  <td className="py-3 px-4 text-right text-gray-900 dark:text-white">₱{transaction.commission.toLocaleString()}</td>
+                  <td className="py-3 px-4 text-center">
+                    <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                      {transaction.payment}
+                    </span>
+                  </td>
+                  <td className="py-3 px-4 text-center">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                      transaction.status === 'Paid' 
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                        : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                    }`}>
+                      {transaction.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Earnings Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl shadow-md p-6 text-white">
+          <h4 className="text-lg font-semibold mb-2">Total Revenue</h4>
+          <p className="text-3xl font-bold mb-1">₱742,800</p>
+          <p className="text-green-100">This month</p>
+        </div>
+        
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-md p-6 text-white">
+          <h4 className="text-lg font-semibold mb-2">Staff Commissions</h4>
+          <p className="text-3xl font-bold mb-1">₱111,420</p>
+          <p className="text-blue-100">15% of revenue</p>
+        </div>
+        
+        <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl shadow-md p-6 text-white">
+          <h4 className="text-lg font-semibold mb-2">Net Profit</h4>
+          <p className="text-3xl font-bold mb-1">₱631,380</p>
+          <p className="text-purple-100">85% profit margin</p>
+        </div>
       </div>
     </div>
   );
@@ -3327,6 +3875,9 @@ export default function FacilityMaintenanceManagement() {
             </div>
           </div>
         )}
+
+        {activeTab === 'analytics' && renderAnalytics()}
+        {activeTab === 'earnings' && renderEarnings()}
       </div>
     </div>
   );
