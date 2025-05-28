@@ -1272,6 +1272,724 @@ export default function FleetManagement() {
     </div>
   );
 
+  const renderEarnings = () => (
+    <div className="space-y-6">
+      {/* Earnings Overview Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-green-100 dark:bg-green-900 rounded-lg">
+              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Today's Earnings</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">₱45,280</p>
+              <p className="text-sm text-green-600">+18% from yesterday</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
+              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">This Week</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">₱298,450</p>
+              <p className="text-sm text-blue-600">+12% from last week</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg">
+              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">This Month</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">₱1,245,680</p>
+              <p className="text-sm text-purple-600">+8% from last month</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-orange-100 dark:bg-orange-900 rounded-lg">
+              <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Average per Trip</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">₱285</p>
+              <p className="text-sm text-orange-600">+5% from last month</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Earnings Chart and Breakdown */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Earnings Chart */}
+        <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Earnings Overview</h3>
+            <div className="flex space-x-2">
+              <button className="px-3 py-1 bg-blue-600 text-white text-sm rounded-lg">7 Days</button>
+              <button className="px-3 py-1 text-gray-600 dark:text-gray-400 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">30 Days</button>
+              <button className="px-3 py-1 text-gray-600 dark:text-gray-400 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">90 Days</button>
+            </div>
+          </div>
+          
+          {/* Chart Placeholder */}
+          <div className="h-64 bg-gray-50 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+            <div className="text-center">
+              <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              <p className="text-gray-500 dark:text-gray-400">Earnings Chart</p>
+              <p className="text-sm text-gray-400 dark:text-gray-500">Chart visualization would be integrated here</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Earnings Breakdown */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Earnings Breakdown</h3>
+          
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                <span className="text-sm text-gray-600 dark:text-gray-400">Trip Fares</span>
+              </div>
+              <span className="font-semibold text-gray-900 dark:text-white">₱38,450</span>
+            </div>
+            
+            <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                <span className="text-sm text-gray-600 dark:text-gray-400">Tips</span>
+              </div>
+              <span className="font-semibold text-gray-900 dark:text-white">₱4,280</span>
+            </div>
+            
+            <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                <div className="w-3 h-3 bg-purple-500 rounded-full mr-3"></div>
+                <span className="text-sm text-gray-600 dark:text-gray-400">Surge Pricing</span>
+              </div>
+              <span className="font-semibold text-gray-900 dark:text-white">₱2,550</span>
+            </div>
+            
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-600 dark:text-gray-400">Platform Fee (15%)</span>
+                <span className="font-semibold text-red-600">-₱6,792</span>
+              </div>
+            </div>
+            
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-gray-900 dark:text-white">Net Earnings</span>
+                <span className="font-bold text-green-600 text-lg">₱38,488</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Top Performing Drivers */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Top Performing Drivers</h3>
+          <select className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+            <option value="today">Today</option>
+            <option value="week">This Week</option>
+            <option value="month">This Month</option>
+          </select>
+        </div>
+        
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead className="bg-gray-50 dark:bg-gray-700">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Driver</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Trips</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Gross Earnings</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Commission</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Net Earnings</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Rating</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              {[
+                {
+                  id: 1,
+                  name: "Maria Santos",
+                  avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+                  trips: 28,
+                  grossEarnings: 8450,
+                  commission: 1268,
+                  netEarnings: 7182,
+                  rating: 4.9
+                },
+                {
+                  id: 2,
+                  name: "Juan Dela Cruz",
+                  avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+                  trips: 25,
+                  grossEarnings: 7850,
+                  commission: 1178,
+                  netEarnings: 6672,
+                  rating: 4.8
+                },
+                {
+                  id: 3,
+                  name: "Lisa Chen",
+                  avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+                  trips: 24,
+                  grossEarnings: 7320,
+                  commission: 1098,
+                  netEarnings: 6222,
+                  rating: 4.9
+                },
+                {
+                  id: 4,
+                  name: "Roberto Garcia",
+                  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+                  trips: 22,
+                  grossEarnings: 6890,
+                  commission: 1034,
+                  netEarnings: 5856,
+                  rating: 4.7
+                },
+                {
+                  id: 5,
+                  name: "Ana Rodriguez",
+                  avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+                  trips: 21,
+                  grossEarnings: 6450,
+                  commission: 968,
+                  netEarnings: 5482,
+                  rating: 4.6
+                }
+              ].map((driver, index) => (
+                <tr key={driver.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <div className="flex items-center mr-3">
+                        <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
+                          index === 0 ? 'bg-yellow-100 text-yellow-800' :
+                          index === 1 ? 'bg-gray-100 text-gray-800' :
+                          index === 2 ? 'bg-orange-100 text-orange-800' :
+                          'bg-blue-100 text-blue-800'
+                        }`}>
+                          {index + 1}
+                        </span>
+                      </div>
+                      <img className="h-10 w-10 rounded-full object-cover" src={driver.avatar} alt={driver.name} />
+                      <div className="ml-4">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white">{driver.name}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900 dark:text-white font-medium">{driver.trips}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900 dark:text-white font-medium">₱{driver.grossEarnings.toLocaleString()}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-red-600 font-medium">₱{driver.commission.toLocaleString()}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-green-600 font-bold">₱{driver.netEarnings.toLocaleString()}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className={`w-4 h-4 ${i < Math.floor(driver.rating) ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                      <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">{driver.rating}</span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Payment Methods and Export */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Payment Methods Breakdown */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Payment Methods</h3>
+          
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
+                  <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900 dark:text-white">Credit/Debit Card</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">68% of transactions</p>
+                </div>
+              </div>
+              <span className="font-semibold text-gray-900 dark:text-white">₱30,790</span>
+            </div>
+            
+            <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-3">
+                  <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900 dark:text-white">Cash</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">25% of transactions</p>
+                </div>
+              </div>
+              <span className="font-semibold text-gray-900 dark:text-white">₱11,320</span>
+            </div>
+            
+            <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-3">
+                  <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900 dark:text-white">Digital Wallet</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">7% of transactions</p>
+                </div>
+              </div>
+              <span className="font-semibold text-gray-900 dark:text-white">₱3,170</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Export and Reports */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Reports & Export</h3>
+          
+          <div className="space-y-4">
+            <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              <div className="flex items-center">
+                <svg className="w-5 h-5 text-green-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                </svg>
+                <span className="font-medium text-gray-900 dark:text-white">Export Daily Report</span>
+              </div>
+              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+            
+            <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              <div className="flex items-center">
+                <svg className="w-5 h-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span className="font-medium text-gray-900 dark:text-white">Weekly Summary</span>
+              </div>
+              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+            
+            <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              <div className="flex items-center">
+                <svg className="w-5 h-5 text-purple-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span className="font-medium text-gray-900 dark:text-white">Monthly Report</span>
+              </div>
+              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+            
+            <button className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              <div className="flex items-center">
+                <svg className="w-5 h-5 text-orange-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span className="font-medium text-gray-900 dark:text-white">Driver Payouts</span>
+              </div>
+              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderAnalytics = () => (
+    <div className="space-y-6">
+      {/* Key Performance Indicators */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
+              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Fleet Utilization</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">87.5%</p>
+              <p className="text-sm text-blue-600">+5.2% from last month</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-green-100 dark:bg-green-900 rounded-lg">
+              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Trip Completion Rate</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">94.8%</p>
+              <p className="text-sm text-green-600">+2.1% from last month</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+              <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Avg Response Time</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">3.2 min</p>
+              <p className="text-sm text-yellow-600">-0.8 min from last month</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg">
+              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Customer Rating</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">4.7</p>
+              <p className="text-sm text-purple-600">+0.3 from last month</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Charts Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Trip Analytics Chart */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Trip Analytics</h3>
+            <div className="flex space-x-2">
+              <button className="px-3 py-1 bg-blue-600 text-white text-sm rounded-lg">Daily</button>
+              <button className="px-3 py-1 text-gray-600 dark:text-gray-400 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Weekly</button>
+              <button className="px-3 py-1 text-gray-600 dark:text-gray-400 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Monthly</button>
+            </div>
+          </div>
+          
+          {/* Chart Placeholder */}
+          <div className="h-64 bg-gray-50 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+            <div className="text-center">
+              <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              <p className="text-gray-500 dark:text-gray-400">Trip Volume Chart</p>
+              <p className="text-sm text-gray-400 dark:text-gray-500">Shows completed vs cancelled trips</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Revenue Trends Chart */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Revenue Trends</h3>
+            <div className="flex space-x-2">
+              <button className="px-3 py-1 bg-blue-600 text-white text-sm rounded-lg">7 Days</button>
+              <button className="px-3 py-1 text-gray-600 dark:text-gray-400 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">30 Days</button>
+              <button className="px-3 py-1 text-gray-600 dark:text-gray-400 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">90 Days</button>
+            </div>
+          </div>
+          
+          {/* Chart Placeholder */}
+          <div className="h-64 bg-gray-50 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+            <div className="text-center">
+              <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+              <p className="text-gray-500 dark:text-gray-400">Revenue Trend Chart</p>
+              <p className="text-sm text-gray-400 dark:text-gray-500">Shows revenue growth over time</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Performance Metrics */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Peak Hours Analysis */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Peak Hours</h3>
+          
+          <div className="space-y-4">
+            {[
+              { time: "7:00 - 9:00 AM", trips: 45, percentage: 85 },
+              { time: "12:00 - 2:00 PM", trips: 38, percentage: 72 },
+              { time: "5:00 - 7:00 PM", trips: 52, percentage: 98 },
+              { time: "9:00 - 11:00 PM", trips: 28, percentage: 53 }
+            ].map((hour, index) => (
+              <div key={index} className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-gray-900 dark:text-white">{hour.time}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{hour.trips} trips</p>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-20 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-blue-600 h-2 rounded-full" 
+                      style={{ width: `${hour.percentage}%` }}
+                    ></div>
+                  </div>
+                  <span className="text-sm font-medium text-gray-900 dark:text-white">{hour.percentage}%</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Popular Routes */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Popular Routes</h3>
+          
+          <div className="space-y-4">
+            {[
+              { route: "Makati → BGC", trips: 156, revenue: "₱45,280" },
+              { route: "Ortigas → Makati", trips: 134, revenue: "₱38,950" },
+              { route: "Quezon City → Manila", trips: 98, revenue: "₱28,470" },
+              { route: "Alabang → Makati", trips: 87, revenue: "₱31,250" },
+              { route: "BGC → Ortigas", trips: 76, revenue: "₱22,180" }
+            ].map((route, index) => (
+              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div>
+                  <p className="font-medium text-gray-900 dark:text-white">{route.route}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{route.trips} trips</p>
+                </div>
+                <div className="text-right">
+                  <p className="font-semibold text-green-600">{route.revenue}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Revenue</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Driver Performance */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Driver Performance</h3>
+          
+          <div className="space-y-4">
+            <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <div>
+                <p className="font-medium text-gray-900 dark:text-white">Average Rating</p>
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className={`w-4 h-4 ${i < 4 ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                  <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">4.7</span>
+                </div>
+              </div>
+              <span className="text-lg font-bold text-gray-900 dark:text-white">4.7/5</span>
+            </div>
+
+            <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <div>
+                <p className="font-medium text-gray-900 dark:text-white">On-Time Rate</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Punctuality score</p>
+              </div>
+              <span className="text-lg font-bold text-green-600">92%</span>
+            </div>
+
+            <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <div>
+                <p className="font-medium text-gray-900 dark:text-white">Acceptance Rate</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Trip acceptance</p>
+              </div>
+              <span className="text-lg font-bold text-blue-600">89%</span>
+            </div>
+
+            <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <div>
+                <p className="font-medium text-gray-900 dark:text-white">Cancellation Rate</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Driver cancellations</p>
+              </div>
+              <span className="text-lg font-bold text-red-600">3.2%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Detailed Analytics Table */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+        <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex justify-between items-center">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Vehicle Performance Analytics</h3>
+            <div className="flex space-x-2">
+              <button className="px-3 py-1 bg-blue-600 text-white text-sm rounded-lg">This Month</button>
+              <button className="px-3 py-1 text-gray-600 dark:text-gray-400 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Last Month</button>
+              <button className="px-3 py-1 text-gray-600 dark:text-gray-400 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Export</button>
+            </div>
+          </div>
+        </div>
+        
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+            <thead className="bg-gray-50 dark:bg-gray-700">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Vehicle</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Driver</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Total Trips</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Revenue</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Utilization</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Rating</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Efficiency</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              {[
+                {
+                  vehicle: "Toyota Vios - ABC 123",
+                  driver: "Juan Dela Cruz",
+                  trips: 156,
+                  revenue: 75200,
+                  utilization: 92,
+                  rating: 4.8,
+                  efficiency: 95
+                },
+                {
+                  vehicle: "Honda City - XYZ 789",
+                  driver: "Maria Santos",
+                  trips: 142,
+                  revenue: 82500,
+                  utilization: 89,
+                  rating: 4.9,
+                  efficiency: 97
+                },
+                {
+                  vehicle: "Mitsubishi Mirage - DEF 456",
+                  driver: "Roberto Garcia",
+                  trips: 98,
+                  revenue: 68900,
+                  utilization: 76,
+                  rating: 4.7,
+                  efficiency: 88
+                },
+                {
+                  vehicle: "Nissan Almera - GHI 789",
+                  driver: "Ana Rodriguez",
+                  trips: 134,
+                  revenue: 71800,
+                  utilization: 85,
+                  rating: 4.6,
+                  efficiency: 91
+                },
+                {
+                  vehicle: "Toyota Wigo - MNO 345",
+                  driver: "Lisa Chen",
+                  trips: 167,
+                  revenue: 89200,
+                  utilization: 94,
+                  rating: 4.9,
+                  efficiency: 96
+                }
+              ].map((vehicle, index) => (
+                <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-gray-900 dark:text-white">{vehicle.vehicle}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900 dark:text-white">{vehicle.driver}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900 dark:text-white">{vehicle.trips}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-green-600">₱{vehicle.revenue.toLocaleString()}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <div className="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2 mr-2">
+                        <div 
+                          className={`h-2 rounded-full ${
+                            vehicle.utilization >= 90 ? 'bg-green-500' :
+                            vehicle.utilization >= 80 ? 'bg-yellow-500' : 'bg-red-500'
+                          }`}
+                          style={{ width: `${vehicle.utilization}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-sm text-gray-900 dark:text-white">{vehicle.utilization}%</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <svg className="w-4 h-4 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span className="text-sm text-gray-900 dark:text-white">{vehicle.rating}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                      vehicle.efficiency >= 95 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                      vehicle.efficiency >= 90 ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
+                      'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                    }`}>
+                      {vehicle.efficiency}%
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
@@ -1341,18 +2059,8 @@ export default function FleetManagement() {
         {activeTab === 'vehicles' && renderVehicles()}
         {activeTab === 'drivers' && renderDrivers()}
         {activeTab === 'bookings' && renderBookings()}
-        {activeTab === 'earnings' && (
-          <div className="text-center py-12">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Earnings Reports</h3>
-            <p className="text-gray-600 dark:text-gray-400">Coming soon...</p>
-          </div>
-        )}
-        {activeTab === 'analytics' && (
-          <div className="text-center py-12">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Analytics Dashboard</h3>
-            <p className="text-gray-600 dark:text-gray-400">Coming soon...</p>
-          </div>
-        )}
+        {activeTab === 'earnings' && renderEarnings()}
+        {activeTab === 'analytics' && renderAnalytics()}
       </div>
 
       {/* Add Vehicle Modal */}
