@@ -1781,6 +1781,347 @@ export default function ToursActivitiesManagement() {
             </div>
           </div>
         )}
+
+        {/* Earnings Tab */}
+        {activeTab === 'earnings' && (
+          <div className="space-y-6">
+            {/* Earnings Overview Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Today's Revenue</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱125,500</p>
+                    <p className="text-sm text-green-600">+12.5% from yesterday</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">This Week</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱785,200</p>
+                    <p className="text-sm text-green-600">+8.3% from last week</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                    <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">This Month</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱3,245,800</p>
+                    <p className="text-sm text-green-600">+15.7% from last month</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-orange-100 dark:bg-orange-900 rounded-lg">
+                    <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Average per Tour</p>
+                    <p className="text-2xl font-semibold text-gray-900 dark:text-white">₱4,250</p>
+                    <p className="text-sm text-green-600">+5.2% increase</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Time Period Selector */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <h3 className="text-lg font-semibold">Revenue Analytics</h3>
+                <div className="flex items-center space-x-4">
+                  <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <option value="7days">Last 7 Days</option>
+                    <option value="30days">Last 30 Days</option>
+                    <option value="3months">Last 3 Months</option>
+                    <option value="year">This Year</option>
+                  </select>
+                  <button className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors">
+                    Export Report
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Revenue Chart and Top Tours */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Revenue Chart */}
+              <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">Daily Revenue Trend</h3>
+                <div className="h-80 flex items-end justify-between space-x-2">
+                  {/* Simulated Chart Bars */}
+                  <div className="flex flex-col items-center">
+                    <div className="w-8 bg-orange-500 rounded-t" style={{height: '120px'}}></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Dec 10</span>
+                    <span className="text-xs font-medium">₱85K</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-8 bg-orange-500 rounded-t" style={{height: '140px'}}></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Dec 11</span>
+                    <span className="text-xs font-medium">₱95K</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-8 bg-orange-500 rounded-t" style={{height: '100px'}}></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Dec 12</span>
+                    <span className="text-xs font-medium">₱72K</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-8 bg-orange-500 rounded-t" style={{height: '180px'}}></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Dec 13</span>
+                    <span className="text-xs font-medium">₱125K</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-8 bg-orange-500 rounded-t" style={{height: '160px'}}></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Dec 14</span>
+                    <span className="text-xs font-medium">₱110K</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-8 bg-orange-500 rounded-t" style={{height: '200px'}}></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Dec 15</span>
+                    <span className="text-xs font-medium">₱145K</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-8 bg-orange-600 rounded-t" style={{height: '175px'}}></div>
+                    <span className="text-xs text-gray-600 dark:text-gray-400 mt-2">Today</span>
+                    <span className="text-xs font-medium">₱125K</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Top Earning Tours */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">Top Earning Tours</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                      <div>
+                        <p className="font-medium text-sm">Ultimate Island Hopping</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">45 bookings</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-green-600">₱112,500</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">35% of total</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <div>
+                        <p className="font-medium text-sm">Sunset Sailing</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">32 bookings</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-green-600">₱96,000</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">30% of total</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div>
+                        <p className="font-medium text-sm">Cultural Heritage Tour</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">28 bookings</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-green-600">₱67,200</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">21% of total</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                      <div>
+                        <p className="font-medium text-sm">Cliff Jumping Adventure</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">18 bookings</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-green-600">₱45,000</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">14% of total</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Detailed Earnings Breakdown */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Payment Methods */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">Payment Methods</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                        <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-medium">Credit/Debit Cards</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">65% of transactions</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">₱210,825</p>
+                      <p className="text-sm text-green-600">+12%</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
+                        <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-medium">Cash Payments</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">25% of transactions</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">₱81,125</p>
+                      <p className="text-sm text-red-600">-5%</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                        <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-medium">Digital Wallets</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">10% of transactions</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">₱32,450</p>
+                      <p className="text-sm text-green-600">+25%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Guide Earnings */}
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 className="text-lg font-semibold mb-6">Top Earning Guides</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop" alt="Captain Jose" className="w-10 h-10 rounded-full object-cover" />
+                      <div>
+                        <p className="font-medium">Captain Jose Santos</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">15 tours this week</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">₱45,000</p>
+                      <p className="text-sm text-green-600">Commission</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=50&h=50&fit=crop" alt="Lisa Garcia" className="w-10 h-10 rounded-full object-cover" />
+                      <div>
+                        <p className="font-medium">Lisa Garcia</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">12 tours this week</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">₱36,000</p>
+                      <p className="text-sm text-green-600">Commission</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop" alt="Miguel Rodriguez" className="w-10 h-10 rounded-full object-cover" />
+                      <div>
+                        <p className="font-medium">Miguel Rodriguez</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">10 tours this week</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">₱30,000</p>
+                      <p className="text-sm text-green-600">Commission</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=50&h=50&fit=crop" alt="Carlos Mendoza" className="w-10 h-10 rounded-full object-cover" />
+                      <div>
+                        <p className="font-medium">Carlos Mendoza</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">8 tours this week</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">₱24,000</p>
+                      <p className="text-sm text-green-600">Commission</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Monthly Comparison */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <h3 className="text-lg font-semibold mb-6">Monthly Revenue Comparison</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <p className="text-3xl font-bold text-blue-600">₱2,890,500</p>
+                  <p className="text-sm text-blue-800 dark:text-blue-400 mt-2">November 2024</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Previous Month</p>
+                </div>
+                <div className="text-center p-6 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                  <p className="text-3xl font-bold text-green-600">₱3,245,800</p>
+                  <p className="text-sm text-green-800 dark:text-green-400 mt-2">December 2024</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Current Month</p>
+                </div>
+                <div className="text-center p-6 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                  <p className="text-3xl font-bold text-orange-600">+₱355,300</p>
+                  <p className="text-sm text-orange-800 dark:text-orange-400 mt-2">+12.3% Growth</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Month over Month</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
