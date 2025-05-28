@@ -52,6 +52,9 @@ export default function FleetManagement() {
   const [selectedDriver, setSelectedDriver] = useState<any>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'maintenance' | 'inactive'>('all');
+  const [showBookingDetails, setShowBookingDetails] = useState(false);
+  const [showAssignDriver, setShowAssignDriver] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState<any>(null);
 
   // Mock data
   const ownerInfo = {
@@ -895,6 +898,380 @@ export default function FleetManagement() {
     </div>
   );
 
+  const renderBookings = () => (
+    <div className="space-y-6">
+      {/* Bookings Overview Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
+              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Total Bookings Today</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">156</p>
+              <p className="text-sm text-green-600">+12% from yesterday</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-orange-100 dark:bg-orange-900 rounded-lg">
+              <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Pending Bookings</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">23</p>
+              <p className="text-sm text-orange-600">Awaiting assignment</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-green-100 dark:bg-green-900 rounded-lg">
+              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Active Trips</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">18</p>
+              <p className="text-sm text-green-600">Currently in progress</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div className="flex items-center">
+            <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg">
+              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Today's Revenue</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">₱45,280</p>
+              <p className="text-sm text-purple-600">From completed trips</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Search and Filter Bar */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+          <div className="flex-1 max-w-md">
+            <div className="relative">
+              <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search bookings by customer, driver, or booking ID..."
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            {/* Status Filter */}
+            <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option value="all">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="in-progress">In Progress</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+
+            {/* Date Filter */}
+            <select className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option value="today">Today</option>
+              <option value="yesterday">Yesterday</option>
+              <option value="this-week">This Week</option>
+              <option value="this-month">This Month</option>
+              <option value="custom">Custom Range</option>
+            </select>
+
+            {/* Export Button */}
+            <button className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors flex items-center space-x-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span>Export</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Bookings Table */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-50 dark:bg-gray-700">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Booking Details</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Customer</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Driver & Vehicle</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Route</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Amount</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+              {[
+                {
+                  id: "BK-2024-001",
+                  bookingTime: "2:30 PM",
+                  pickupTime: "3:00 PM",
+                  customer: {
+                    name: "Maria Santos",
+                    phone: "+63 917 123 4567",
+                    rating: 4.8
+                  },
+                  driver: {
+                    name: "Juan Dela Cruz",
+                    phone: "+63 918 987 6543"
+                  },
+                  vehicle: "Toyota Vios - ABC 123",
+                  pickup: "SM Mall of Asia",
+                  destination: "NAIA Terminal 3",
+                  distance: "12.5 km",
+                  duration: "25 mins",
+                  status: "in-progress",
+                  amount: 450,
+                  paymentMethod: "Cash"
+                },
+                {
+                  id: "BK-2024-002",
+                  bookingTime: "1:45 PM",
+                  pickupTime: "2:15 PM",
+                  customer: {
+                    name: "Roberto Garcia",
+                    phone: "+63 919 555 1234",
+                    rating: 4.6
+                  },
+                  driver: {
+                    name: "Maria Santos",
+                    phone: "+63 920 777 8888"
+                  },
+                  vehicle: "Honda City - XYZ 789",
+                  pickup: "Makati CBD",
+                  destination: "BGC Taguig",
+                  distance: "8.2 km",
+                  duration: "18 mins",
+                  status: "completed",
+                  amount: 320,
+                  paymentMethod: "GCash"
+                },
+                {
+                  id: "BK-2024-003",
+                  bookingTime: "3:15 PM",
+                  pickupTime: "3:45 PM",
+                  customer: {
+                    name: "Ana Rodriguez",
+                    phone: "+63 921 333 4444",
+                    rating: 4.9
+                  },
+                  driver: null,
+                  vehicle: "Pending Assignment",
+                  pickup: "Quezon City Circle",
+                  destination: "UP Diliman",
+                  distance: "5.8 km",
+                  duration: "15 mins",
+                  status: "pending",
+                  amount: 250,
+                  paymentMethod: "Card"
+                },
+                {
+                  id: "BK-2024-004",
+                  bookingTime: "12:30 PM",
+                  pickupTime: "1:00 PM",
+                  customer: {
+                    name: "Carlos Mendoza",
+                    phone: "+63 922 666 7777",
+                    rating: 4.7
+                  },
+                  driver: {
+                    name: "Roberto Garcia",
+                    phone: "+63 919 555 1234"
+                  },
+                  vehicle: "Mitsubishi Mirage - DEF 456",
+                  pickup: "Ortigas Center",
+                  destination: "Eastwood City",
+                  distance: "6.3 km",
+                  duration: "12 mins",
+                  status: "confirmed",
+                  amount: 280,
+                  paymentMethod: "Cash"
+                },
+                {
+                  id: "BK-2024-005",
+                  bookingTime: "11:15 AM",
+                  pickupTime: "11:45 AM",
+                  customer: {
+                    name: "Lisa Chen",
+                    phone: "+63 923 888 9999",
+                    rating: 4.5
+                  },
+                  driver: {
+                    name: "Ana Rodriguez",
+                    phone: "+63 920 777 8888"
+                  },
+                  vehicle: "Nissan Almera - GHI 789",
+                  pickup: "Alabang Town Center",
+                  destination: "Festival Mall",
+                  distance: "4.2 km",
+                  duration: "10 mins",
+                  status: "cancelled",
+                  amount: 200,
+                  paymentMethod: "GCash"
+                }
+              ].map((booking) => (
+                <tr key={booking.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">{booking.id}</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Booked: {booking.bookingTime}</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">Pickup: {booking.pickupTime}</div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">{booking.customer.name}</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{booking.customer.phone}</div>
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className={`w-3 h-3 ${i < Math.floor(booking.customer.rating) ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                        <span className="ml-1 text-xs text-gray-500 dark:text-gray-400">{booking.customer.rating}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div>
+                      {booking.driver ? (
+                        <>
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">{booking.driver.name}</div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">{booking.driver.phone}</div>
+                        </>
+                      ) : (
+                        <div className="text-sm text-orange-600 dark:text-orange-400 font-medium">Unassigned</div>
+                      )}
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{booking.vehicle}</div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div>
+                      <div className="text-sm text-gray-900 dark:text-white">
+                        <div className="flex items-center">
+                          <svg className="w-4 h-4 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                          </svg>
+                          {booking.pickup}
+                        </div>
+                      </div>
+                      <div className="text-sm text-gray-900 dark:text-white">
+                        <div className="flex items-center">
+                          <svg className="w-4 h-4 text-red-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                          </svg>
+                          {booking.destination}
+                        </div>
+                      </div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{booking.distance} • {booking.duration}</div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                      booking.status === 'completed' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                      booking.status === 'in-progress' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                      booking.status === 'confirmed' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
+                      booking.status === 'pending' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200' :
+                      'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                    }`}>
+                      {booking.status === 'in-progress' ? 'In Progress' : 
+                       booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">₱{booking.amount}</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{booking.paymentMethod}</div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <div className="flex space-x-2">
+                      <button 
+                        onClick={() => {
+                          setSelectedBooking(booking);
+                          setShowBookingDetails(true);
+                        }}
+                        className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                      >
+                        View
+                      </button>
+                      {booking.status === 'pending' && (
+                        <button 
+                          onClick={() => {
+                            setSelectedBooking(booking);
+                            setShowAssignDriver(true);
+                          }}
+                          className="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300"
+                        >
+                          Assign
+                        </button>
+                      )}
+                      {(booking.status === 'pending' || booking.status === 'confirmed') && (
+                        <button className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">
+                          Cancel
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Pagination */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-gray-700 dark:text-gray-300">
+            Showing <span className="font-medium">1</span> to <span className="font-medium">5</span> of{' '}
+            <span className="font-medium">156</span> results
+          </div>
+          <div className="flex items-center space-x-2">
+            <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+              Previous
+            </button>
+            <button className="px-3 py-1 bg-blue-600 text-white rounded-md">1</button>
+            <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+              2
+            </button>
+            <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+              3
+            </button>
+            <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
@@ -963,12 +1340,7 @@ export default function FleetManagement() {
         {activeTab === 'overview' && renderOverview()}
         {activeTab === 'vehicles' && renderVehicles()}
         {activeTab === 'drivers' && renderDrivers()}
-        {activeTab === 'bookings' && (
-          <div className="text-center py-12">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Booking Management</h3>
-            <p className="text-gray-600 dark:text-gray-400">Coming soon...</p>
-          </div>
-        )}
+        {activeTab === 'bookings' && renderBookings()}
         {activeTab === 'earnings' && (
           <div className="text-center py-12">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Earnings Reports</h3>
@@ -1828,6 +2200,318 @@ export default function FleetManagement() {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Booking Details Modal */}
+      {showBookingDetails && selectedBooking && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Booking Details</h3>
+                <button 
+                  onClick={() => {
+                    setShowBookingDetails(false);
+                    setSelectedBooking(null);
+                  }}
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Booking Information */}
+                <div className="space-y-6">
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Booking Information</h4>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Booking ID:</span>
+                        <span className="font-medium">{selectedBooking.id}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Status:</span>
+                        <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                          selectedBooking.status === 'completed' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                          selectedBooking.status === 'in-progress' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                          selectedBooking.status === 'confirmed' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
+                          selectedBooking.status === 'pending' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200' :
+                          'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                        }`}>
+                          {selectedBooking.status === 'in-progress' ? 'In Progress' : 
+                           selectedBooking.status.charAt(0).toUpperCase() + selectedBooking.status.slice(1)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Booking Time:</span>
+                        <span className="font-medium">{selectedBooking.bookingTime}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Pickup Time:</span>
+                        <span className="font-medium">{selectedBooking.pickupTime}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Amount:</span>
+                        <span className="font-medium text-green-600">₱{selectedBooking.amount}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Payment Method:</span>
+                        <span className="font-medium">{selectedBooking.paymentMethod}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Customer Information */}
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Customer Information</h4>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Name:</span>
+                        <span className="font-medium">{selectedBooking.customer.name}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Phone:</span>
+                        <span className="font-medium">{selectedBooking.customer.phone}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-600 dark:text-gray-400">Rating:</span>
+                        <div className="flex items-center">
+                          {[...Array(5)].map((_, i) => (
+                            <svg key={i} className={`w-4 h-4 ${i < Math.floor(selectedBooking.customer.rating) ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                          <span className="ml-2 text-sm">{selectedBooking.customer.rating}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Driver Information */}
+                  {selectedBooking.driver && (
+                    <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Driver Information</h4>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Name:</span>
+                          <span className="font-medium">{selectedBooking.driver.name}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Phone:</span>
+                          <span className="font-medium">{selectedBooking.driver.phone}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600 dark:text-gray-400">Vehicle:</span>
+                          <span className="font-medium">{selectedBooking.vehicle}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Route and Map */}
+                <div className="space-y-6">
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Route Information</h4>
+                    <div className="space-y-3">
+                      <div>
+                        <div className="flex items-center text-green-600 mb-1">
+                          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                          </svg>
+                          <span className="font-medium">Pickup Location</span>
+                        </div>
+                        <p className="text-gray-700 dark:text-gray-300 ml-7">{selectedBooking.pickup}</p>
+                      </div>
+                      <div>
+                        <div className="flex items-center text-red-600 mb-1">
+                          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                          </svg>
+                          <span className="font-medium">Destination</span>
+                        </div>
+                        <p className="text-gray-700 dark:text-gray-300 ml-7">{selectedBooking.destination}</p>
+                      </div>
+                      <div className="flex justify-between pt-2 border-t border-gray-200 dark:border-gray-600">
+                        <span className="text-gray-600 dark:text-gray-400">Distance:</span>
+                        <span className="font-medium">{selectedBooking.distance}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Duration:</span>
+                        <span className="font-medium">{selectedBooking.duration}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Map Placeholder */}
+                  <div className="bg-gray-200 dark:bg-gray-600 rounded-lg h-64 flex items-center justify-center">
+                    <div className="text-center">
+                      <svg className="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7" />
+                      </svg>
+                      <p className="text-gray-500 dark:text-gray-400">Route Map</p>
+                      <p className="text-sm text-gray-400 dark:text-gray-500">Interactive map would be displayed here</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex justify-end space-x-4 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <button 
+                  onClick={() => {
+                    setShowBookingDetails(false);
+                    setSelectedBooking(null);
+                  }}
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                >
+                  Close
+                </button>
+                {selectedBooking.status === 'pending' && (
+                  <button 
+                    onClick={() => {
+                      setShowBookingDetails(false);
+                      setShowAssignDriver(true);
+                    }}
+                    className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors"
+                  >
+                    Assign Driver
+                  </button>
+                )}
+                <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                  Contact Customer
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Assign Driver Modal */}
+      {showAssignDriver && selectedBooking && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Assign Driver</h3>
+                <button 
+                  onClick={() => {
+                    setShowAssignDriver(false);
+                    setSelectedBooking(null);
+                  }}
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Booking Summary */}
+              <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Booking Summary</h4>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-gray-600 dark:text-gray-400">Booking ID:</span>
+                    <span className="ml-2 font-medium">{selectedBooking.id}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-600 dark:text-gray-400">Pickup Time:</span>
+                    <span className="ml-2 font-medium">{selectedBooking.pickupTime}</span>
+                  </div>
+                  <div className="col-span-2">
+                    <span className="text-gray-600 dark:text-gray-400">Route:</span>
+                    <span className="ml-2 font-medium">{selectedBooking.pickup} → {selectedBooking.destination}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Available Drivers */}
+              <div className="mb-6">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Available Drivers</h4>
+                <div className="space-y-3 max-h-64 overflow-y-auto">
+                  {[
+                    {
+                      id: 1,
+                      name: "Juan Dela Cruz",
+                      phone: "+63 917 123 4567",
+                      vehicle: "Toyota Vios - ABC 123",
+                      rating: 4.8,
+                      distance: "2.3 km away",
+                      status: "active",
+                      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+                    },
+                    {
+                      id: 2,
+                      name: "Maria Santos",
+                      phone: "+63 918 987 6543",
+                      vehicle: "Honda City - XYZ 789",
+                      rating: 4.9,
+                      distance: "1.8 km away",
+                      status: "active",
+                      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
+                    },
+                    {
+                      id: 3,
+                      name: "Lisa Chen",
+                      phone: "+63 922 666 7777",
+                      vehicle: "Toyota Wigo - MNO 345",
+                      rating: 4.9,
+                      distance: "3.1 km away",
+                      status: "active",
+                      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face"
+                    }
+                  ].map((driver) => (
+                    <div key={driver.id} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <img src={driver.avatar} alt={driver.name} className="w-12 h-12 rounded-full object-cover" />
+                          <div>
+                            <h5 className="font-medium text-gray-900 dark:text-white">{driver.name}</h5>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">{driver.vehicle}</p>
+                            <div className="flex items-center">
+                              {[...Array(5)].map((_, i) => (
+                                <svg key={i} className={`w-3 h-3 ${i < Math.floor(driver.rating) ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                              ))}
+                              <span className="ml-1 text-xs text-gray-500 dark:text-gray-400">{driver.rating}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{driver.distance}</p>
+                          <button className="mt-2 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors">
+                            Assign
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <button 
+                  onClick={() => {
+                    setShowAssignDriver(false);
+                    setSelectedBooking(null);
+                  }}
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
+                  Auto Assign Best Driver
+                </button>
+              </div>
             </div>
           </div>
         </div>
