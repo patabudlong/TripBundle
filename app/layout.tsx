@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import Image from 'next/image'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "TripBundle - Your Complete Travel Companion",
-  description: "Plan, book, and explore effortlessly with TripBundle — the all-in-one travel platform.",
+  title: "TripBundles - Your Complete Travel Companion",
+  description: "Plan, book, and explore effortlessly with TripBundles — the all-in-one travel platform.",
 };
 
 export default function RootLayout({
@@ -33,7 +34,7 @@ export default function RootLayout({
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <span className="text-xl font-bold text-gray-900 dark:text-white">TripBundle</span>
+                    <span className="text-xl font-bold text-gray-900 dark:text-white">TripBundles</span>
                   </Link>
                 </div>
 
