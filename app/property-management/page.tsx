@@ -2850,9 +2850,9 @@ export default function PropertyManagement() {
         )}
 
         {/* Other tabs placeholders */}
-        {activeTab !== 'overview' && activeTab !== 'properties' && activeTab !== 'rooms' && activeTab !== 'bookings' && activeTab !== 'earnings' && activeTab !== 'analytics' && (
+        {!['overview', 'properties', 'rooms', 'bookings', 'earnings', 'analytics'].includes(activeTab) && (
           <div className="text-center py-12">
-            <p className="text-gray-600 dark:text-gray-400">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} section coming soon...</p>
+            <p className="text-gray-600 dark:text-gray-400">{(activeTab as string).charAt(0).toUpperCase() + (activeTab as string).slice(1)} section coming soon...</p>
           </div>
         )}
       </div>
