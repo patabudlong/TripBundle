@@ -20,19 +20,25 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // Mark as client-side
+    setIsClient(true);
     // Check if user is logged in on app start
     checkAuthStatus();
   }, []);
 
   const checkAuthStatus = async () => {
     try {
-      // First check localStorage for user data
-      const savedUser = localStorage.getItem('user');
-      if (savedUser) {
-        setUser(JSON.parse(savedUser));
-        console.log('Found saved user:', JSON.parse(savedUser));
+      // Check if we're on the client side
+      if (typeof window !== 'undefined') {
+        const savedUser = localStorage.getItem('user');
+        if (savedUser) {
+          const userData = JSON.parse(savedUser);
+          setUser(userData);
+          console.log('Found saved user:', userData);
+        }
       }
     } catch (error) {
       console.log('No saved user found');
@@ -44,8 +50,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = (userData: User) => {
     console.log('AuthContext login called with:', userData);
     setUser(userData);
-    // Save to localStorage for persistence
-    localStorage.setItem('user', JSON.stringify(userData));
+    // Save to localStorage for persistence (only on client side)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('user', JSON.stringify(userData));
+    }
     console.log('User set in context:', userData);
   };
 
@@ -56,13 +64,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error('Logout error:', error);
     } finally {
       setUser(null);
-      localStorage.removeItem('user');
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('user');
+      }
       window.location.href = '/login';
     }
   };
 
-  const isAuthenticated = !!user;
-  console.log('AuthContext state - user:', user, 'isAuthenticated:', isAuthenticated);
+  const isAuthenticated = !!user && isClient;
+  console.log('AuthContext state - user:', user, 'isAuthenticated:', isAuthenticated, 'isClient:', isClient);
 
   return (
     <AuthContext.Provider value={{
@@ -70,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       isAuthenticated,
       login,
       logout,
-      isLoading
+      isLoading: isLoading || !isClient
     }}>
       {children}
     </AuthContext.Provider>
