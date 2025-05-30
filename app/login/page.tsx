@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ApiConnectionChecker from '@/components/ApiConnectionChecker';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -49,23 +51,43 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) return;
-    
+    if (!validateForm()) {
+      return;
+    }
+
     setIsLoading(true);
-    
+    setErrors({});
+
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       
-      // Handle successful login here
-      console.log('Login successful:', formData);
-      
-      // Redirect to dashboard or home page
-      // router.push('/dashboard');
-      
+      if (!apiUrl) {
+        setErrors({ general: 'API URL not configured' });
+        setIsLoading(false);
+        return;
+      }
+
+      const response = await fetch(`${apiUrl}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Login successful - redirect to home page
+        console.log('Login successful:', data);
+        router.push('/'); // Better than window.location.href
+      } else {
+        // Login failed - show error
+        setErrors({ general: data.error || 'Login failed' });
+      }
     } catch (error) {
-      console.error('Login failed:', error);
-      setErrors({ general: 'Login failed. Please try again.' });
+      console.error('Login error:', error);
+      setErrors({ general: 'Network error. Please try again.' });
     } finally {
       setIsLoading(false);
     }
