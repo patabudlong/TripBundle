@@ -66,138 +66,147 @@ export default function PropertyManagement() {
     totalRooms: 156
   };
 
-  const properties: Property[] = [
+  const properties = [
     {
-      id: 'PROP001',
-      name: 'Grand Palace Hotel Boracay',
-      type: 'hotel',
-      status: 'active',
-      location: 'Station 1, Boracay',
-      address: 'White Beach, Station 1, Boracay Island, Aklan',
-      rating: 4.8,
+      id: 1,
+      name: "Sunset Beach Resort",
+      type: "resort" as const,
+      status: "active" as const,
+      location: "Boracay, Philippines",
+      address: "456 Tourism Boulevard, Boracay, Aklan",
+      coordinates: { lat: 11.9674, lng: 121.9248 },
+      rooms: 45,
       totalRooms: 45,
-      availableRooms: 12,
-      images: [
-        'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop',
-        'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&h=300&fit=crop'
-      ],
-      amenities: ['Swimming Pool', 'Restaurant', 'Spa', 'WiFi', 'Beach Access', 'Gym'],
+      availableRooms: 6,
+      occupancy: "87%",
+      occupancyRate: 87,
+      revenue: "₱125,000",
+      rating: "4.8",
+      image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop",
+      images: ["https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop"],
+      description: "A luxurious beachfront resort offering stunning sunset views and world-class amenities. Perfect for romantic getaways and family vacations.",
+      amenities: ["Free WiFi", "Swimming Pool", "Beach Access", "Restaurant", "Spa", "Gym", "Room Service", "Parking"],
+      contact: {
+        manager: "Maria Santos",
+        phone: "+63 917 123 4567",
+        email: "manager@sunsetbeach.com"
+      },
+      earnings: {
+        today: 15000,
+        thisWeek: 85000,
+        thisMonth: 125000
+      },
+      bookings: {
+        total: 150,
+        confirmed: 135,
+        cancelled: 15,
+        checkInsToday: 8,
+        checkOutsToday: 6
+      },
       pricing: {
         standard: 3500,
         deluxe: 5500,
         suite: 8500
       },
-      contact: {
-        phone: '+63 917 111 1111',
-        email: 'reservations@grandpalace.com',
-        manager: 'Maria Elena Santos'
-      },
       documents: {
-        businessPermit: { uploaded: true, expiry: '2025-12-31' },
-        firePermit: { uploaded: true, expiry: '2025-06-30' },
-        dotAccreditation: { uploaded: true, expiry: '2026-03-15' }
-      },
-      earnings: {
-        today: 45000,
-        thisWeek: 285000,
-        thisMonth: 1250000
-      },
-      bookings: {
-        total: 234,
-        confirmed: 198,
-        cancelled: 36,
-        checkInsToday: 8,
-        checkOutsToday: 12
-      },
-      occupancyRate: 73
+        businessPermit: { uploaded: true, expiry: "2024-12-31" },
+        dotAccreditation: { uploaded: true, expiry: "2025-06-30" },
+        firePermit: { uploaded: true, expiry: "2024-08-15" }
+      }
     },
     {
-      id: 'PROP002',
-      name: 'Sunset Beach Resort',
-      type: 'resort',
-      status: 'active',
-      location: 'Station 3, Boracay',
-      address: 'Sunset Point, Station 3, Boracay Island, Aklan',
-      rating: 4.5,
-      totalRooms: 32,
+      id: 2,
+      name: "Mountain View Lodge",
+      type: "hotel" as const,
+      status: "active" as const,
+      location: "Baguio, Philippines",
+      address: "123 Session Road, Baguio City",
+      coordinates: { lat: 16.4023, lng: 120.5960 },
+      rooms: 28,
+      totalRooms: 28,
       availableRooms: 8,
-      images: [
-        'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop',
-        'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop'
-      ],
-      amenities: ['Private Beach', 'Restaurant', 'Bar', 'WiFi', 'Water Sports', 'Spa'],
+      occupancy: "72%",
+      occupancyRate: 72,
+      revenue: "₱85,000",
+      rating: "4.6",
+      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      images: ["https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop"],
+      description: "A cozy mountain retreat with breathtaking views of the Cordillera mountains. Ideal for those seeking tranquility and fresh mountain air.",
+      amenities: ["Free WiFi", "Fireplace", "Mountain View", "Restaurant", "Hiking Trails", "Conference Room", "Parking"],
+      contact: {
+        manager: "Juan Dela Cruz",
+        phone: "+63 917 234 5678",
+        email: "manager@mountainview.com"
+      },
+      earnings: {
+        today: 8500,
+        thisWeek: 45000,
+        thisMonth: 85000
+      },
+      bookings: {
+        total: 95,
+        confirmed: 88,
+        cancelled: 7,
+        checkInsToday: 4,
+        checkOutsToday: 5
+      },
+      pricing: {
+        standard: 2800,
+        deluxe: 4200,
+        suite: 6500
+      },
+      documents: {
+        businessPermit: { uploaded: true, expiry: "2024-11-30" },
+        dotAccreditation: { uploaded: true, expiry: "2025-03-15" },
+        firePermit: { uploaded: false, expiry: "2024-05-20" }
+      }
+    },
+    {
+      id: 3,
+      name: "City Center Hotel",
+      type: "hotel" as const,
+      status: "maintenance" as const,
+      location: "Makati, Philippines",
+      address: "789 Ayala Avenue, Makati City",
+      coordinates: { lat: 14.5547, lng: 121.0244 },
+      rooms: 120,
+      totalRooms: 120,
+      availableRooms: 7,
+      occupancy: "94%",
+      occupancyRate: 94,
+      revenue: "₱280,000",
+      rating: "4.7",
+      image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop",
+      images: ["https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop"],
+      description: "A modern business hotel in the heart of Makati's financial district. Perfect for business travelers and shopping enthusiasts.",
+      amenities: ["Free WiFi", "Business Center", "Gym", "Restaurant", "Bar", "Concierge", "Laundry", "Airport Shuttle"],
+      contact: {
+        manager: "Ana Rodriguez",
+        phone: "+63 917 345 6789",
+        email: "manager@citycenter.com"
+      },
+      earnings: {
+        today: 25000,
+        thisWeek: 120000,
+        thisMonth: 280000
+      },
+      bookings: {
+        total: 220,
+        confirmed: 205,
+        cancelled: 15,
+        checkInsToday: 12,
+        checkOutsToday: 10
+      },
       pricing: {
         standard: 4200,
         deluxe: 6800,
         suite: 12000
       },
-      contact: {
-        phone: '+63 917 222 2222',
-        email: 'info@sunsetbeach.com',
-        manager: 'Roberto Cruz'
-      },
       documents: {
-        businessPermit: { uploaded: true, expiry: '2025-12-31' },
-        firePermit: { uploaded: true, expiry: '2025-06-30' },
-        dotAccreditation: { uploaded: true, expiry: '2026-03-15' }
-      },
-      earnings: {
-        today: 38000,
-        thisWeek: 245000,
-        thisMonth: 980000
-      },
-      bookings: {
-        total: 189,
-        confirmed: 165,
-        cancelled: 24,
-        checkInsToday: 6,
-        checkOutsToday: 9
-      },
-      occupancyRate: 75
-    },
-    {
-      id: 'PROP003',
-      name: 'Boracay Villa Paradise',
-      type: 'villa',
-      status: 'active',
-      location: 'Bulabog Beach, Boracay',
-      address: 'Bulabog Beach Road, Boracay Island, Aklan',
-      rating: 4.7,
-      totalRooms: 8,
-      availableRooms: 2,
-      images: [
-        'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&h=300&fit=crop',
-        'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=400&h=300&fit=crop'
-      ],
-      amenities: ['Private Pool', 'Kitchen', 'WiFi', 'Garden', 'BBQ Area', 'Parking'],
-      pricing: {
-        standard: 8500,
-        deluxe: 12000,
-        suite: 18000
-      },
-      contact: {
-        phone: '+63 917 333 3333',
-        email: 'villa@paradise.com',
-        manager: 'Carmen Dela Cruz'
-      },
-      documents: {
-        businessPermit: { uploaded: true, expiry: '2025-12-31' },
-        firePermit: { uploaded: false, expiry: '2025-06-30' },
-        dotAccreditation: { uploaded: true, expiry: '2026-03-15' }
-      },
-      earnings: {
-        today: 25000,
-        thisWeek: 168000,
-        thisMonth: 650000
-      },
-      bookings: {
-        total: 89,
-        confirmed: 82,
-        cancelled: 7,
-        checkInsToday: 2,
-        checkOutsToday: 3
-      },
-      occupancyRate: 75
+        businessPermit: { uploaded: true, expiry: "2024-10-31" },
+        dotAccreditation: { uploaded: true, expiry: "2025-01-15" },
+        firePermit: { uploaded: true, expiry: "2024-07-30" }
+      }
     }
   ];
 
@@ -226,8 +235,7 @@ export default function PropertyManagement() {
   // Filter properties
   const filteredProperties = properties.filter(property => {
     const matchesSearch = property.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         property.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         property.contact.manager.toLowerCase().includes(searchQuery.toLowerCase());
+                         property.location.toLowerCase().includes(searchQuery.toLowerCase());
     
     const matchesStatus = statusFilter === 'all' || property.status === statusFilter;
     const matchesType = typeFilter === 'all' || property.type === typeFilter;
@@ -235,9 +243,15 @@ export default function PropertyManagement() {
     return matchesSearch && matchesStatus && matchesType;
   });
 
-  const totalEarnings = properties.reduce((sum, prop) => sum + prop.earnings.thisMonth, 0);
-  const totalBookings = properties.reduce((sum, prop) => sum + prop.bookings.total, 0);
-  const averageOccupancy = properties.reduce((sum, prop) => sum + prop.occupancyRate, 0) / properties.length;
+  const totalEarnings = properties.reduce((sum, prop) => {
+    const revenue = parseInt(prop.revenue.replace(/[₱,]/g, ''));
+    return sum + revenue;
+  }, 0);
+  const totalBookings = properties.length * 50; // Mock total bookings
+  const averageOccupancy = properties.reduce((sum, prop) => {
+    const occupancy = parseInt(prop.occupancy.replace('%', ''));
+    return sum + occupancy;
+  }, 0) / properties.length;
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -358,7 +372,7 @@ export default function PropertyManagement() {
                 {properties.slice(0, 3).map((property) => (
                   <div key={property.id} className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
                     <div className="flex items-center space-x-4">
-                      <img src={property.images[0]} alt={property.name} className="w-16 h-16 object-cover rounded-lg" />
+                      <img src={property.image} alt={property.name} className="w-16 h-16 object-cover rounded-lg" />
                       <div>
                         <h4 className="font-medium">{property.name}</h4>
                         <p className="text-sm text-gray-600 dark:text-gray-400">{property.location}</p>
@@ -373,8 +387,8 @@ export default function PropertyManagement() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-medium">₱{property.earnings.thisMonth.toLocaleString()}</p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{property.occupancyRate}% occupied</p>
+                      <p className="font-medium">{property.revenue}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{property.occupancy} occupied</p>
                     </div>
                   </div>
                 ))}
@@ -469,7 +483,7 @@ export default function PropertyManagement() {
                 {filteredProperties.map((property) => (
                   <div key={property.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="relative">
-                      <img src={property.images[0]} alt={property.name} className="w-full h-48 object-cover" />
+                      <img src={property.image} alt={property.name} className="w-full h-48 object-cover" />
                       <div className="absolute top-4 right-4 flex space-x-2">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(property.status)}`}>
                           {property.status.charAt(0).toUpperCase() + property.status.slice(1)}
@@ -480,7 +494,7 @@ export default function PropertyManagement() {
                       </div>
                       <div className="absolute bottom-4 left-4">
                         <div className="bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
-                          {property.rating} ⭐ ({property.totalRooms} rooms)
+                          {property.rating} ⭐ ({property.rooms} rooms)
                         </div>
                       </div>
                     </div>
@@ -493,12 +507,12 @@ export default function PropertyManagement() {
                       
                       <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                         <div>
-                          <p className="text-gray-600 dark:text-gray-400">Available Rooms</p>
-                          <p className="font-medium">{property.availableRooms}/{property.totalRooms}</p>
+                          <p className="text-gray-600 dark:text-gray-400">Total Rooms</p>
+                          <p className="font-medium">{property.rooms}</p>
                         </div>
                         <div>
                           <p className="text-gray-600 dark:text-gray-400">Occupancy Rate</p>
-                          <p className="font-medium">{property.occupancyRate}%</p>
+                          <p className="font-medium">{property.occupancy}</p>
                         </div>
                         <div>
                           <p className="text-gray-600 dark:text-gray-400">Manager</p>
@@ -538,7 +552,7 @@ export default function PropertyManagement() {
 
                       <div className="flex space-x-2">
                         <button 
-                          onClick={() => setSelectedProperty(property)}
+                          onClick={() => setSelectedProperty(property as Property)}
                           className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
                         >
                           View Details
@@ -780,19 +794,22 @@ export default function PropertyManagement() {
                   <div className="space-y-6">
                     <div>
                       <img 
-                        src={selectedProperty.images[0]} 
+                        src={selectedProperty.images?.[0]} 
                         alt={selectedProperty.name} 
                         className="w-full h-64 object-cover rounded-lg mb-4" 
                       />
                       <div className="grid grid-cols-2 gap-2">
-                        {selectedProperty.images.slice(1).map((image, index) => (
-                          <img 
-                            key={index}
-                            src={image} 
-                            alt={`${selectedProperty.name} ${index + 2}`} 
-                            className="w-full h-32 object-cover rounded-lg" 
-                          />
-                        ))}
+                        {/* Mock additional images or remove this section */}
+                        <img 
+                          src={selectedProperty.images?.[1] || selectedProperty.images?.[0]} 
+                          alt={`${selectedProperty.name} 2`} 
+                          className="w-full h-32 object-cover rounded-lg" 
+                        />
+                        <img 
+                          src={selectedProperty.image} 
+                          alt={`${selectedProperty.name} 3`} 
+                          className="w-full h-32 object-cover rounded-lg" 
+                        />
                       </div>
                     </div>
                     
