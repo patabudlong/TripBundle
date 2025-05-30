@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  tripbundles-dev:
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    container_name: tripbundles-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../../:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - .env.development
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    networks:
+      - tripbundles-dev-network
+
+  # Development database
+  postgres-dev:
+    image: postgres:15-alpine
+    container_name: tripbundles-postgres-dev
+    environment:
+      POSTGRES_DB: tripbundles_dev
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    networks:
+      - tripbundles-dev-network
+
+  # Redis for development
+  redis-dev:
+    image: redis:7-alpine
+    container_name: tripbundles-redis-dev
+    ports:
+      - "6379:6379"
+    networks:
+      - tripbundles-dev-network
+
+  # Mailhog for email testing
+  mailhog-dev:
+    image: mailhog/mailhog
+    container_name: tripbundles-mailhog-dev
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    networks:
+      - tripbundles-dev-network
+
+volumes:
+  postgres_dev_data:
+
+networks:
+  tripbundles-dev-network:
+    driver: bridge 
