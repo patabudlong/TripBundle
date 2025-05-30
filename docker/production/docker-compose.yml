@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  tripbundles-app-prod:
+    build:
+      context: ../../
+      dockerfile: docker/production/Dockerfile
+    container_name: tripbundles-app-prod
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env.production
+    networks:
+      - tripbundles-prod-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: tripbundles-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - ./logs:/var/log/nginx
+    depends_on:
+      - tripbundles-app-prod
+    restart: unless-stopped
+    networks:
+      - tripbundles-prod-network
+
+networks:
+  tripbundles-prod-network:
+    driver: bridge 
