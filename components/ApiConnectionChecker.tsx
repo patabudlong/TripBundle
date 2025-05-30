@@ -14,13 +14,19 @@ export default function ApiConnectionChecker() {
 
   useEffect(() => {
     const checkApiConnection = async () => {
-      const apiUrl = typeof window !== 'undefined' 
-        ? window.location.origin + '/api'
-        : 'http://localhost:3000/api';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       
-      console.log('🔍 Checking API connection to:', apiUrl);
-      
+      if (!apiUrl) {
+        setApiStatus({
+          status: 'failed',
+          error: 'NEXT_PUBLIC_API_URL not configured'
+        });
+        return;
+      }
+
       try {
+        console.log('🔍 Checking API connection to:', apiUrl);
+        
         // Try to fetch a simple endpoint
         const response = await fetch(`${apiUrl}/health`, {
           method: 'GET',
