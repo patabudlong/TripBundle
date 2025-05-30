@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ApiConnectionChecker from '@/components/ApiConnectionChecker';
@@ -152,6 +153,15 @@ export default function LoginPage() {
           
           {/* Header */}
           <div className="text-center mb-8">
+            <div className="flex justify-center mb-4">
+              <Image
+                src="/tripbundles-logo.png"
+                alt="TripBundles Logo"
+                width={64}
+                height={64}
+                className="rounded-lg"
+              />
+            </div>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
               Welcome Back
             </h2>
