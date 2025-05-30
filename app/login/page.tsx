@@ -152,20 +152,20 @@ export default function LoginPage() {
           <ApiConnectionChecker />
           
           {/* Header */}
-          <div className="text-center mb-8">
-            <div className="flex justify-center mb-4">
+          <div className="mb-8">
+            <div className="flex items-center justify-center mb-4">
               <Image
                 src="/tripbundles-logo.png"
                 alt="TripBundles Logo"
-                width={64}
-                height={64}
-                className="rounded-lg"
+                width={48}
+                height={48}
+                className="rounded-lg mr-3"
               />
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+                Welcome Back
+              </h2>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-              Welcome Back
-            </h2>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">
+            <p className="text-center text-gray-600 dark:text-gray-400">
               Please sign in to your account
             </p>
           </div>
