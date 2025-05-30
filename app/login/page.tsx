@@ -1,16 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import ApiConnectionChecker from '@/components/ApiConnectionChecker';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { login, isAuthenticated, isLoading } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     rememberMe: false
   });
   const [errors, setErrors] = useState<{[key: string]: string}>({});
-  const [isLoading, setIsLoading] = useState(false);
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      console.log('User already authenticated, redirecting to home');
+      router.push('/');
+    }
+  }, [isAuthenticated, isLoading, router]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -47,25 +61,52 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) return;
-    
-    setIsLoading(true);
-    
+    if (!validateForm()) {
+      return;
+    }
+
+    setErrors({});
+
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       
-      // Handle successful login here
-      console.log('Login successful:', formData);
-      
-      // Redirect to dashboard or home page
-      // router.push('/dashboard');
-      
+      if (!apiUrl) {
+        setErrors({ general: 'API URL not configured' });
+        return;
+      }
+
+      const response = await fetch(`${apiUrl}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      console.log('Login response status:', response.status);
+      const data = await response.json();
+      console.log('Login response data:', data);
+
+      if (response.ok) {
+        // Login successful - update auth context and redirect
+        console.log('Login successful:', data);
+        
+        // Create user object from the form data since API doesn't return user data
+        const user = {
+          email: formData.email
+        };
+        
+        console.log('User data to login with:', user);
+        login(user);
+        console.log('Login function called');
+        router.push('/');
+      } else {
+        // Login failed - show error
+        setErrors({ general: data.error || data.message || 'Login failed' });
+      }
     } catch (error) {
-      console.error('Login failed:', error);
-      setErrors({ general: 'Login failed. Please try again.' });
-    } finally {
-      setIsLoading(false);
+      console.error('Login error:', error);
+      setErrors({ general: 'Network error. Please try again.' });
     }
   };
 
@@ -84,16 +125,47 @@ export default function LoginPage() {
     console.log('Apple login clicked');
   };
 
+  console.log('API URL:', process.env.NEXT_PUBLIC_API_URL);
+
+  // Don't render login form if already authenticated
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="lg" text="Loading..." />
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="lg" text="Redirecting..." />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700">
+          {/* API Connection Checker */}
+          <ApiConnectionChecker />
+          
           {/* Header */}
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-              Welcome Back
-            </h2>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">
+          <div className="mb-8">
+            <div className="flex items-center justify-center mb-4">
+              <Image
+                src="/tripbundles-logo.png"
+                alt="TripBundles Logo"
+                width={48}
+                height={48}
+                className="rounded-lg mr-3"
+              />
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+                Welcome Back
+              </h2>
+            </div>
+            <p className="text-center text-gray-600 dark:text-gray-400">
               Please sign in to your account
             </p>
           </div>
@@ -173,20 +245,9 @@ export default function LoginPage() {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isLoading}
               className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {isLoading ? (
-                <>
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Signing in...
-                </>
-              ) : (
-                'Sign In'
-              )}
+              Sign In
             </button>
 
             {/* Divider */}
