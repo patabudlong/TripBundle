@@ -43,6 +43,10 @@ interface Property {
     checkOutsToday: number;
   };
   occupancyRate: number;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
 }
 
 export default function PropertyManagement() {
@@ -68,7 +72,7 @@ export default function PropertyManagement() {
 
   const properties = [
     {
-      id: 1,
+      id: "1",
       name: "Sunset Beach Resort",
       type: "resort" as const,
       status: "active" as const,
@@ -115,7 +119,7 @@ export default function PropertyManagement() {
       }
     },
     {
-      id: 2,
+      id: "2",
       name: "Mountain View Lodge",
       type: "hotel" as const,
       status: "active" as const,
@@ -162,7 +166,7 @@ export default function PropertyManagement() {
       }
     },
     {
-      id: 3,
+      id: "3",
       name: "City Center Hotel",
       type: "hotel" as const,
       status: "maintenance" as const,
@@ -552,7 +556,7 @@ export default function PropertyManagement() {
 
                       <div className="flex space-x-2">
                         <button 
-                          onClick={() => setSelectedProperty(property as Property)}
+                          onClick={() => setSelectedProperty(property)}
                           className="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
                         >
                           View Details
@@ -810,6 +814,32 @@ export default function PropertyManagement() {
                           alt={`${selectedProperty.name} 3`} 
                           className="w-full h-32 object-cover rounded-lg" 
                         />
+                      </div>
+                    </div>
+
+                    {/* Map Section */}
+                    <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                      <h4 className="font-semibold mb-3">Location</h4>
+                      <div className="w-full h-48 bg-gray-200 dark:bg-gray-600 rounded-lg flex items-center justify-center mb-3">
+                        <div className="text-center">
+                          <svg className="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Interactive Map</p>
+                          <p className="text-xs text-gray-400 dark:text-gray-500">
+                            Lat: {selectedProperty.coordinates.lat}, Lng: {selectedProperty.coordinates.lng}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium">{selectedProperty.location}</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">{selectedProperty.address}</p>
+                        </div>
+                        <button className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-lg transition-colors">
+                          View on Maps
+                        </button>
                       </div>
                     </div>
                     
