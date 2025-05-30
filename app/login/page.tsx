@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ApiConnectionChecker from '@/components/ApiConnectionChecker';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function LoginPage() {
   });
   const [errors, setErrors] = useState<{[key: string]: string}>({});
   const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -75,15 +77,26 @@ export default function LoginPage() {
         body: JSON.stringify(formData),
       });
 
+      console.log('Login response status:', response.status);
       const data = await response.json();
+      console.log('Login response data:', data);
 
       if (response.ok) {
-        // Login successful - redirect to home page
+        // Login successful - update auth context and redirect
         console.log('Login successful:', data);
-        router.push('/'); // Better than window.location.href
+        
+        // Create user object from the form data since API doesn't return user data
+        const user = {
+          email: formData.email
+        };
+        
+        console.log('User data to login with:', user);
+        login(user);
+        console.log('Login function called');
+        router.push('/');
       } else {
         // Login failed - show error
-        setErrors({ general: data.error || 'Login failed' });
+        setErrors({ general: data.error || data.message || 'Login failed' });
       }
     } catch (error) {
       console.error('Login error:', error);
